@@ -1,0 +1,36 @@
+{% unless collection_image_size %}
+{%- assign collection_image_size = '300x400' -%}
+{% endunless %}
+
+{% if collection.empty? %}
+{% comment %}add default state for collection block in theme editor{% endcomment %}
+{% assign collection_image_url = '' %}
+{% else %}
+{% if collection.image %}
+{% capture collection_image_url %}{{ collection | img_url: collection_image_size, crop: 'top' }}{% endcapture %}
+{% elsif collection.products.first %}
+{% capture collection_image_url %}{{ collection.products.first | img_url: collection_image_size, crop: 'top' }}{% endcapture %}
+{% endif %}
+{% endif %}
+
+
+
+<div class="item item-pd margin_bottom_50 col-lg-4 col-md-4 col-sm-6 col-xs-6">
+    <div class="product-img text-center">
+        <a href="{% if collection.empty? %}#{% else %}{{ collection.url }}{% endif %}">
+              {% if collection.empty? %}
+              {% capture current %}{% cycle 1, 2, 3, 4, 5, 6 %}{% endcapture %}
+              {{ 'collection-' | append: current | placeholder_svg_tag: 'placeholder-svg' }}
+              {% else %}
+              <img src="{{ collection_image_url }}" alt="photo" class="img-reponsive">
+              {% endif %}
+        </a> 
+    </div>
+    <h3 class="title-font text-center">{% if collection.empty? %}
+        {{ 'homepage.onboarding.collection_title' | t }}
+        {% else %}
+        {{ collection.title }}
+        {% endif %}</h3>
+  <p class="des-font text-center">{{ collection.all_products_count }} {{ collection.all_products_count | pluralize: 'Item', 'Items' }}</p>
+  <a href="{{collection.url}}" class="btn-nixx uppercase number-font full-width">view more</a>
+</div>

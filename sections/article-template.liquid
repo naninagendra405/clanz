@@ -1,0 +1,205 @@
+<!-- /sections/article-template.liquid -->
+<div class="container container-240">
+    <div class="blog-banner pd-banner v2">
+       <a href="#" class="effect_img2">
+        	<img {%if section.settings.bg_img == blank%}src="{{'blog-banner.png'| asset_url }}" 
+                    {%else%}
+                src="{{section.settings.bg_img | img_url:'master'}}" class="img-reponsive"{%endif%} alt="" />
+        </a>
+    </div>
+    <div class="blog spc1">
+        {% include 'breadcrumb' %}
+        {% include 'article-template-right-sidebar' %}
+    </div>
+</div>
+
+
+
+{% schema %}
+{
+  "name": "Article page",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "bg_img",
+      "label": "Image",
+      "info": "1398x191px recommended"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_date",
+      "label": "Show publish date?",
+      "default": true
+    },
+	{
+      "type": "header",
+      "content": "Widget Social"
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_widget_social",
+      "label": "Enable",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "widget_social_title",
+      "label": "Widget Title",
+      "default": "Follow us"
+    },
+    {
+      "type": "textarea",
+      "id": "widget_social_content",
+      "info": "Input HTML (Right Sidebar)",
+      "label": "Social content"
+    },
+	{
+      "type": "textarea",
+      "id": "widget_social_content2",
+      "info": "Input HTML (Post Content)",
+      "label": "Social content"
+    },
+    {
+      "type": "header",
+      "content": "Widget Categories"
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_widget_categories",
+      "label": "Enable",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "widget_categories_title",
+      "label": "Widget Title",
+      "default": "Categories"
+    },
+    {
+      "type": "link_list",
+      "id": "widget_categories_menu",
+      "label": "Widget Menu"
+    },
+    {
+      "type": "header",
+      "content": "Widget Recent Posts"
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_widget_rposts",
+      "label": "Enable",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "widget_recent_title",
+      "label": "Widget Title",
+      "default": "Popular Posts"
+    },
+    
+    {
+      "type": "header",
+      "info": "MailChimp form action URL: Setting in Login Store > Customize theme > General Settings tab > General > Mailchimp",
+      "content": "Widget Newletter"
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_widget_newletter",
+      "label": "Enable?",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "newletter_title",
+      "label": "Title",
+      "default": "Newletters"
+    },
+    {
+      "type": "text",
+      "id": "newletter_placeholder",
+      "label": "Input placeholder",
+      "default": "Enter your emaill adress"
+    },
+    
+    {
+      "type": "header",
+      "content": "Widget Instagram"
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_widget_instagram",
+      "label": "Enable",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "widget_instagram_title",
+      "label": "Widget Title",
+      "default": "Instagrams"
+    },
+    {
+      "type": "text",
+      "id": "instagram_userid",
+      "label": "User ID Instagram",
+      "default": "3672948962"
+    },
+    {
+      "type": "text",
+      "id": "instagram_access_token",
+      "label": "Access Token Instagram",
+      "default": "3672948962.0f64772.430edb7f711e4665b59777c54d1ed9ce"
+    },
+    {
+      "type": "text",
+      "id": "instagram_limit_number",
+      "label": "Limit Image",
+      "default": "6"
+    },
+    {
+      "type": "header",
+      "content": "Widget Banner"
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_widget_banner",
+      "label": "Enable",
+      "default": true
+    },
+    {
+      "type": "image_picker",
+      "id": "banner_img",
+      "label": "Image",
+      "info": "320x320px recommended"
+    },
+	{
+      "type": "url",
+      "id": "banner_url",
+      "label": "URL"
+    }
+  ],
+  "blocks": [
+	{
+      "type": "pproduct",
+      "name": "Popular Post",
+      "limit": 3,
+      "settings": [
+          {
+            "type": "header",
+            "content": "List Post"
+          },
+          {
+            "type": "blog",
+            "id": "blog_collection",
+            "label": "Select collection"
+          },
+          {
+            "type": "text",
+            "id": "blog_limit",
+            "label": "Limit number",
+            "default": "4"
+          }
+      ]
+    }
+	]
+}
+{% endschema %}

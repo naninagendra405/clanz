@@ -1,0 +1,478 @@
+{% if section.settings.enable_banner %}
+<div class="banner margin_bottom_150 {% if section.settings.enable_line_top %}border-top{% endif %} {% if section.settings.enable_line_bot %}border-bot{% endif %}" style="background:{{section.settings.bgc_banner}};">
+	<div class="container">
+		<h1 class="title-font title-banner text-center">About Us</h1>
+		{% include 'breadcrumb' %}
+	</div>
+</div>
+{% endif %}
+<!--  -->
+<div class="container collection-about-page margin_bottom_150">
+  <div class="row">
+    <div class="col-lg-7 col-md-7 col-sm-12 col-xs-12">
+      <div class="row">
+        <div class="col-lg-7 col-md-7 col-sm-12 col-xs-12">
+          <a href="{{section.settings.url}}" class="inline-block over-hidden">
+            {% if section.settings.img_1 == blank %}
+            <img src="{{ 'product-about1.jpg' | asset_url }}" class="img-responsive hover-zoom-out" alt="">
+            {% else %}
+            <img src="{{ section.settings.img_1 | img_url:'master' }}" class="img-responsive hover-zoom-out" alt="">
+            {% endif %}
+          </a>
+        </div>
+        <div class="col-lg-5 col-md-5 col-sm-12 col-xs-12 img-middle">
+          <a href="{{section.settings.url}}" class="inline-block over-hidden">
+            {% if section.settings.img_2 == blank %}
+            <img src="{{ 'product-about2.jpg' | asset_url }}" class="img-responsive hover-zoom-out" alt="">
+            {% else %}
+            <img src="{{ section.settings.img_2 | img_url:'master' }}" class="img-responsive hover-zoom-out" alt="">
+            {% endif %}
+          </a>
+        </div>
+      </div>
+    </div>
+    <div class="col-lg-5 col-md-5 col-sm-12 col-xs-12 text-collection">
+      <h1 class="title-font title-about margin_bottom_20">{{section.settings.title}}</h1>
+      <p class="des-font des-about margin_bottom_70">{{ section.settings.des | truncatewords: 50 }}</p>
+      <a href="{{section.settings.url}}" class="link-default uppercase link-collection menu-font">{{section.settings.btn_name}}</a>
+    </div>
+  </div>
+</div>
+<!--  -->
+<div class="video-home7 relative">
+  <div>
+    <h1 class="title-font capital text-center title-video absolute">{{section.settings.title_video}}</h1>
+    {% if section.settings.img == blank %}
+    <img src="{{'video_home7.jpg' | asset_url }}" class="img-responsive" alt="">
+    {% else %}
+    <img src="{{ section.settings.img | img_url:'master' }}" class="img-responsive" alt="">
+    {% endif %}
+    <button type="button" class="btn-video-home7 absolute" data-fancybox href="{{section.settings.link_video}}">
+      <svg role="presentation" focusable="false">
+        <svg id="plyr-play" viewBox="0 0 0 0">
+          {% if section.settings.icon == blank %}
+          <i class="ti-control-play"></i>
+          {% else %}
+          <i class="{{section.settings.icon}}"></i>
+          {% endif %}
+        </svg>
+      </svg>
+    </button>
+  </div>
+</div>
+<!--  -->
+<div class="container-fluid content-about-page-2 container_100 margin_bottom_150">
+  <div class="row">
+    <div class="col-lg-5 col-md-5 col-sm-12 col-xs-12">
+      <h1 class="title-font title-content">{{section.settings.title_about}}</h1>
+      <p class="des-font des-content">{{section.settings.des_about}}</p>
+    </div>
+    <div class="col-lg-7 col-md-7 col-sm-12 col-xs-12">
+      <p class="des-font content">{{section.settings.content_about_1}}</p>
+      <br><br>
+      <p class="des-font content">{{section.settings.content_about_2}}</p>
+    </div>
+  </div>
+</div>
+<!--  -->
+<div class="container shipping-home4 margin_bottom_150">
+  <div class="row">
+    {% if section.blocks.size > 0 %}
+    {% for block in section.blocks %}
+    {% if block.type == 'text' %}
+    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12 content">
+      <div class="flex">
+        {% if block.settings.icon == blank %}
+        <img src="{{'icon_ship.png' | asset_url}}" class="img-responsive" alt="">
+        {% else %}
+        <img src="{{ block.settings.icon | img_url:'master' }}" class="img-responsive" alt="">
+        {% endif %}
+        <span class="title-font title-ship space_left_30">{{block.settings.title}}</span>
+      </div>
+      <p class="des-font des-ship">{{block.settings.des}}</p>
+    </div>
+    {% endif %}
+    {% endfor %}
+    {% endif %}
+  </div>
+</div>
+<!--  -->
+<div class="insta_home3 {% if section.settings.box == 'box' %}container{% else %}container-fluid{% endif %}">
+  <div {% if section.settings.box == 'full' %}class="row"{% endif %}>
+	{% if section.blocks.size > 0 %}
+  	{% for block in section.blocks %}
+  {% if block.type == '5_image' %}
+  <div class="column-20 relative">
+    <a href="{{block.settings.url}}">
+      {% if block.settings.img == blank %}
+      <img src="{{'img_insta_home3_1.jpg' | asset_url}}" class="img-responsive full-width" alt="">
+      {% else %}
+      <img src="{{ block.settings.img | img_url:'master' }}" class="img-responsive full-width" alt="">
+      {% endif %}
+    </a>
+    <div class="absolute icon-insta text-center">
+      <a href="{{block.settings.url}}">
+        {% if block.settings.icon == blank %}
+        <i class="ti-instagram"></i>
+        {% else %}
+        <i class="{{block.settings.icon}}"></i>
+        {% endif %}
+      </a>
+    </div>
+  </div>
+    {% elsif block.type == '6_image' %}
+    <div class="col-lg-2 col-md-3 col-sm-4 col-xs-6 clear-space relative">
+    <a href="{{block.settings.url}}">
+      {% if block.settings.img == blank %}
+      <img src="{{'img_insta_home3_1.jpg' | asset_url}}" class="img-responsive full-width" alt="">
+      {% else %}
+      <img src="{{ block.settings.img | img_url:'master' }}" class="img-responsive full-width" alt="">
+      {% endif %}
+    </a>
+    <div class="absolute icon-insta text-center">
+      <a href="{{block.settings.url}}">
+        {% if block.settings.icon == blank %}
+        <i class="ti-instagram"></i>
+        {% else %}
+        <i class="{{block.settings.icon}}"></i>
+        {% endif %}
+      </a>
+    </div>
+  </div>
+    {% elsif block.type == '2_image' %}
+    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 relative">
+    <a href="{{block.settings.url}}">
+      {% if block.settings.img == blank %}
+      <img src="{{'img_insta_home3_1.jpg' | asset_url}}" class="img-responsive full-width" alt="">
+      {% else %}
+      <img src="{{ block.settings.img | img_url:'master' }}" class="img-responsive full-width" alt="">
+      {% endif %}
+    </a>
+    <div class="absolute icon-insta text-center">
+      <a href="{{block.settings.url}}">
+        {% if block.settings.icon == blank %}
+        <i class="ti-instagram"></i>
+        {% else %}
+        <i class="{{block.settings.icon}}"></i>
+        {% endif %}
+      </a>
+    </div>
+  </div>
+    {% elsif block.type == '4_image' %}
+    <div class="col-lg-3 col-md-3 col-sm-6 col-xs-6 relative">
+    <a href="{{block.settings.url}}">
+      {% if block.settings.img == blank %}
+      <img src="{{'img_insta_home3_1.jpg' | asset_url}}" class="img-responsive full-width" alt="">
+      {% else %}
+      <img src="{{ block.settings.img | img_url:'master' }}" class="img-responsive full-width" alt="">
+      {% endif %}
+    </a>
+    <div class="absolute icon-insta text-center">
+      <a href="{{block.settings.url}}">
+        {% if block.settings.icon == blank %}
+        <i class="ti-instagram"></i>
+        {% else %}
+        <i class="{{block.settings.icon}}"></i>
+        {% endif %}
+      </a>
+    </div>
+  </div>
+  {% endif %}
+  {% endfor %}
+  {% endif %}
+
+  </div>
+</div>
+<!--  -->
+{% include 'nixx-newsletter' %}
+{% schema %}
+{
+  "name": "Page About Us 2",
+  "settings": [
+	{
+      "type": "header",
+      "content": "Banner"
+    },
+	{
+        "type": "checkbox",
+        "id": "enable_banner",
+        "label": "Enable banner",
+        "default": true
+    },
+	{
+        "type": "checkbox",
+        "id": "enable_line_top",
+        "label": "Enable line top",
+        "default": false
+    },
+	{
+        "type": "checkbox",
+        "id": "enable_line_bot",
+        "label": "Enable line bot",
+        "default": false
+    },
+	{
+        	"type": "color",
+        	"id": "bgc_banner",
+        	"label": "Background color",
+        	"default": "#ffe9c7"
+    },
+    {
+      "type": "header",
+      "content": "New Collection"
+    },
+	{
+      "id": "url",
+      "type": "url",
+      "default": "/collections/all",
+      "label": "URL"
+    },
+    {
+      "type": "image_picker",
+      "id": "img_1",
+      "label": "Image 1",
+      "info": "550x650 recommended"
+    },
+	{
+      "type": "image_picker",
+      "id": "img_2",
+      "label": "Image 2",
+      "info": "370x470 recommended"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title",
+      "default": "New collection"
+    },
+	{
+      "type": "textarea",
+      "id": "des",
+      "label": "Description",
+      "default": "I did not even know that there were any better conditions to escape to, but I was more than willing to take my chances among people fashioned after."
+    },
+    {
+      "type": "text",
+      "id": "btn_name",
+      "label": "Button name",
+      "default": "lookbook"
+    },
+	{
+      "type": "header",
+      "content": "Video"
+    },
+	{
+      "type": "text",
+      "id": "title_video",
+      "label": "Title",
+      "default": "skin tones<br>exclisive collection"
+    },
+	{
+      "type": "image_picker",
+      "id": "img",
+      "label": "Image",
+      "info": "1920 x 750 Image size"
+    },
+	{
+      "type": "text",
+      "id": "link_video",
+      "label": "Link video",
+      "default": "https://www.youtube.com/watch?v=_sI_Ps7JSEk"
+    },
+	{
+      "type": "text",
+      "id": "icon",
+      "label": "Icon video"
+    },
+	{
+      "type": "header",
+      "content": "Content about us"
+    },
+	{
+      "type": "text",
+      "id": "title_about",
+      "label": "Title",
+      "default": "A better way to shop<br>online for fashion"
+    },
+	{
+      "type": "textarea",
+      "id": "des_about",
+      "label": "Description",
+      "default": "I did not even know that there were any better conditions to escape to, but I was more than willing to take my chances among people fashioned after."
+    },
+	{
+      "type": "textarea",
+      "id": "content_about_1",
+      "label": "Content 1",
+      "default": "Ea esse bacon nulla porchetta non shank anim dolor pastrami est ad. Pig turkey pariatur spare ribs pastrami veniam laborum exercitation pork loin jerky ribeye bresaola. Pig turkey pariatur spare. Taking time to learn about our clients’ businesses, sectors and commercial challenges, we develop robust strategies and thoughtful designs, characterised by meti attention to detail. Led by our highly experienced co-founders, our design team has the ability to apply their talents with equal effectiveness across visual identity, print and digital design. With clients in locations around the world, the success of every project rests on our rigorous, proven process for managing our work. Building long term relationships with our clients means the better we know you, the richer our work becomes. So you’ll find us collaborative, open and honest to work with. Above all, you’ll find us passionate about design. It’s this passion that inspired us to form Six and continues to inspire us today..."
+    },
+	{
+      "type": "textarea",
+      "id": "content_about_2",
+      "label": "Content 2",
+      "default": "Ea esse bacon nulla porchetta non shank anim dolor pastrami est ad. Pig turkey pariatur spare ribs pastrami veniam laborum exercitation pork loin jerky ribeye bresaola. Pig turkey pariatur spare. Taking time to learn about our clients’ businesses, sectors and commercial challenges, we develop robust strategies and thoughtful designs, characterised by meti attention to detail."
+    },
+	{
+      "type": "header",
+      "content": "Instagram"
+    },
+	{
+   				"type":      "select",
+   				"id":        "box",
+   				"label":     "Select Content",
+   				"options": [
+   				  {
+   				   
+   				    "value": "box",
+   				    "label": "Box"
+   				  },
+   				  {
+   				    
+   				    "value": "full",
+   				    "label": "Full width"
+   				  }
+   				],
+   				"default":   "full"
+   				
+	}
+  ],
+	"blocks": [
+    {
+		"type": "text",
+      	"name": "Information",
+		"limit":3,
+      	"settings": [
+			{
+          		"type": "image_picker",
+          		"id": "icon",
+          		"label": "Icon",
+          		"info": "Image size 45 x 45"
+        	},
+			{
+          		"type": "text",
+          		"id": "title",
+          		"label": "Title",
+          		"default": "Free shipping"
+        	},
+			{
+          		"type": "text",
+          		"id": "des",
+          		"label": "Description",
+          		"default": "I did not even know that there were any better conditions to escape to, but I was more than willing to take my chances among people fashioned after."
+        	}
+	]
+	},
+	{
+		"type": "5_image",
+      	"name": "content 5",
+		"limit":5,
+      	"settings": [
+			{
+          		"type": "url",
+          		"id": "url",
+          		"label": "URL",
+          		"default": "/collections/all"
+        	},
+			{
+          		"type": "image_picker",
+          		"id": "img",
+          		"label": "Image",
+				"info": "Image size 344 x 344"
+        	},
+			{
+          		"type": "text",
+          		"id": "icon",
+          		"label": "Icon",
+          		"info": "(http:\/\/fontawesome.io\/icons\/)"
+        	}
+	]
+	},
+	{
+		"type": "6_image",
+      	"name": "content 6",
+		"limit":6,
+      	"settings": [
+			{
+          		"type": "url",
+          		"id": "url",
+          		"label": "URL",
+          		"default": "/collections/all"
+        	},
+			{
+          		"type": "image_picker",
+          		"id": "img",
+          		"label": "Image",
+				"info": "Image size 344 x 344"
+        	},
+			{
+          		"type": "text",
+          		"id": "icon",
+          		"label": "Icon",
+          		"info": "(http:\/\/fontawesome.io\/icons\/)"
+        	}
+	]
+	},
+	{
+		"type": "2_image",
+      	"name": "content 2",
+		"limit":2,
+      	"settings": [
+			{
+          		"type": "url",
+          		"id": "url",
+          		"label": "URL",
+          		"default": "/collections/all"
+        	},
+			{
+          		"type": "image_picker",
+          		"id": "img",
+          		"label": "Image",
+				"info": "Image size 344 x 344"
+        	},
+			{
+          		"type": "text",
+          		"id": "icon",
+          		"label": "Icon",
+          		"info": "(http:\/\/fontawesome.io\/icons\/)"
+        	}
+	]
+	},
+	{
+		"type": "4_image",
+      	"name": "content 4",
+		"limit":4,
+      	"settings": [
+			{
+          		"type": "url",
+          		"id": "url",
+          		"label": "URL",
+          		"default": "/collections/all"
+        	},
+			{
+          		"type": "image_picker",
+          		"id": "img",
+          		"label": "Image",
+				"info": "Image size 344 x 344"
+        	},
+			{
+          		"type": "text",
+          		"id": "icon",
+          		"label": "Icon",
+          		"info": "(http:\/\/fontawesome.io\/icons\/)"
+        	}
+	]
+	}
+  ],
+  "presets": [
+    {
+      "name": "Page About Us 2"
+    }
+  ]
+}
+{% endschema %}
+
+{% stylesheet %}
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}

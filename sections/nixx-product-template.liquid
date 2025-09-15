@@ -1,0 +1,418 @@
+{% assign on_sale = false %}
+{% if product.compare_at_price > product.price %}
+{% assign on_sale = true %}
+{% endif %}
+
+{% assign sold_out = true %}
+{% if product.available %}
+{% assign sold_out = false %}
+{% endif %}
+
+
+
+
+{% if section.settings.layout_pd == "pd_classic" %}
+	{% include 'nixx-product-detail-template-classic' %}
+{% elsif section.settings.layout_pd == "pd_vertical" %}
+	{% include 'nixx-product-detail-template-vertical' %}
+{% endif %}
+{% comment %}
+To take advantage of a callback on the select dropdown, add option_selection.js
+and customize the JS in timber.productPage as needed.
+
+Currently, timber.productPage does the following:
+- Hides your <select> tag from above
+- Breaks out the product variants into separate product options, if more than one exists
+- Generates a <select> tag for each product option
+- Enables/disables elements based on variant availability
+
+Callback notes:
+- Keep the callback available to the global scope (window.selectCallback) so that advanced
+addons can override it.
+* E.g. multiple currencies http://docs.shopify.com/manual/configuration/store-customization/currencies-and-translations/currencies/how-to-toggle-between-two-currencies
+{% endcomment %}
+{{ 'option_selection.js' | shopify_asset_url | script_tag }}
+
+<script>
+
+  var selectCallback = function(variant, selector) {
+    // BEGIN SWATCHES
+    if (variant) {
+      var form = jQuery('#' + selector.domIdPrefix).closest('form');
+      for (var i=0,length=variant.options.length; i<length; i++) {
+        var radioButton = form.find('.swatch[data-option-index="' + i + '"] :radio[value="' + variant.options[i] +'"]');
+        if (radioButton.size()) {
+          radioButton.get(0).checked = true;
+        }
+      }
+    }
+    // END SWATCHES
+    
+    {% if section.settings.show_sku %}
+    if (variant) {
+      $('.engoj-variant-sku').text(variant.sku);
+    }
+    else {
+      $('.engoj-variant-sku').empty();
+    }
+    {% endif %}
+
+    var quantity = 1,
+        totalPrice;
+    if (variant) {
+      if (variant.available) {
+        // Selected a valid variant that is available.
+        $('#AddToCart').removeClass('disabled').removeAttr('disabled').val('Add To Cart').fadeTo(200,1);
+        $('#AddToCart span').html('Add To Cart');
+      } else {
+        // Variant is sold out.
+        $('#AddToCart').val('Sold Out').addClass('disabled').attr('disabled', 'disabled').fadeTo(200,0.5);
+        $('#AddToCart span').html('Sold Out');
+      }
+      quantity = parseInt($('#Quantity').val(), 10);
+      totalPrice = variant.price * quantity;
+
+      if ( variant.compare_at_price > variant.price ) {
+          $('.enj-product-price').html('</span><span class="price engoj_price_main f-24">'+Shopify.formatMoney(variant.price, window.money_format)+ '</span>'+'<span class="price old">'+ Shopify.formatMoney(variant.compare_at_price, window.money_format) );
+        } else {
+          $('.enj-product-price').html('<span class="price engoj_price_main">'+ Shopify.formatMoney(variant.price, window.money_format) + '</span>');
+        }
+
+
+    } else {
+      // variant doesn't exist.
+      $('#AddToCart').val('Unavailable').addClass('disabled').attr('disabled', 'disabled').fadeTo(200,0.5);
+    }
+
+    /*begin variant image*/
+    if (variant && variant.featured_image) {
+      var originalImage = jQuery(".slick-active .engoj_img_main");
+      var newImage = variant.featured_image;
+      var element = originalImage[0];
+      Shopify.Image.switchImage(newImage, element, function (newImageSizedSrc, newImage, element) {
+        var $el = $(element);
+        $el.attr('src', newImageSizedSrc);
+        $(".engoj_img_variant:eq(0)").trigger('click');
+      });        
+    }
+    /*end of variant image*/
+  }
+
+  jQuery(function($) {
+    new Shopify.OptionSelectors('productSelect', {
+      product: {{ product | json }},
+      onVariantSelected: selectCallback,
+      enableHistoryState: true
+    });
+
+    // Add label if only one product option and it isn't 'Title'. Could be 'Size'.
+    {% if product.options.size == 1 and product.options.first != 'Title' %}
+    $('.selector-wrapper:eq(0)').prepend('<label for="productSelect-option-0">{{ product.options.first | escape }}</label>');
+    {% endif %}
+
+    // Hide selectors if we only have 1 variant and its title contains 'Default'.
+    {% if product.variants.size == 1 and product.variants.first.title contains 'Default' %}
+    $('.selector-wrapper').hide();
+    {% endif %}
+  });
+</script>
+  
+{% schema %}
+{
+  "name": "Product detail page",
+  "settings": [
+	{
+      "type": "header",
+      "content": "Banner"
+    },
+	{
+        "type": "checkbox",
+        "id": "enable_banner",
+        "label": "Enable banner",
+        "default": true
+    },
+	{
+        "type": "checkbox",
+        "id": "enable_line_top",
+        "label": "Enable line top",
+        "default": false
+    },
+	{
+        "type": "checkbox",
+        "id": "enable_line_bot",
+        "label": "Enable line bot",
+        "default": false
+    },
+	{
+        	"type": "color",
+        	"id": "bgc_banner",
+        	"label": "Background color",
+        	"default": "#ffe9c7"
+    },
+    {
+      "type": "select",
+      "id": "layout_pd",
+      "options": [
+        {
+          "value": "pd_classic",
+          "label": "Classic"
+        },
+        {
+          "value": "pd_vertical",
+          "label": "Vertical"
+        }
+      ],
+      "label": "Select Layout",
+      "default": "pd_classic"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_rating",
+      "label": "Show rating star",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_sku",
+      "label": "Show SKU",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_quantity",
+      "label": "Show quantity box",
+      "default": true
+    },
+	
+    {
+      "type": "header",
+      "content": "Product Tabs"
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_alltab",
+      "label": "Enable All Tab?",
+      "default": true
+    },
+    
+    {
+      "type": "header",
+      "content": "Description Tab"
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_description_tab",
+      "label": "Enable?",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "destab_title",
+      "label": "Title",
+      "default": "Description"
+    },
+    {
+      "type": "header",
+      "content": "Custom Tab"
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_custom_tab",
+      "label": "Enable?",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "title_tab_2",
+      "label": "Title",
+      "default": "Shipping & returns"
+    },
+	{
+      "type": "textarea",
+      "id": "content_tab_2",
+      "label": "Content",
+      "default": "Tote bag from Mansur Gavriel in Saddle. Calf leather. Open compartment. Interior side pocket. Top handles. Detachable, adjustable shoulder strap. Goldtone hardware. Embossed logo detailing at exterior. Tonal patent coated interior."
+    },
+    {
+      "type": "paragraph",
+      "content": "After enabling reviews you will need to install the free [Shopify Product Reviews](https:\/\/apps.shopify.com\/product-reviews) app."
+    },
+	{
+      "type": "header",
+      "content": "Review Tab"
+    },
+    {
+      "type": "text",
+      "id": "title_review_tab",
+      "label": "Title",
+      "default": "Customer reviews"
+    },
+	{
+      "type": "header",
+      "content": "Product Related"
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_pd_relate",
+      "label": "Show product related",
+      "default": true
+    },
+	{
+          "type": "text",
+          "id": "title_pd_relate",
+          "label": "Title",
+          "default": "Related products"
+    },
+    {
+      "type": "textarea",
+      "id": "des_pd_relate",
+      "label": "Description",
+      "default": "I did not even know that there were any better conditions to escape to, but I was more than willing to take my chances among people fashioned after."
+    },
+	{
+      "type": "header",
+      "content": "Newsletter"
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_newsletter",
+      "label": "Show newsletter",
+      "default": true
+    }
+  ],
+  "blocks": [
+    
+    {
+      "type": "section_related_product",
+      "name": "Section Related Product",
+      "limit": 1,
+      "settings": [
+     
+        
+        {
+          "type": "text",
+          "id": "srdp_limitnumber",
+          "label": "Number of products",
+          "default": "12"
+        }
+      ]
+    },
+	{
+      "type": "section_service_box",
+      "name": "Section Service Box",
+      "limit": 3,
+      "settings": [
+		{
+          "type": "image_picker",
+          "id": "servicebox_img",
+          "label": "Image",
+			"info": "50x50px recommended"
+        },
+        {
+          "type": "text",
+          "id": "servicebox_title",
+          "label": "Title",
+          "default": "Title"
+        },
+        {
+          "type": "text",
+          "id": "servicebox_desc",
+          "label": "Content",
+			"default": "Content"
+        }
+      ]
+    },
+	{
+      "type": "faqblock",
+      "name": "FAQ block",
+      "settings": [
+		{
+          "type": "text",
+          "id": "faq_icon1",
+          "label": "Icon",
+          "default": "Q"
+        },
+        {
+          "type": "text",
+          "id": "faq_title",
+          "label": "Title",
+          "default": "Does the sonos one pair up with a sonos play1 as a stereo pair ?"
+        },
+		{
+          "type": "text",
+          "id": "faq_icon2",
+          "label": "Icon",
+          "default": "Q"
+        },
+        {
+          "type": "textarea",
+          "id": "faq_content",
+          "label": "Content",
+          "default": "As long as the players are grouped in a configuration to your liking, you can ask Alexa on the Sonos One or on an echo device to start music and playback will begin across the Sonos grouping. "
+        }
+      ]
+    },
+	{
+      "type": "faqblock2",
+      "name": "FAQ block 2",
+      "settings": [
+		{
+          "type": "text",
+          "id": "faq_icon3",
+          "label": "Icon",
+          "default": "Q"
+        },
+        {
+          "type": "text",
+          "id": "faq_title2",
+          "label": "Title",
+          "default": "Does the sonos one pair up with a sonos play1 as a stereo pair ?"
+        },
+		{
+          "type": "text",
+          "id": "faq_icon4",
+          "label": "Icon",
+          "default": "Q"
+        },
+        {
+          "type": "textarea",
+          "id": "faq_content2",
+          "label": "Content",
+          "default": "As long as the players are grouped in a configuration to your liking, you can ask Alexa on the Sonos One or on an echo device to start music and playback will begin across the Sonos grouping. "
+        }
+      ]
+    },
+	{
+      "type": "sidebarproduct",
+      "name": "Sidebar Product",
+      "limit": 3,
+      "settings": [
+          {
+            "type": "header",
+            "content": "List Products"
+          },
+          {
+            "type": "collection",
+            "id": "product_collection",
+            "label": "Select collection"
+          },
+          {
+            "type": "text",
+            "id": "product_limit",
+            "label": "Limit number",
+            "default": "5"
+          }
+      ]
+    }
+  ],
+  "default": {
+    "blocks": [
+      
+      {
+        "type": "section_related_product"
+      }
+      
+    ]
+  }
+}
+{% endschema %}

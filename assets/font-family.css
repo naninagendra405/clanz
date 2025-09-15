@@ -1,0 +1,24 @@
+@font-face {
+font-family:FuturaPT;
+src:url('FuturaPTMedium.otf');
+}
+@font-face {
+font-family:"FuturaPT Book";
+src:url('FuturaPTBook.otf');
+}
+@font-face {
+font-family:"FuturaPT Heavy";
+src:url('FuturaPTHeavy.otf');
+}
+@font-face {
+font-family:"FuturaPT Demi";
+src:url('FuturaPTDemi.otf');
+}
+@font-face {
+font-family:"FuturaPT light";
+src:url('FuturaPTLight.otf');
+}
+@font-face {
+font-family:"MuliExtraBold";
+src:url('Muli-ExtraBold.ttf');
+}

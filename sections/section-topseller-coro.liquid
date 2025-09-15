@@ -1,0 +1,215 @@
+<div data-section-id="{{ section.id }}" style="{% if section.settings.margin_top != blank %}margin-top: {{section.settings.margin_top}}px;{%endif%} {% if section.settings.margin_bottom != blank %}margin-bottom: {{section.settings.margin_bottom}}px;{% endif %}">
+  <div class="topseller_v1 margin_bottom_30">
+    <div class="container v2">
+      <h3 class="title_section title-font margin_bottom_20">{{section.settings.title}}</h3>
+    </div>
+    <div class="container v2">
+      <div class="row">
+        {% if section.blocks.size > 0 %}
+        {% for block in section.blocks %}
+        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 content_left relative flex clear-space-right">
+          <a href="{{block.settings.url}}" class="inline-block over-hidden {% if block.settings.hidden_mb_1 %}hidden-xs{% endif %}">
+            {% if block.settings.img == blank %}
+            <img src="{{'710x400.jpg' | asset_url}}" class="img-responsive {% if block.settings.enable_zoom_1 %}hover-zoom-out{% endif %}">
+            {% else %}
+          	<img src="{{block.settings.img | img_url:'master'}}" class="img-responsive {% if block.settings.enable_zoom_1 %}hover-zoom-out{% endif %}">
+            {% endif %}
+          </a>
+          {% if block.settings.enable_text %}
+          <div class="text_content absolute">
+            <h4 class="title-font title_cate">
+              <a href="{{block.settings.url}}">{{block.settings.title_categories}}</a>
+            </h4>
+            <h5 class="title-font price">
+              {{block.settings.price}}
+            </h5>
+          </div>
+          {% endif %}
+        </div>
+<!--          -->
+        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 content_right relative flex clear-space-left" {% if block.settings.type_content == 'text' %}style="flex-direction:column;"{% endif %}>
+          {% if block.settings.type_content == 'image' %}
+          <a href="{{block.settings.url}}" class="inline-block over-hidden {% if block.settings.hidden_mb_2 %}hidden-xs{% endif %}">
+            {% if block.settings.img_2 == blank %}
+            <img src="{{'710x400.jpg' | asset_url}}" class="img-responsive {% if block.settings.enable_zoom_2 %}hover-zoom-out{% endif %}">
+            {% else %}
+          	<img src="{{block.settings.img_2 | img_url:'master'}}" class="img-responsive {% if block.settings.enable_zoom_2 %}hover-zoom-out{% endif %}">
+            {% endif %}
+          </a>
+          {% if block.settings.enable_text_2 %}
+          <div class="text_content absolute">
+            <h4 class="title-font title_cate">
+              <a href="{{block.settings.url_2}}">{{block.settings.title_categories_2}}</a>
+            </h4>
+            <h5 class="title-font price">
+              {{block.settings.price_2}}
+            </h5>
+          </div>
+          {% endif %}
+          {% else %}
+          <h3 class="title-font title_content_text">{{block.settings.title_categories_2}}</h3>
+          <h5 class="title-font price v2">
+            {{block.settings.price_2}}
+          </h5>
+          {% endif %}
+        </div>
+        {% endfor %}
+        {% endif %}
+      </div>
+    </div>
+  </div>
+</div>  
+
+{% schema %}
+{
+  "name": "Topseller v1",
+  "class": "index-section",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Section Space"
+    },
+    {
+      "type": "text",
+      "id": "margin_top",
+      "label": "Margin Top",
+      "info": "Defined in pixels. Do not add the 'px' unit."
+    },
+    {
+      "type": "text",
+      "id": "margin_bottom",
+      "label": "Margin Bottom",
+      "info": "Defined in pixels. Do not add the 'px' unit."
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title section",
+      "default": "Top Seller"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "image",
+      "name": "Image",
+	  "limit":5,
+      "settings": [
+	{
+      "type": "header",
+      "content": "Content left"
+    },
+	{
+      "type": "checkbox",
+      "id": "hidden_mb_1",
+      "label": "Hidden image on mobile",
+      "default": false
+    },
+	{
+      "type": "checkbox",
+      "id": "enable_zoom_1",
+      "label": "Enable zoom image",
+      "default": true
+    },
+	{
+      "type": "image_picker",
+      "id": "img",
+      "label": "Image categories",
+      "info": "710x400.jpg"
+    },
+	{
+      "type": "checkbox",
+      "id": "enable_text",
+      "label": "Enable text",
+      "default": true
+    },
+	{
+      "type": "text",
+      "id": "title_categories",
+      "label": "Title categories",
+      "default": "Shop By Brand"
+    },
+	{
+      "type": "url",
+      "id": "url",
+      "label": "Url categories",
+      "default": "/collections/all"
+    },
+	{
+      "type": "text",
+      "id": "price",
+      "label": "Price",
+      "default": "From $99.00"
+    },
+	{
+      "type": "header",
+      "content": "Content right"
+    },
+	{
+     "type":      "select",
+     "id":        "type_content",
+     "label":     "Select tyle content",
+     "options": [
+		{
+         "value": "image",
+         "label": "Image"
+     	},
+		{
+         "value": "text",
+         "label": "Text"
+     	}
+	],
+	 "default":   "text"
+	},
+	{
+      "type": "checkbox",
+      "id": "hidden_mb_2",
+      "label": "Hidden image on mobile",
+      "default": false
+    },
+	{
+      "type": "checkbox",
+      "id": "enable_zoom_2",
+      "label": "Enable zoom image",
+      "default": true
+    },
+	{
+      "type": "image_picker",
+      "id": "img_2",
+      "label": "Image categories",
+      "info": "710x400.jpg"
+    },
+	{
+      "type": "checkbox",
+      "id": "enable_text_2",
+      "label": "Enable text",
+      "default": true
+    },
+	{
+      "type": "textarea",
+      "id": "title_categories_2",
+      "label": "Title categories",
+      "default": "Collections"
+    },
+	{
+      "type": "url",
+      "id": "url_2",
+      "label": "Url categories",
+      "default": "/collections/all"
+    },
+	{
+      "type": "text",
+      "id": "price_2",
+      "label": "Price",
+      "default": "From $99.00"
+    }
+]
+}
+],
+  "presets": [
+    {
+      "name": "Topseller v1",
+      "category": "section Coro"
+    }
+  ]
+}
+{% endschema %}

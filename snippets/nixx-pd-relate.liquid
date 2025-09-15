@@ -1,0 +1,41 @@
+{% assign products_limit = 12 %}
+
+{% if collection == null or collection.handle == 'frontpage' or collection.handle == 'all' %}
+{% assign found_a_collection = false %}
+{% for c in product.collections %}
+{% if found_a_collection == false and c.handle != 'frontpage' and c.handle != 'all' and c.all_products_count > 1 %}
+{% assign found_a_collection = true %}
+{% assign collection = c %}
+{% endif %}
+{% endfor %}
+{% endif %}
+<div class="container margin_bottom_90 section-bestseller-home1">
+  <div class="row">
+    <div class="col-md-12">
+      <h1 class="title-font margin_bottom_10 title-bestseller">{{section.settings.title_pd_relate}}</h1>
+      <p class="des-font margin_bottom_50 des-bestseller">{{ section.settings.des_pd_relate | truncatewords: 30 }}</p>
+      <div class="slick-bestseller">
+        {% if collection and collection.products_count > 1 %}
+        {% assign current_product = product %}
+        {% assign current_product_found = false %}
+        {% for product in collection.products limit: products_limit %}
+        {% if product.handle == current_product.handle %}
+        {% assign current_product_found = true %}
+        {% else %}
+        {% unless current_product_found == false and forloop.last %}
+        {% include 'nixx-product' %}
+
+        {% endunless %}
+        {% endif %}
+        {% endfor %}
+        {% else %}
+
+        {% include 'onboarding-empty-pd-related' %}
+
+        {% endif %}
+        
+      </div>
+
+    </div>
+  </div>
+</div>

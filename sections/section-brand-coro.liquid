@@ -1,0 +1,89 @@
+<div data-section-id="{{ section.id }}" style="{% if section.settings.margin_top != blank %}margin-top: {{section.settings.margin_top}}px;{%endif%} {% if section.settings.margin_bottom != blank %}margin-bottom: {{section.settings.margin_bottom}}px;{% endif %}">
+
+<div class="container container_250 brand">
+  <div class="brand-slider {% if section.settings.enable_v2 %}v2{% endif %} {% if section.settings.enable_line_top %}border-top{% endif %}">
+    {% if section.blocks.size > 0 %}
+    {% for block in section.blocks %}
+    <div>
+      <a href="{{block.settings.url}}">
+        {% if block.settings.img == blank %}
+        <img src="{{'brand1.png' | asset_url}}" alt="">
+        {% else %}
+        <img src="{{ block.settings.img | img_url:'master' }}" alt="">
+        {% endif %}
+      </a>
+    </div>
+    {% endfor %}
+    {% endif %}
+  </div>
+</div>
+</div>
+
+{% schema %}
+  {
+    "name": "brand v1",
+    "settings": [
+		{
+      "type": "header",
+      "content": "Section Space"
+    },
+    {
+      "type": "text",
+      "id": "margin_top",
+      "label": "Margin Top",
+      "info": "Defined in pixels. Do not add the 'px' unit."
+    },
+    {
+      "type": "text",
+      "id": "margin_bottom",
+      "label": "Margin Bottom",
+      "info": "Defined in pixels. Do not add the 'px' unit."
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_line_top",
+      "label": "Enable line top",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_v2",
+      "label": "Enable style 2",
+      "default": false
+    }
+	],
+	"blocks":[
+	{
+		"type": "image",
+      	"name": "comment",
+		"limit":12,
+      	"settings": [
+			{
+          		"type": "url",
+          		"id": "url",
+          		"label": "URL",
+          		"default": "/collections/all"
+        	},
+			{
+          		"type": "image_picker",
+          		"id": "img",
+          		"label": "Image",
+          		"info": "Image size 106 x 43"
+        	}
+	]
+	}
+	],
+	"presets": [
+      {
+        "name": "brand v1",
+        "category": "section Coro"
+      }
+    ]
+  }
+{% endschema %}
+
+{% stylesheet %}
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}

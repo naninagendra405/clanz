@@ -1,0 +1,21 @@
+<h3 class="post-title widget-title">{{ 'blogs.article.related' | t }}</h3>
+  {%- assign blog_selected = section.settings.choose_blog -%}
+  <div class="post-related-slide">
+    <div class="row">
+      {% for article in blogs[blog_selected].articles limit: 2 %}
+      <div class="col-xs-12 col-sm-6 col-md-6">
+        <div class="blog-post-item post-item">
+          <div class="blog-post-img">
+            <a class="hover-images" href="#"><img src="{{ article.image.src | img_url: 'original' }}" alt="{{ article.title }}"></a>
+          </div>
+          <div class="blog-post-info">
+            {% if section.settings.show_date%}
+            <div class="post-date">{{article.published_at | time_tag: format: 'month_day_year'}}</div>
+            {% endif %}
+            <h3 class="post-name"><a href="{{ article.url }}">{{ article.title }}</a></h3>
+          </div>
+        </div>  
+      </div>
+      {% endfor %}
+    </div>
+  </div>

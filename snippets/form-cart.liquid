@@ -1,0 +1,41 @@
+<div class="form-cart delay03">
+  <i class="ti-close" id="close-cart"></i>
+  <h3 class="title-font capital">my cart</h3>
+  <div class="enj-minicart-ajax">
+  {% if cart.item_count > 0 %}
+      <ul class="list mini-products-list margin_top_50 margin_bottom_50">
+       	{% for item in cart.items %}
+          <li class="item-cart flex margin_bottom_20">
+              <div class="product-img-wrap">
+                  <a href="{{item.url}}"><img src="{{ item.image | product_img_url: '83x100' }}" alt="{{ item.title }}"></a>
+              </div>
+              <div class="product-details space_left_20">
+                  <div class="inner-left">
+                      <div class="product-name title-font"><a href="{{ item.url }}" tabindex="0" class="link-default">{{ item.title}}</a></div>
+                      <div class="product-price number-font">
+                          {{ item.price | money }} <span>( x{{ item.quantity }})</span>
+                      </div>
+                  </div>
+              </div>
+              
+          </li>
+          {% endfor %}
+      </ul>
+      <div class="bottom-cart">
+          <div class="cart-price number-font flex margin_bottom_50">
+              <span>Subtotal</span>
+              <span class="price-total">{{cart.total_price | money}}</span>
+          </div>
+          <div class="button-cart des-font">
+              <a href="/cart" class="cart-btn btn-viewcart btn-nixx full-width margin_bottom_20">{{ 'minicart.general.view_cart' | t }}</a>
+              <a href="/checkout" class="cart-btn e-checkout btn-nixx full-width">{{ 'minicart.general.checkout' | t }}</a>
+          </div>
+      </div>
+  {% else %}
+    <div class="empty-cart">
+    <p class="des-font">No products in the cart.</p>
+    <a href="/collections/all" class="capital des-font">start shopping</a>
+  </div>
+  {% endif %}
+  </div>
+  </div>

@@ -1,0 +1,73 @@
+<div class="nixx-promotion hidden-xs hidden-sm">
+  <div class="container">
+    <div class="row flex">
+      <div class="col-md-8 col-sm-8">
+        <span class="text-uppercase small des-font space_right_20 title">{{settings.text}}</span>
+
+        <a href="/collections/all" class="btn-promo number-font uppercase">{{settings.btn_name_promo}}</a>
+
+      </div>
+      <div class="col-md-4 col-sm-4 relative flex content-right">
+        {% if settings.enable_timer_promo %}
+        <div><i class="ti-timer"></i></div>
+        
+        <div class="time time-v1 number-font absolute" data-countdown="countdown" data-date="{{settings.timer_promo}}"></div>
+        {% endif %}
+        <button type="button" class="close-promo right">
+          <i class="ti-close" aria-hidden="true"></i>
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+<style>
+  .nixx-promotion{
+  {% if settings.bg-promo == 'color' %}
+  background:{{settings.bg-color-promo}};
+  {% else %}
+  background-image:{{settings.bg-img-promo | img_url:'master'}};
+  background-position:center center;
+  background-repeat:none;
+  height:auto;
+  {% endif %}
+}
+  .nixx-promotion .title{
+	font-size:18px;
+    color:{{settings.color_text_promo}};
+}
+.nixx-promotion .btn-promo{
+  color: {{settings.color_btn_promo}};
+  padding: 10px 30px;
+  background:{{settings.bg_color_btn_promo}};
+  transition:all .3s ease;
+}
+.nixx-promotion .btn-promo:hover{
+	background:{{settings.bg_color_hover_promo}};
+}
+  .nixx-promotion button.close-promo i{
+  	color:{{settings.color_icon_promo}};
+  }
+  .close-promotion{
+  	display:none;
+  }
+  .nixx-promotion .content-right{
+  	justify-content: space-between;
+  }
+  .nixx-promotion i.ti-timer{
+  	color:{{settings.color_timer_promo}};
+    font-size:18px;
+  }
+  .nixx-promotion .time ul{
+  	display:flex;
+  }
+  .nixx-promotion .time ul li{
+  	list-style-type:none;
+    display:flex;
+    padding-right:20px;
+    color:{{settings.color_timer_promo}};
+  }
+  .nixx-promotion .time ul li span{
+  	margin-left:5px;
+    text-transform: capitalize;
+  }
+</style>

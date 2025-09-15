@@ -1,0 +1,202 @@
+{% if section.settings.enable_banner %}
+<div class="banner margin_bottom_150 {% if section.settings.enable_line_top %}border-top{% endif %} {% if section.settings.enable_line_bot %}border-bot{% endif %}" style="background:{{section.settings.bgc_banner}};">
+	<div class="container">
+		<h1 class="title-font title-banner text-center">F.A.Q.'S</h1>
+		{% include 'breadcrumb' %}
+	</div>
+</div>
+{% endif %}
+<!--  -->
+<div class="content-faq margin_bottom_150 margin_top_150 container">
+	<div class="row">
+		<div class="col-md-12">
+			<h1 class="title-faq title-font">{{section.settings.title}}</h1>
+			<p class="des-font des-faq">{{section.settings.des}}</p>
+		</div>
+		
+	</div>
+	<div class="row row-2">
+		<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 content-main-faq space_top_50 clear-space-left">
+          {% if section.blocks.size > 0 %}
+          {% for block in section.blocks %}
+          {% if block.type == 'column1' %}
+			<button class="accordion menu-font">{{block.settings.title_content}}</button>
+			<div class="panel">
+				<br>
+  				<p class="des-font">{{block.settings.content_1}}</p>
+				<br><br>
+				<p class="des-font">{{block.settings.content_2}}</p>
+				<br>
+				<br>
+			</div>
+          {% endif %}
+          {% endfor %}
+          {% endif %}
+			<!--  -->
+			
+          
+		</div>
+		<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 content-main-faq space_top_50">
+			{% if section.blocks.size > 0 %}
+          {% for block in section.blocks %}
+          {% if block.type == 'column2' %}
+			<button class="accordion menu-font">{{block.settings.title_content}}</button>
+			<div class="panel">
+				<br>
+  				<p class="des-font">{{block.settings.content_1}}</p>
+				<br><br>
+				<p class="des-font">{{block.settings.content_2}}</p>
+				<br>
+				<br>
+			</div>
+          {% endif %}
+          {% endfor %}
+          {% endif %}
+		</div>
+	</div>
+</div>
+<!--  -->
+<div class="container-fluid newsletter-home3 space_top_bot_150">
+  <h1 class="title-font capital title-newsletter text-center">{{section.settings.title_newsletter_form}}</h1>
+  <p class="des-font des-newsletter space_bot_60 text-center">{{section.settings.des_newsletter_form}}</p>
+  <form class="form-group des-font flex" action="{{ form_action }}" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" target="_blank">
+    <input type="email" name="EMAIL" class="form-control" placeholder="Your email address...">
+    <button type="submit" class="menu-font uppercase">{{section.settings.btn_submit_name}}</button>
+  </form>
+</div>
+{% schema %}
+{
+  "name": "Page FAQs",
+  "settings": [
+	{
+      "type": "header",
+      "content": "Banner"
+    },
+	{
+        "type": "checkbox",
+        "id": "enable_banner",
+        "label": "Enable banner",
+        "default": true
+    },
+	{
+        "type": "checkbox",
+        "id": "enable_line_top",
+        "label": "Enable line top",
+        "default": false
+    },
+	{
+        "type": "checkbox",
+        "id": "enable_line_bot",
+        "label": "Enable line bot",
+        "default": false
+    },
+	{
+        	"type": "color",
+        	"id": "bgc_banner",
+        	"label": "Background color",
+        	"default": "#ffe9c7"
+    },
+	{
+      "type": "header",
+      "content": "Content FAQs"
+    },
+	{
+        "type": "text",
+        "id": "title",
+        "label": "Title",
+        "default": "Frequently asked questions"
+    },
+	{
+        "type": "text",
+        "id": "des",
+        "label": "Description",
+        "default": "I am text block. Click edit button to change this text. Lorem ipsum dolor sit amet,consectetur adipiscing elit. Ut elit tellus, luctus nec ullamcorper mattis, pulvinar dapibus leo."
+    },
+	{
+      "type": "header",
+      "content": "Newsletter"
+    },
+	{
+        "type": "text",
+        "id": "title_newsletter_form",
+        "label": "Title",
+        "default": "Get Our Latest Update In Your Email"
+      },
+      {
+        "type": "text",
+        "id": "des_newsletter_form",
+        "label": "Description",
+        "default": "Subscribe now to get 15% off on any product"
+      },
+      {
+        "type": "text",
+        "id": "btn_submit_name",
+        "label": "Button",
+        "default": "subscribe"
+      }
+  ],
+  "blocks": [
+    {
+      "type": "column1",
+      "name": "FAQ block 1",
+	  
+      "settings": [
+		{
+          "type": "text",
+          "id": "title_content",
+          "label": "Title",
+          "default": "First question"
+        },
+        {
+          "type": "textarea",
+          "id": "content_1",
+          "label": "Content 1",
+          "default": "Lorem ipsum dolor sit amet isse potenti. Vesquam ante aliquet lacusemper elit. Cras neque nulla, convallis non commodo et, euismod nonsese. At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate provident, similique sunt in culpa qui offic"
+        },
+		{
+          "type": "textarea",
+          "id": "content_2",
+          "label": "Content 2",
+          "default": "Cras neque nulla, convallis non commodo et, euismod nonsese. At vero et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti"
+        }
+      ]
+    },
+	{
+      "type": "column2",
+      "name": "FAQ block 2",
+	  
+      "settings": [
+		{
+          "type": "text",
+          "id": "title_content",
+          "label": "Title",
+          "default": "First question"
+        },
+        {
+          "type": "textarea",
+          "id": "content_1",
+          "label": "Content 1",
+          "default": "Lorem ipsum dolor sit amet isse potenti. Vesquam ante aliquet lacusemper elit. Cras neque nulla, convallis non commodo et, euismod nonsese. At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate provident, similique sunt in culpa qui offic"
+        },
+		{
+          "type": "textarea",
+          "id": "content_2",
+          "label": "Content 2",
+          "default": "Cras neque nulla, convallis non commodo et, euismod nonsese. At vero et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Page FAQs"
+    }
+  ]
+}
+{% endschema %}
+
+{% stylesheet %}
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}

@@ -1,0 +1,125 @@
+<div class="banner margin_bottom_150">
+  <div class="container">
+    <h1 class="title-font title-banner">Login/Register</h1>
+    {% include 'breadcrumb' %}
+  </div>
+</div>
+<div class="container login_page margin_bottom_50">
+  <div class="myaccount">
+    
+    <div class="row">
+      
+        <div class="note form-success hide title-font" id="ResetSuccess">
+          {{ 'customer.recover_password.success' | t }}
+        </div>
+        <div id="CustomerLoginForm" class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+              <h1 class="title-font text-center capital margin_bottom_50">{{ 'customer.login.title' | t }}</h1>
+          {% form 'customer_login' %}
+          {{ form.errors | default_errors }}
+            <div class="form-customer des-font">
+            <div class="login-form">
+              <div class="form-group">
+                <label for="exampleInputEmail1">E-mail*</label>
+                <input type="email" class="form-control form-account{% if form.errors contains 'email' %} input--error{% endif %}" name="customer[email]" placeholder="Email*" autocorrect="off" autocapitalize="off">
+              </div>
+              {% if form.password_needed %}
+
+                <div class="form-group">
+                  <label for="exampleInputPassword1">Password*</label>
+                  <input type="password" class="form-control form-account{% if form.errors contains 'password' %} input--error{% endif %}" name="customer[password]" placeholder="Password*" autocorrect="off" autocapitalize="off">
+                </div>
+				<div class="flex space_top_bot_30">
+                  <a href="#recover" id="RecoverPassword" class="link-default">Forgot Password?</a>
+              	</div>
+              {% endif %}
+              
+              <div class="btn-button-group mg-top-30 mg-bottom-15">
+                  <button type="submit" class="btn-nixx full-width number-font uppercase">
+                      Sign In
+                  </button>
+              </div>
+              
+
+            </div>
+            </div>
+          {% endform %}
+        </div>
+        <div id="RecoverPasswordForm" class="recover col-lg-6 col-md-6 col-sm-6 col-xs-12" style="display:none;">
+			<div class="cmt-title text-center abs">
+              <h1 class="title-font text-center capital margin_bottom_50">{{ 'customer.recover_password.title' | t }}</h1>
+          </div>
+          
+			<div class="page-content">
+           
+          <div class="form-login">
+            {% form 'recover_customer_password' %}
+
+            {{ form.errors | default_errors }}
+
+            {% comment %}
+            Add a hidden span to indicate the form was submitted succesfully.
+            {% endcomment %}
+            {% if form.posted_successfully? %}
+            <span class="hide reset-password-success"></span>
+            {% endif %}
+            <div class="form-group">
+              <label for="RecoverEmail">{{ 'customer.recover_password.email' | t }}*</label>
+              <input type="email" class="form-control form-account" value="" name="email" id="RecoverEmail" class="input-full" autocorrect="off" autocapitalize="off" placeholder="Email*">
+            </div>
+
+            
+              <button class="btn-submit btn-nixx block number-font uppercase full-width margin_bottom_20">{{ 'customer.recover_password.submit' | t }}</button>  
+              <button id="HideRecoverPasswordLink" class="btn-submit btn-nixx block number-font uppercase full-width">{{ 'customer.recover_password.cancel' | t }}</button>  
+
+            
+
+
+            {% endform %}
+          </div>
+          </div>
+        </div>
+        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                <h1 class="title-font text-center capital margin_bottom_50">{{ 'customer.register.title' | t }}</h1>
+            <div class="page-content">
+                {% form 'create_customer' %}
+                  {{ form.errors | default_errors }}
+              <div class="form-customer des-font">
+                <div class="form-group">
+                  <label for="exampleInputEmail1">E-mail*</label>
+                  <input type="email" class="form-control form-account{% if form.errors contains 'email' %} input--error{% endif %}" name="customer[email]" placeholder="Email*" autocorrect="off" autocapitalize="off">
+                </div>
+
+                <div class="form-group">
+                  <label for="exampleInputPassword1">Password*</label>
+                  <input type="password" class="form-control form-account{% if form.errors contains 'password' %} input--error{% endif %}" name="customer[password]" placeholder="Password*" autocorrect="off" autocapitalize="off">
+                </div>
+                <div class="btn-button-group">
+                  <button type="submit" class="btn-nixx full-width number-font uppercase">
+                    register
+                  </button>
+                </div>
+              </div>
+                
+                {% endform %}
+            </div>
+        </div>
+      
+    </div>
+  </div>
+  {% comment %}
+  If accounts are set as optional, the following will be shown as an option
+  during checkout, not on the default /login page.
+  {% endcomment %}
+  {% if shop.checkout.guest_login %}
+  <div class="text-center">
+    <hr class="hr--invisible">
+    <h2 class="title-font">{{ 'customer.login.guest_title' | t }}</h2>
+
+    {% form 'guest_login' %}
+    <input type="submit" class="btn des-font" value="{{ 'customer.login.guest_continue' | t }}">
+    {% endform %}
+  </div>
+  {% endif %}
+
+</div>
+{% include 'nixx-newsletter' %}

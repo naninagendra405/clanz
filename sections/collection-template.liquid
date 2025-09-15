@@ -1,0 +1,316 @@
+<!-- collection-template.liquid -->
+{% comment %}
+For more information on collection tags:
+- http://docs.shopify.com/themes/liquid-variables/collection
+{% endcomment %}
+{% if template contains 'collection.list' %}
+	{%- assign per_page = settings.nb_per_page -%}
+{% elsif template contains 'collection.fullwidth' %}
+	{%- assign per_page = 24 -%}
+{% elsif template contains 'collection.24' %}
+	{%- assign per_page = 24 -%}
+{% elsif template contains 'collection.36' %}
+	{%- assign per_page = 36 -%}
+{% elsif template contains 'collection.48' %}
+	{%- assign per_page = 48 -%}
+{% else %}
+	{%- assign per_page = settings.nb_per_page -%}
+{% endif %}
+
+{% paginate collection.products by per_page %}
+
+{% comment %}
+Use .grid--rev so that the collection tags appear below the products on mobile
+{% endcomment %}
+{% if section.settings.layout == 'collection_standard' %}
+	{% include 'collection-template-standard' %}
+{% elsif section.settings.layout == 'collection_sidebar' %}
+	{% include 'collection-template-sidebar' %}
+{% elsif section.settings.layout == 'cate_sidebarleft' %}
+	{% include 'cate-template-lsidebar' %}
+{% elsif section.settings.layout == 'cate_sidebarright' %}
+	{% include 'cate-template-rsidebar' %}
+{% else %}
+    {% include 'collection-template-sidebarright' %}
+{% endif %}
+{% endpaginate %}
+
+{% schema %}
+{
+  "name": "Collection Page",
+  "settings": [
+    {
+      "type": "select",
+        "id": "layout",
+        "label": "Layout",
+        "default": "collection_sidebar",
+        "options": [
+        {
+          "value": "collection_standard",
+          "label": "Full Width"
+        },
+        {
+          "value": "collection_sidebar",
+          "label": "Left Sidebar"
+        },
+        {
+          "value": "collection_grid",
+          "label": "Right Sidebar"
+        },
+		{
+          "value": "cate_sidebarleft",
+          "label": "Cate Left Sidebar"
+        },
+        {
+          "value": "cate_sidebarright",
+          "label": "Cate Right Sidebar"
+        }
+      ]
+    },
+    {
+      "type": "header",
+      "content": "Banner (For Layout Full Width)"
+    },
+    {
+      "type": "image_picker",
+      "id": "bg_img1",
+      "label": "Image",
+      "info": "1398x316px recommended"
+    },
+    {
+      "id": "bg_url1",
+      "type": "url",
+      "default": "/collections/all",
+      "label": "Button link"
+    },
+    {
+      "type": "header",
+      "content": "Banner (For Layout Sidebar)"
+    },
+    {
+      "type": "image_picker",
+      "id": "bg_img2",
+      "label": "Image",
+      "info": "1038x316px recommended"
+    },
+    {
+      "id": "bg_url2",
+      "type": "url",
+      "default": "/collections/all",
+      "label": "Button link"
+    },
+	{
+      "type": "header",
+      "content": "Mobile Filter"
+    },
+	{
+      "type": "text",
+      "id": "text_filter2",
+      "label": "Title",
+      "default": "Filter"
+    },
+    {
+      "type": "header",
+      "content": "Section Filter"
+    },
+    {
+      "type": "text",
+      "id": "text_filter",
+      "label": "Title",
+      "default": "Product filter"
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_filter_collection",
+      "label": "Enable Filter (showing, grid, filter, list, sort)?",
+      "default": true
+    },
+
+    {
+      "type": "header",
+      "content": "Widget config"
+    },
+    
+    {
+      "type": "header",
+      "content": "Widget Filter by Color"
+    },
+    {
+      "type": "text",
+      "id": "shop_by_color_title",
+      "label": "Title Widget",
+      "default": "Color"
+    },
+    {
+      "type": "textarea",
+      "id": "shop_by_color_list_tags",
+      "info": "Shop by Color list tags is tags in product",
+      "label": "Shop by Color list tags"
+    },
+    {
+      "type": "header",
+      "content": "Widget Filter by Price"
+    },
+    {
+      "type": "text",
+      "id": "shop_by_price_title",
+      "label": "Title Widget",
+      "default": "Price"
+    },
+    {
+      "type": "textarea",
+      "id": "shop_by_price_list_tags",
+      "info": "Shop by Price list tags is tags in product",
+      "label": "Shop by Price list tags"
+    },
+    {
+      "type": "header",
+      "content": "Widget Filter by Size"
+    },
+    {
+      "type": "text",
+      "id": "shop_by_size_title",
+      "label": "Title Widget",
+      "default": "Size"
+    },
+    {
+      "type": "textarea",
+      "id": "shop_by_size_list_tags",
+      "info": "Shop by Size list tags is tags in product",
+      "label": "Shop by Size list tags"
+    },
+    {
+      "type": "header",
+      "info": "Brand is vendor in product",
+      "content": "Widget Filter by Brand"
+    },
+    {
+      "type": "text",
+      "id": "shop_by_brand_title",
+      "label": "Widget Title",
+      "default": "Brands"
+    },
+	{
+      "type": "header",
+      "content": "Widget Banner"
+    },
+    {
+      "type": "image_picker",
+      "id": "widget_banner_img",
+      "label": "Image",
+      "info": "320 x 384px Recommended"
+    },
+    {
+      "type": "url",
+      "id": "widget_banner_url",
+      "label": "URL"
+    },
+	{
+      "type": "text",
+      "id": "sidebar_text",
+      "label": "Heading",
+      "default": "Top products"
+    },
+	{
+      "type": "header",
+      "content": "For Category Layout"
+    },
+	{
+      "type": "header",
+      "content": "List Products 1"
+    },
+	{
+      "type": "text",
+      "id": "list_name1",
+      "label": "Title",
+      "default": "Beseller Products"
+    },
+	{
+      "type":"header",
+      "content":"Button"
+    },
+    {
+      "type": "text",
+      "id": "list_btn_name1",
+      "label": "Title button",
+      "default": "Shop more"
+    },
+	{
+      "type": "url",
+      "id": "list_btn_url1",
+      "label": "URL"
+    },
+    {
+      "type": "collection",
+      "id": "product_collection1",
+      "label": "Select collection"
+    },
+    {
+      "type": "text",
+      "id": "product_limit1",
+      "label": "Limit number",
+      "default": "12"
+    }
+  ],
+	"blocks": [
+    
+    {
+      "type": "sidebarproduct",
+      "name": "Sidebar Product",
+      "limit": 3,
+      "settings": [
+          {
+            "type": "header",
+            "content": "List Products"
+          },
+          {
+            "type": "collection",
+            "id": "product_collection",
+            "label": "Select collection"
+          },
+          {
+            "type": "text",
+            "id": "product_limit",
+            "label": "Limit number",
+            "default": "5"
+          }
+      ]
+    },
+	{
+      "type": "catetab",
+      "name": "Category Block",
+      "limit": 9,
+      "settings": [
+		{
+          "type": "image_picker",
+          "id": "cate_img",
+          "label": "Image",
+			"info": "320x320px recommended"
+        },
+        {
+          "type": "text",
+          "id": "text1",
+          "label": "Title",
+          "default": "Our vision"
+        },
+        {
+          "id": "cate_url",
+          "type": "url",
+          "default": "/collections/all",
+          "label": "Button link"
+        }
+      ]
+    }
+	
+],
+	"default": {
+    "blocks": [
+      
+      {
+        "type": "sidebarproduct"
+      }
+      
+    ]
+  }
+}
+{% endschema %}

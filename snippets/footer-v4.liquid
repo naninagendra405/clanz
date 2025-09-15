@@ -1,0 +1,67 @@
+{% if settings.newsletter_form_action != blank %}
+{% assign form_action = settings.newsletter_form_action %}
+{% else %}
+{% assign form_action = '#' %}
+{% endif %}
+<footer>
+  <div  class="footer_v4">
+    <div class="container content_fv4">
+      <div class="row">
+        <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12 content">
+          <div class="margin_bottom_30 logo_fv4">
+            <a href="/">
+              {% if settings.logo_fv4 == blank %}
+              <img src="{{'logo.png' | asset_url}}" class="img-logo">
+              {% else %}
+              <img src="{{settings.logo_fv4 | img_url:'master'}}" class="img-logo">
+              {% endif %}
+            </a>
+          </div>
+          <div class="social_fv4 margin_bottom_30">
+            <a href="{{settings.url_icon_in_fv4}}"><i class="{{settings.icon_in_fv4}}"></i></a>
+            <a href="{{settings.url_icon_fb_fv4}}"><i class="{{settings.icon_fb_fv4}}"></i></a>
+            <a href="{{settings.url_icon_tw_fv4}}"><i class="{{settings.icon_tw_fv4}}"></i></a>
+            <a href="{{settings.url_icon_vi_fv4}}"><i class="{{settings.icon_vi_fv4}}"></i></a>
+            <a href="{{settings.url_icon_pi_fv4}}"><i class="{{settings.icon_pi_fv4}}"></i></a>
+          </div>
+          
+        </div>
+        <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12 gr_link_fv4 content">
+          <h3 class="des-font margin_bottom_30 title">{{settings.title_1_fv4}}</h3>
+          {% assign footer_menu = settings.menu_fv4 %}
+          <ul>
+            {% for link in linklists[footer_menu].links %}
+            <li class=""><a href="{{ link.url }}" title="{{ link.title }}" class="delay03 des-font">{{ link.title }}</a></li>
+            {%endfor%}
+          </ul>
+        </div>
+        <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12 newletter_fv4 content">
+          <h3 class="des-font margin_bottom_30 title">{{settings.title_newletter_fv4}}</h3>
+          <p class="des-font des_newletter_fv4 margin_bottom_20">{{settings.des_newletter_fv4}}</p>
+          <form action="{{ form_action }}" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="form-group flex relative" target="_blank">
+            <input type="email" name="EMAIL" class="form-control menu-child-font" placeholder="Your email goes here..." value="{% if customer %}{{ customer.email }}{% endif %}">
+            <button type="submit" class="absolute">
+              {% if settings.icon_submit_fv4 == blank %}
+              <i class="ti-email"></i>
+              {% else %}
+              <i class="{{settings.icon_submit_fv4}}"></i>
+              {% endif %}
+            </button>
+          </form>
+        </div>
+      </div>
+      <div class="">
+        <div class="content_bot flex {% if settings.enable_line_top_fv4 %}border-top{% endif %}">
+          <a href="{{settings.url_img_payment_fv4}}" class="inline-block">
+            {% if settings.img_payment_fv4 == blank %}
+            <img src="{{ 'img-footer-1.png' | asset_url }}" class="img-responsive" alt="">
+            {% else %}
+            {{ settings.img_payment_fv4 | img_url:'master' }}
+            {% endif %}
+          </a>
+          <p class="des-font">{{settings.copy_right_fv4}}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>

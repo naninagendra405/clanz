@@ -1,0 +1,16 @@
+<ul class="category margin_bottom_70 clear-space-left space_right_10">
+  <li><h1 class="title-font title">{{section.settings.title-category-filter}}</h1></li>
+  {% for collection in collections limit: 10 %}
+  
+  <li>
+    <button class="des-font link-collection accordion">{{ collection.title }} ({{ collection.all_products_count }})</button>
+    <ul class="panel">
+      {% for product in collection.products limit:5 %}
+      <li><a href="{{product.url}}" class="des-font link-collection">{{product.title}}</a></li>
+      {% endfor %}
+    </ul>
+  </li>
+  
+  {% endfor %}
+  
+</ul>

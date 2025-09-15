@@ -1,0 +1,35 @@
+<footer class="footer_v3">
+  <div  class="container content_top">
+    <div class="row">
+      <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12 payment">
+          <a href="{{settings.url_img_payment_fv3}}" class="inline-block">
+            {% if settings.img_payment_fv3 == blank %}
+            <img src="{{ 'img-footer-1.png' | asset_url }}" class="img-responsive" alt="">
+            {% else %}
+            {{ settings.img_payment_fv3 | img_url:'master' }}
+            {% endif %}
+          </a>
+      </div>
+      <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12 img_logo_fv3 text-center">
+        <a href="/" class="inline-block">
+          {% if settings.img_logo_fv3 == blank %}
+          <img src="{{ 'logo.png' | asset_url }}" class="img-responsive" alt="">
+          {% else %}
+          {{ settings.img_logo_fv3 | img_url:'master' }}
+          {% endif %}
+        </a>
+      </div>
+      <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12 social_fv3 text-right">
+        <a href="{{settings.url_icon_in_fv3}}"><i class="{{settings.icon_in_fv3}}"></i></a>
+        <a href="{{settings.url_icon_fb_fv3}}"><i class="{{settings.icon_fb_fv3}}"></i></a>
+        <a href="{{settings.url_icon_tw_fv3}}"><i class="{{settings.icon_tw_fv3}}"></i></a>
+        <a href="{{settings.url_icon_vi_fv3}}"><i class="{{settings.icon_vi_fv3}}"></i></a>
+        <a href="{{settings.url_icon_pi_fv3}}"><i class="{{settings.icon_pi_fv3}}"></i></a>
+      </div>
+    </div>
+  </div>
+  <div class="container text-center copyright margin_bottom_30">
+    <span class="des-font">{{settings.copy_text_fv3}}</span>
+  </div>
+
+</footer>

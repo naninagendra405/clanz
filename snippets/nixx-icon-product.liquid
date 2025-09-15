@@ -1,0 +1,32 @@
+{% assign sold_out = true %}
+{% if product.available %}
+{% assign sold_out = false %}
+{% endif %}
+<div class="product-icon text-center absolute hidden-xs hidden-sm">
+  {% if sold_out %}
+  <form class="inline-block icon-addcart">
+    <button class="btn-default">
+      <i class="ti-na" style="padding-top: 3px;display: inline-block;"></i>
+    </button>
+  </form>
+  {% else %}
+  <form method="post" action="/cart/add" enctype="multipart/form-data" class="inline-block icon-addcart">
+    <input type="hidden" name="id" value="{{ product.variants.first.id }}" />
+    <button type="submit" name="add" class="enj-add-to-cart-btn btn-default">
+      {% if settings.icon-addcart == blank %}
+      <i class="ti-bag"></i>
+      {% else %}
+      <i class="{{settings.icon-addcart}}"></i>
+      {% endif %}
+    </button>
+  </form>
+  {% endif %}
+  {% include 'nixx-add-wishlist' %}
+  <a href="#" class="engoj_btn_quickview icon-quickview inline-block" title="quickview" data-id="{{ product.handle }}">
+    {% if settings.icon-quickview == blank %}
+    <i class="ti-search"></i>
+    {% else %}
+      <i class="{{settings.icon-quickview}}"></i>
+    {% endif %}
+  </a>
+</div>

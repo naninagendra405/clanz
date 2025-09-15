@@ -1,0 +1,330 @@
+<!-- /sections/article-template.liquid -->
+{% if section.settings.enable_banner %}
+<div class="banner margin_bottom_150 {% if section.settings.enable_line_top %}border-top{% endif %} {% if section.settings.enable_line_bot %}border-bot{% endif %}" style="background:{{section.settings.bgc_banner}};">
+	<div class="container">
+		<h1 class="title-font title-banner text-center">{{ article.title }}</h1>
+		{% include 'breadcrumb' %}
+	</div>
+</div>
+{% endif %}
+        
+{% if section.settings.layout == 'article_right' %}
+{% include 'nixx-article-template-right-sidebar' %}
+{% elsif section.settings.layout == 'article_left' %}
+{% include 'nixx-article-template-left-sidebar' %}
+{% elsif section.settings.layout == 'article_full' %}
+{% include 'nixx-article-template-full' %}
+{% endif %}
+
+{% if section.settings.enable_newsletter %}
+{% include 'nixx-newsletter' %}
+{% endif %}
+
+
+{% schema %}
+{
+  "name": "Article page",
+  "settings": [
+	{
+      "type": "header",
+      "content": "Banner"
+    },
+	{
+        "type": "checkbox",
+        "id": "enable_banner",
+        "label": "Enable banner",
+        "default": true
+    },
+	{
+        "type": "checkbox",
+        "id": "enable_line_top",
+        "label": "Enable line top",
+        "default": false
+    },
+	{
+        "type": "checkbox",
+        "id": "enable_line_bot",
+        "label": "Enable line bot",
+        "default": false
+    },
+	{
+        	"type": "color",
+        	"id": "bgc_banner",
+        	"label": "Background color",
+        	"default": "#ffe9c7"
+    },
+	{
+      "type": "select",
+        "id": "layout",
+        "label": "Layout",
+        "default": "article_right",
+        "options": [
+        {
+          "value": "article_right",
+          "label": "Right sidebar"
+        },
+        {
+          "value": "article_left",
+          "label": "Left sidebar"
+        },
+        {
+          "value": "article_full",
+          "label": "Full width"
+        }
+      ]
+    },
+	{
+      "type": "header",
+      "content": "Text special"
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_text_special",
+      "label": "Show text special?",
+      "default": true
+    },
+	{
+      "type": "image_picker",
+      "id": "img_special",
+      "label": "Image"
+    },
+	{
+      "type": "textarea",
+      "id": "content_special",
+      "default": "Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for ‘lorem ipsum’ will uncover many web sites still in their infancy.",
+      "label": "Content"
+    },
+	{
+      "type": "header",
+      "content": "Widget Image"
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_img_banner",
+      "label": "Enable",
+      "default": true
+    },
+	{
+      "type": "url",
+      "id": "url_banner_1",
+      "label": "URL Image 1",
+      "default": "/collections/all"
+    },
+	{
+      "type": "image_picker",
+      "id": "img_banner_1",
+      "label": "Image"
+    },
+	{
+      "type": "url",
+      "id": "url_banner_2",
+      "label": "URL Image 2",
+      "default": "/collections/all"
+    },
+	{
+      "type": "image_picker",
+      "id": "img_banner_2",
+      "label": "Image"
+    },
+	{
+      "type": "header",
+      "content": "Info more article"
+    },
+	{
+      "type": "checkbox",
+      "id": "enable_category_article",
+      "label": "Enable",
+      "default": true
+    },
+	{
+      "type": "header",
+      "content": "Comment form"
+    },
+	{
+      "type": "text",
+      "id": "title_comment",
+      "label": "Title",
+      "default": "Leave a reply"
+    },
+	{
+      "type": "textarea",
+      "id": "des_comment",
+      "label": "Description",
+      "default": "Your email address will not be published. Required fields are marked *"
+    },
+	{
+      "type": "text",
+      "id": "btn_comment",
+      "label": "Button name",
+      "default": "subscribe"
+    },
+    {
+      "type": "header",
+      "content": "article sidebar",
+	  "info": "*only for layout sidebar"
+    },
+    {
+      "type": "header",
+      "content": "Widget Search"
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_widget_search",
+      "label": "Enable",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "icon_search",
+      "label": "Icon search",
+      "info": "https://themify.me/themify-icons/"
+    },
+    {
+      "type": "header",
+      "content": "Widget Categories"
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_widget_categories",
+      "label": "Enable",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "title_category",
+      "label": "Widget Title",
+      "default": "Blog categories"
+    },
+    {
+      "type": "link_list",
+      "id": "widget_categories_menu",
+      "label": "Widget Menu"
+    },
+    {
+      "type": "header",
+      "content": "Widget Recent Posts"
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_widget_rposts",
+      "label": "Enable",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "title_post",
+      "label": "Widget Title",
+      "default": "Recent Posts"
+    },
+	{
+      "type": "blog",
+      "id": "blog_collection",
+      "label": "Chose blog"
+    },
+	{
+      "type": "text",
+      "id": "blog_limit",
+      "label": "Limit blog",
+      "default": "3"
+    },
+    {
+      "type": "header",
+      "content": "Widget Comment"
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_widget_cmt",
+      "label": "Enable",
+      "default": true
+    },
+	{
+      "type": "url",
+      "id": "url_cmt",
+      "label": "URL",
+      "default": "/"
+    },
+	{
+      "type": "image_picker",
+      "id": "img_cmt",
+      "label": "Image"
+    },
+    {
+      "type": "text",
+      "id": "title_cmt",
+      "label": "Widget Title",
+      "default": "Recent Comment"
+    },
+	
+    {
+      "type": "text",
+      "id": "name_cmt",
+      "label": "User",
+      "default": "Mr Wordpress"
+    },
+    {
+      "type": "text",
+      "id": "content_cmt",
+      "label": "Content",
+      "default": "Hi, this is a comment..."
+    },
+    {
+      "type": "text",
+      "id": "des_cmt",
+      "label": "Description",
+      "default": "Anteposuerit litterarum formas."
+    },
+    {
+      "type": "header",
+      "content": "Widget Archives"
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_widget_archive",
+      "label": "Enable",
+      "default": true
+    },
+	{
+      "type": "text",
+      "id": "title_archive",
+      "label": "Title",
+      "default": "Archives"
+    },
+	{
+      "type": "link_list",
+      "id": "widget_archive",
+      "label": "Chose link list"
+    },
+    {
+      "type": "header",
+      "content": "Widget meta"
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_widget_meta",
+      "label": "Show Meta",
+      "default": true
+    },
+	{
+      "type": "text",
+      "id": "title_meta",
+      "label": "Title",
+      "default": "Meta"
+    },
+	{
+      "type": "link_list",
+      "id": "widget_meta",
+      "label": "Chose link list"
+    },
+	{
+      "type": "header",
+      "content": "Newsletter"
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_newsletter",
+      "label": "Enable",
+      "default": true
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,398 @@
+{% if settings.newsletter_form_action != blank %}
+{% assign form_action = settings.newsletter_form_action %}
+{% else %}
+{% assign form_action = '#' %}
+{% endif %}
+{% if section.settings.enable_banner %}
+<div class="banner margin_bottom_150 {% if section.settings.enable_line_top %}border-top{% endif %} {% if section.settings.enable_line_bot %}border-bot{% endif %}" style="background:{{section.settings.bgc_banner}};">
+	<div class="container">
+		<h1 class="title-font title-banner text-center">Contact</h1>
+		{% include 'breadcrumb' %}
+	</div>
+</div>
+{% endif %}
+<div class="content-contact margin_bottom_150 container">
+	<div class="row">
+		<div class="col-lg-5 col-md-6 col-sm-12 col-xs-12 local">
+			<h1 class="title-local title-font margin_bottom_30">{{section.settings.title}}</h1>
+			<div class="address">
+				<i class="ti-location-pin"></i>
+				<span class="menu-font bold capital">{{section.settings.address}}</span>
+				<p class="des-font text">{{section.settings.local}}</p>
+			</div>
+			<!--  -->
+			<div class="email">
+				<i class="ti-email"></i>
+				<span class="menu-font bold capital">{{section.settings.title_email}}</span>
+				<p class="des-font text">{{section.settings.email}}</p>
+			</div>
+			<!--  -->
+			<div class="phone">
+				<i class="ti-headphone"></i>
+				<span class="menu-font bold capital">{{section.settings.title_phone}}</span>
+				<p class="des-font text">{{section.settings.phone_1}}</p>
+				<p class="des-font text">{{section.settings.phone_2}}</p>
+			</div>
+			<p class="des-local des-font margin_top_50">{{section.settings.des}}</p>
+		</div>
+		<div class="col-lg-7 col-md-6 col-sm-12 col-xs-12 subscribe">
+			<h1 class="title-font title-sub margin_bottom_30">{{section.settings.title_form}}</h1>
+          {% form 'contact' %}
+          {{ form.errors | default_errors }}
+			<form class="form-group des-font" method="post" target="_blank">
+					<input type="text" name="contact[author]" class="form-control margin_bottom_30" placeholder="Your name (required)">
+					<input type="email" name="contact[email]" class="form-control margin_bottom_30" placeholder="Your email (required)">
+					<input type="text" name="SUBJECT" class="form-control margin_bottom_30" placeholder="Subject">
+					<input type="text" name="contact[body]" class="form-control margin_bottom_30" placeholder="Your message">
+					<button type="submit" class="full-width uppercase menu-font">{{section.settings.btn_name}}</button>
+			</form>
+          {% endform %}
+		</div>
+	</div>
+</div>
+<!--  -->
+<div class="relative over-hidden container map-contact">
+	<div id="map"></div>
+  {% if section.settings.enable_img_map %}
+  {% if section.settings.img_map == blank %}
+	<img src="{{'img-map.jpg' | asset_url}}" class="img-responsive absolute hidden-xs hidden-sm" alt="">
+  {% else %}
+  <img src="{{section.settings.img_map | img_url:'master'}}" class="img-responsive absolute hidden-xs hidden-sm" alt="">
+  {% endif %}
+  {% endif %}
+</div>
+<div class="container newsletter-home3 space_top_bot_150 no-border">
+  <h1 class="title-font capital title-newsletter text-center">{{section.settings.title_newsletter_form}}</h1>
+  <p class="des-font des-newsletter space_bot_60 text-center">{{section.settings.des_newsletter_form}}</p>
+  <form class="form-group des-font flex" action="{{ form_action }}" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" target="_blank">
+    <input type="email" name="EMAIL" class="form-control" placeholder="Your email address...">
+    <button type="submit" class="menu-font uppercase">{{section.settings.btn_submit_name}}</button>
+  </form>
+</div>
+ <script>
+    $(document).ready(function(){
+
+    var mapCanvas = document.getElementById("map");
+    var mapOptions = {
+        center: new google.maps.LatLng({{settings.gmap_latitude}}, {{settings.gmap_longitude}}),
+        zoom: 15,
+        styles: [
+									  {
+									    "elementType": "geometry",
+									    "stylers": [
+									      {
+									        "color": "#333333"
+									      }
+									    ]
+									  },
+									  {
+									    "elementType": "labels.icon",
+									    "stylers": [
+									      {
+									        "visibility": "off"
+									      }
+									    ]
+									  },
+									  {
+									    "elementType": "labels.text.fill",
+									    "stylers": [
+									      {
+									        "color": "#616161"
+									      }
+									    ]
+									  },
+									  {
+									    "elementType": "labels.text.stroke",
+									    "stylers": [
+									      {
+									        "color": "#575757"
+									      }
+									    ]
+									  },
+									  {
+									    "featureType": "administrative.land_parcel",
+									    "elementType": "labels.text.fill",
+									    "stylers": [
+									      {
+									        "color": "#bdbdbd"
+									      }
+									    ]
+									  },
+									  {
+									    "featureType": "poi",
+									    "elementType": "geometry",
+									    "stylers": [
+									      {
+									        "color": "#eeeeee"
+									      }
+									    ]
+									  },
+									  {
+									    "featureType": "poi",
+									    "elementType": "labels.text.fill",
+									    "stylers": [
+									      {
+									        "color": "#757575"
+									      }
+									    ]
+									  },
+									  {
+									    "featureType": "poi.park",
+									    "elementType": "geometry",
+									    "stylers": [
+									      {
+									        "color": "#575757"
+									      }
+									    ]
+									  },
+									  {
+									    "featureType": "poi.park",
+									    "elementType": "labels.text.fill",
+									    "stylers": [
+									      {
+									        "color": "#575757"
+									      }
+									    ]
+									  },
+									  {
+									    "featureType": "road",
+									    "elementType": "geometry",
+									    "stylers": [
+									      {
+									        "color": "#2b2b2b"
+									      }
+									    ]
+									  },
+									  {
+									    "featureType": "road.arterial",
+									    "elementType": "labels.text.fill",
+									    "stylers": [
+									      {
+									        "color": "#757575"
+									      }
+									    ]
+									  },
+									  {
+									    "featureType": "road.highway",
+									    "elementType": "geometry",
+									    "stylers": [
+									      {
+									        "color": "#dadada"
+									      }
+									    ]
+									  },
+									  {
+									    "featureType": "road.highway",
+									    "elementType": "labels.text.fill",
+									    "stylers": [
+									      {
+									        "color": "#616161"
+									      }
+									    ]
+									  },
+									  {
+									    "featureType": "road.local",
+									    "elementType": "labels.text.fill",
+									    "stylers": [
+									      {
+									        "color": "#9e9e9e"
+									      }
+									    ]
+									  },
+									  {
+									    "featureType": "transit.line",
+									    "elementType": "geometry",
+									    "stylers": [
+									      {
+									        "color": "#e5e5e5"
+									      }
+									    ]
+									  },
+									  {
+									    "featureType": "transit.station",
+									    "elementType": "geometry",
+									    "stylers": [
+									      {
+									        "color": "#eeeeee"
+									      }
+									    ]
+									  },
+									  {
+									    "featureType": "water",
+									    "elementType": "geometry",
+									    "stylers": [
+									      {
+									        "color": "#c9c9c9"
+									      }
+									    ]
+									  },
+									  {
+									    "featureType": "water",
+									    "elementType": "labels.text.fill",
+									    "stylers": [
+									      {
+									        "color": "#9e9e9e"
+									      }
+									    ]
+									  }
+									]
+    };
+    var map = new google.maps.Map(mapCanvas, mapOptions);
+
+});
+
+    </script>
+{% schema %}
+  {
+    "name": "Page Contact",
+    "settings": [
+	{
+      "type": "header",
+      "content": "Banner"
+    },
+	{
+        "type": "checkbox",
+        "id": "enable_banner",
+        "label": "Enable banner",
+        "default": true
+    },
+	{
+        "type": "checkbox",
+        "id": "enable_line_top",
+        "label": "Enable line top",
+        "default": false
+    },
+	{
+        "type": "checkbox",
+        "id": "enable_line_bot",
+        "label": "Enable line bot",
+        "default": false
+    },
+	{
+        	"type": "color",
+        	"id": "bgc_banner",
+        	"label": "Background color",
+        	"default": "#ffe9c7"
+    },
+	{
+      "type": "header",
+      "content": "Content left"
+    },
+	{
+      "type": "text",
+      "id": "title",
+      "label": "Title",
+      "default": "Find us here"
+    },
+	{
+      "type": "text",
+      "id": "address",
+      "label": "Address",
+      "default": "address:"
+    },
+	{
+      "type": "text",
+      "id": "local",
+      "label": "Location",
+      "default": "1234 Heaven Stress, Beverly hill, Melbourne, USA."
+    },
+	{
+      "type": "text",
+      "id": "title_email",
+      "label": "Title Email",
+      "default": "email:"
+    },
+	{
+      "type": "text",
+      "id": "email",
+      "label": "Email",
+      "default": "Contact@example.com"
+    },
+	{
+      "type": "text",
+      "id": "title_phone",
+      "label": "Title phone",
+      "default": "number phone:"
+    },
+	{
+      "type": "text",
+      "id": "phone_1",
+      "label": "Number phone 1",
+      "default": "(008) 123 456 789"
+    },
+	{
+      "type": "text",
+      "id": "phone_2",
+      "label": "Number phone 2",
+      "default": "(008) 987 654 321"
+    },
+	{
+      "type": "text",
+      "id": "des",
+      "label": "Description",
+      "default": "I did not even know that there were any better conditions to escape to, but I was more than willing to take my chances among people fashioned after. I did not even know that there were any better conditions to escape to, but I was more than willing to take my chances among people fashioned after."
+    },
+	{
+      "type": "header",
+      "content": "Content right"
+    },
+	{
+      "type": "text",
+      "id": "title_form",
+      "label": "Title",
+      "default": "Contact us"
+    },
+	{
+      "type": "text",
+      "id": "btn_name",
+      "label": "Button name",
+      "default": "subscribe"
+    },
+	{
+      "type": "checkbox",
+      "id": "enable_img_map",
+      "label": "Enable image",
+      "default": true
+    },
+	{
+      "type": "image_picker",
+      "id": "img_map",
+      "label": "Image map",
+      "info": "720x500px recommended"
+    },
+	{
+      "type": "header",
+      "content": "Newsletter"
+    },
+	{
+        "type": "text",
+        "id": "title_newsletter_form",
+        "label": "Title",
+        "default": "Get Our Latest Update In Your Email"
+      },
+      {
+        "type": "text",
+        "id": "des_newsletter_form",
+        "label": "Description",
+        "default": "Subscribe now to get 15% off on any product"
+      },
+      {
+        "type": "text",
+        "id": "btn_submit_name",
+        "label": "Button",
+        "default": "subscribe"
+      }
+	],
+	"presets": [
+    {
+      "name": "Page Contact"
+    }
+  ]
+  }
+{% endschema %}
+
+{% stylesheet %}
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}

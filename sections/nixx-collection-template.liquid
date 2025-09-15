@@ -1,0 +1,248 @@
+<!-- collection-template.liquid -->
+{% comment %}
+For more information on collection tags:
+- http://docs.shopify.com/themes/liquid-variables/collection
+{% endcomment %}
+{% if template contains 'collection.list' %}
+	{%- assign per_page = settings.nb_per_page -%}
+{% elsif template contains 'collection.fullwidth' %}
+	{%- assign per_page = 12 -%}
+{% elsif template contains 'collection.12' %}
+	{%- assign per_page = 12 -%}
+{% elsif template contains 'collection.16' %}
+	{%- assign per_page = 16 -%}
+{% elsif template contains 'collection.24' %}
+	{%- assign per_page = 24 -%}
+{% else %}
+	{%- assign per_page = settings.nb_per_page -%}
+{% endif %}
+
+{% paginate collection.products by per_page %}
+
+{% comment %}
+Use .grid--rev so that the collection tags appear below the products on mobile
+{% endcomment %}
+{% if section.settings.layout == 'Left_sidebar' %}
+	{% include 'nixx-collection-template-left-sidebar' %}
+{% elsif section.settings.layout == 'Right_sidebar' %}
+	{% include 'nixx-collection-template-right-sidebar' %}
+{% elsif section.settings.layout == 'full_width' %}
+	{% include 'nixx-collection-template-full' %}
+
+{% endif %}
+{% endpaginate %}
+
+{% schema %}
+{
+  "name": "Collection Page",
+  "settings": [
+	{
+      "type": "header",
+      "content": "Banner"
+    },
+	{
+        "type": "checkbox",
+        "id": "enable_banner",
+        "label": "Enable banner",
+        "default": true
+    },
+	{
+        "type": "checkbox",
+        "id": "enable_line_top",
+        "label": "Enable line top",
+        "default": false
+    },
+	{
+        "type": "checkbox",
+        "id": "enable_line_bot",
+        "label": "Enable line bot",
+        "default": false
+    },
+	{
+        	"type": "color",
+        	"id": "bgc_banner",
+        	"label": "Background color",
+        	"default": "#ffe9c7"
+    },
+    {
+      "type": "select",
+        "id": "layout",
+        "label": "Layout",
+        "default": "Right_sidebar",
+        "options": [
+        {
+          "value": "full_width",
+          "label": "Full Width"
+        },
+        {
+          "value": "Left_sidebar",
+          "label": "Left Sidebar"
+        },
+        {
+          "value": "Right_sidebar",
+          "label": "Right Sidebar"
+        }
+      ]
+    },
+    {
+      "type": "header",
+      "content": "Banner"
+    },
+	{
+      "type": "checkbox",
+      "id": "enable_bg_banner",
+      "label": "Enable background color",
+      "default": false
+    },
+	{
+   	  "type":      "select",
+   	  "id":        "select_bg",
+   	  "label":     "Select Background banner",
+   	  "options": [
+     {
+       
+       "value": "img",
+       "label": "Image"
+     },
+     {
+       
+       "value": "color",
+       "label": "Color"
+     }
+    ],
+      "default":   "img"
+  
+	},
+    {
+      "type": "image_picker",
+      "id": "bg-banner",
+      "label": "Image",
+      "info": "1398x316px recommended"
+    },
+	{
+      "type": "color",
+      "id": "color",
+      "label": "Chose background color",
+      "default": "#fff"
+    },
+	{
+      "type": "header",
+      "content": "Button function"
+    },
+	{
+      "type": "text",
+      "id": "btn-grid",
+      "label": "Button grid layout",
+      "default": "ti-layout-grid3-alt",
+	  "info": "https://themify.me/themify-icons"
+    },
+	{
+      "type": "text",
+      "id": "btn-list",
+      "label": "Button list layout",
+      "default": "ti-list",
+	  "info": "https://themify.me/themify-icons"
+    },
+    {
+      "type": "header",
+      "content": "Section Filter"
+    },
+    {
+      "type": "text",
+      "id": "title-category-filter",
+      "label": "Title",
+      "default": "Product Categories"
+    },
+    {
+      "type": "header",
+      "content": "Widget config"
+    },
+    {
+      "type": "header",
+      "content": "Widget Filter by Price"
+    },
+    {
+      "type": "text",
+      "id": "shop_by_price_title",
+      "label": "Title Widget",
+      "default": "Filter By Price"
+    },
+    {
+      "type": "textarea",
+      "id": "shop_by_price_list_tags",
+      "info": "Shop by Price list tags is tags in product",
+      "label": "Shop by Price list tags"
+    },
+    {
+      "type": "header",
+      "content": "Widget Filter by Size"
+    },
+    {
+      "type": "text",
+      "id": "shop_by_size_title",
+      "label": "Title Widget",
+      "default": "Any Size"
+    },
+    {
+      "type": "textarea",
+      "id": "shop_by_size_list_tags",
+      "info": "Shop by Size list tags is tags in product",
+      "label": "Shop by Size list tags"
+    },
+	{
+      "type": "header",
+      "content": "Widget Filter by Color"
+    },
+    {
+      "type": "text",
+      "id": "shop_by_color_title",
+      "label": "Title Widget",
+      "default": "Chose Color"
+    },
+    {
+      "type": "textarea",
+      "id": "shop_by_color_list_tags",
+      "info": "Shop by Color list tags is tags in product",
+      "label": "Shop by Color list tags"
+    },
+	{
+      "type": "header",
+      "content": "Widget Filter by Tag"
+    },
+    {
+      "type": "text",
+      "id": "title-tag",
+      "label": "Title",
+      "default": "Popular Tags"
+    },
+    {
+      "type": "textarea",
+      "id": "shop_by_tag_list_tags",
+      "info": "Shop by Tag list tags is tags in product",
+      "label": "Shop by Tag list tags"
+    }
+	
+  ],
+	"blocks": [
+    
+    {
+      "type": "sidebarproduct",
+      "name": "Sidebar Product",
+      "limit": 3,
+      "settings": [
+          
+      ]
+    }
+	
+],
+	"default": {
+    "blocks": [
+      
+      {
+        "type": "sidebarproduct"
+      }
+      
+    ]
+  }
+}
+{% endschema %}

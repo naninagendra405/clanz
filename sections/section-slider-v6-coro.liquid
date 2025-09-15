@@ -1,0 +1,209 @@
+<div data-section-id="{{ section.id }}" style="{% if section.settings.margin_top != blank %}margin-top: {{section.settings.margin_top}}px;{%endif%} {% if section.settings.margin_bottom != blank %}margin-bottom: {{section.settings.margin_bottom}}px;{% endif %}">
+  <div class="slider_home6 js_slider_4 container-fluid clear-space relative margin_bottom_30">
+    
+    {% if section.blocks.size > 0 %}
+    {% for block in section.blocks %}
+    
+    <div class="content-slider relative">
+      {% if block.settings.img == blank %}
+      <img src="{{'slide_home7.jpg' | asset_url }}" class="img-responsive img-fit" alt="">
+      {% else %}
+      <img src="{{ block.settings.img | img_url:'master' }}" class="img-responsive img-fit" alt="">
+      {% endif %}
+      <div class="img-slider absolute">
+        <a href="{{block.settings.url}}" class="inline-block right">
+          {% if block.settings.img_main == blank %}
+          <img src="{{'610x800.png' | asset_url }}" class="img-responsive" alt="">
+          {% else %}
+          <img src="{{ block.settings.img_main | img_url:'master' }}" class="img-responsive" alt="">
+          {% endif %}
+        </a>
+      </div>
+      <div class="absolute text_slider_1">
+        <h3 class="title-font title-slider delay2">{{block.settings.title_1}}</h3>
+        <p class="des-font des-slider delay1_5">{{ block.settings.title_2 }}</p>
+      </div>
+      <div class="absolute text_slider_2">
+        {% if block.settings.img_2 == blank %}
+        <img src="{{'350x450.png' | asset_url}}" class="img-responsive" alt="">
+        {% else %}
+        <img src="{{ block.settings.img_2 | img_url:'master' }}" class="img-responsive" alt="">
+        {% endif %}
+      </div>
+      {% if block.settings.enable_social %}
+      <div class="absolute social_slider">
+        <ul class="flex social">
+          <li>
+            <a href="{{block.settings.url_insta}}"><i class="ti-instagram"></i></a>
+          </li>
+          <li>
+            <a href="{{block.settings.url_fb}}"><i class="ti-facebook"></i></a>
+          </li>
+          <li>
+            <a href="{{block.settings.url_tw}}"><i class="ti-twitter-alt"></i></a>
+          </li>
+          <li>
+            <a href="{{block.settings.url_pin}}"><i class="ti-pinterest"></i></a>
+          </li>
+          <li>
+            <a href="{{block.settings.url_vi}}"><i class="ti-vimeo-alt"></i></a>
+          </li>
+        </ul>
+      </div>
+      {% endif %}
+    </div>
+    
+    {% endfor %}
+    {% endif %}
+    <!--  -->
+   
+  </div>
+</div>  
+<style>
+  @media (min-width:1200px){
+    .slider_home6 .content-slider .text_slider_1 .des-slider{
+      font-size:{{section.settings.font_size_title_2}}px;
+    }
+  }
+  @media (min-width:1200px){
+    .slider_home6 .content-slider .text_slider_1 .title-slider{
+      font-size:{{section.settings.font_size_title_1}}px;
+    }
+  }
+</style>
+{% schema %}
+{
+  "name": "Slider home 6",
+  "class": "index-section",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Section Space"
+    },
+    {
+      "type": "text",
+      "id": "margin_top",
+      "label": "Margin Top",
+      "info": "Defined in pixels. Do not add the 'px' unit."
+    },
+    {
+      "type": "text",
+      "id": "margin_bottom",
+      "label": "Margin Bottom",
+      "info": "Defined in pixels. Do not add the 'px' unit."
+    },
+	{
+      "type": "header",
+      "content": "Text top"
+    },
+	{
+          "type": "range",
+          "id": "font_size_title_1",
+          "label": "Font size title",
+          "default": 90,
+          "min": 14,
+          "max": 100,
+          "unit": "px"
+    },
+	{
+      "type": "header",
+      "content": "Text bottom"
+    },
+	{
+          "type": "range",
+          "id": "font_size_title_2",
+          "label": "Font size description",
+          "default": 20,
+          "min": 14,
+          "max": 100,
+          "unit": "px"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "image",
+      "name": "Image",
+	  "limit":6,
+      "settings": [
+		{
+          "type": "header",
+          "content": "Image background"
+    	},
+		{
+          "type": "image_picker",
+          "id": "img",
+          "label": "Image",
+          "info": "Image size 1920 x 1080"
+    	},
+        {
+          "type": "url",
+          "id": "url",
+          "label": "URL",
+          "default": "/collections/all"
+        },
+        {
+          "type": "image_picker",
+          "id": "img_main",
+          "label": "Image main",
+          "info": "Image size 610 x 800"
+        },
+		{
+          "type": "text",
+          "id": "title_1",
+          "label": "Title",
+          "default": "Kombiniertes <br>oversize- shirt"
+        },
+		{
+          "type": "image_picker",
+          "id": "img_2",
+          "label": "Image child",
+          "info": "Image size 350 x 450"
+        },
+		{
+          "type": "textarea",
+          "id": "title_2",
+          "label": "Description",
+		  "default": "BlackBird collection of minimal, sleek and <br>functional Carryalls were designedwith <br>creatives in mind."
+        },
+		{
+          "type": "checkbox",
+          "id": "enable_social",
+          "label": "Enable social",
+          "default": true
+        },
+		{
+          "type": "url",
+          "id": "url_insta",
+          "label": "URL social 1"
+        },
+		{
+          "type": "url",
+          "id": "url_fb",
+          "label": "URL social 2"
+        },
+		{
+          "type": "url",
+          "id": "url_tw",
+          "label": "URL social 3"
+        },
+		{
+          "type": "url",
+          "id": "url_pin",
+          "label": "URL social 4"
+        },
+		{
+          "type": "url",
+          "id": "url_vi",
+          "label": "URL social 5"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Slider home 6",
+      "category": "Slider coro"
+    }
+  ]
+}
+{% endschema %}

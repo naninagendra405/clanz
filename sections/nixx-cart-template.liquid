@@ -1,0 +1,181 @@
+<div class="page-width" data-section-id="{{ section.id }}" data-section-type="cart-template">
+
+<!-- /templates/cart.liquid -->
+{% comment %}
+
+For info on test orders:
+- General http://docs.shopify.com/manual/your-store/orders/test-orders
+- Shopify Payments - http://docs.shopify.com/manual/more/shopify-payments/testing-shopify-payments
+
+{% endcomment %}
+<!-- PAGE TITLE -->
+
+<!-- BOX TITLE -->
+
+<!-- SHOPPING CART -->
+
+
+<!--main content-->
+        
+  {% if section.settings.enable_banner %}
+<div class="banner margin_bottom_150 {% if section.settings.enable_line_top %}border-top{% endif %} {% if section.settings.enable_line_bot %}border-bot{% endif %}" style="background:{{section.settings.bgc_banner}};">
+	<div class="container">
+		<h1 class="title-font title-banner text-center">My Cart</h1>
+		{% include 'breadcrumb' %}
+	</div>
+</div>
+{% endif %}     
+  
+  <div class="container">     
+    {% if cart.item_count > 0 %}
+    <form action="/cart" method="post" novalidate>
+      <div class="table-responsive">
+        <table class="table cart-table">
+          <thead>
+            <tr class="number-font">
+              <th class="product-thumbnail uppercase">Product</th>
+              <th class="product-name uppercase">Description</th>
+              <th class="product-price uppercase">Price</th>
+              <th class="product-quantity uppercase">Quantity</th>
+              <th class="product-subtotal uppercase">Total</th>
+              <th class="product-remove uppercase">Delete</th>
+            </tr>
+          </thead>
+          <tbody>
+			{% for item in cart.items %}
+            <tr class="item_cart">
+              <td class=" product-name">
+                <div class="product-img">
+                  <img src="{{ item | img_url: '100x100' }}" class="img-responsive" alt="{{ item.title | escape }}">
+                </div>
+              </td>
+              <td class="product-desc">
+                <div class="product-info">
+                  <a href="{{ item.url }}" class="title-font link-default">{{ item.product.title }}</a>
+                  <p class="number-font margin_top_20">SKU: <span class="menu-child-font">{{ item.sku }}</span></p>
+                </div>
+              </td>
+              <td>
+                <p class="price number-font">{{ item.price | money }}</p>
+              </td>
+              <td class="btn-fuction product-quantity">
+                <div class="input-number-group">
+                  <div class="relative input-number-custom">
+                    <div class="input-group-button absolute down-btn">
+                      <span class="input-number-decrement ti-angle-down"></span>
+                    </div>
+                    {% if item.quantity > 1 %}
+                    <input type="text" class="input-number menu-font" name="updates[]" value="{{ item.quantity }}" style="border-radius: 0;">
+                    {% else %}
+                    <input type="text" class="input-number menu-font" name="updates[]" value="1" style="border-radius: 0;">
+                    {% endif %}
+                    <div class="input-group-button absolute up-btn quantity-right-plus">
+                      <span class="input-number-increment ti-angle-up"></span>
+                    </div>
+                  </div>
+                </div>   
+              </td>
+              <td class="total-price">
+                <p class="price number-font">{{ item.line_price | money }}</p>
+              </td>
+              <td class="product-remove">
+                <a href="/cart/change?line={{ forloop.index }}&amp;quantity=0" class="btn-del link-default"><i class="ti-close"></i></a>
+              </td>
+            </tr>
+			{% endfor %}
+          </tbody>
+        </table>
+      </div>
+      <div class="table-cart-bottom margin_top_20 margin_bottom_50">
+        <div class="row">
+          <div class="col-md-7 col-sm-6 col-xs-12">
+            <div class="cart-btn-group">
+              <a href="/collections/all" class="btn-nixx number-font">{{ 'cart.general.continue_browsing_html' | t }}</a>
+              <input type="submit" name="update" class="btn-nixx number-font" value="Update Cart">
+            </div>
+            <div class="form-note">
+
+              <h3 class="title-font margin_bottom_20">{{ 'cart.label.cart_note' | t }}</h3>
+              <div class="form_coupon">
+                <div class="">
+                  <label for="CartSpecialInstructions" class="des-font margin_bottom_20">Special instructions for seller</label>
+                  <textarea rows="6" name="note" id="CartSpecialInstructions" class="form-control note--input des-font"></textarea>
+                </div>
+              </div>
+
+            </div>
+          </div>
+          <div class="col-md-5 col-sm-6 col-xs-12">
+            <div class="cart-text">
+              <div class="cart-element flex">
+                <p class="des-font">{{ 'cart.label.subtotal' | t }}</p>
+                <p class="number-font right">{{ cart.total_price | money }}</p>
+              </div>
+
+              <div class="cart-element flex">
+                <p class="des-font">{{ 'cart.label.total' | t }}</p>
+                <p class="number-font right">{{ cart.total_price | money }}</p>
+              </div>
+            </div>
+            <a href="/checkout" class="btn-nixx number-font">{{ 'cart.general.checkout' | t }}</a>
+          </div>
+        </div>
+      </div>
+    </form>
+    {% else %}
+    {% include 'cart-empty'%}
+    {% endif %}
+  </div>
+  <!-- End cat-box-container -->
+  {% include 'nixx-newsletter' %}
+</div>
+<!-- end main content-->
+
+
+{% schema %}
+  {
+    "name": "Cart page",
+    "settings": [
+		{
+      "type": "header",
+      "content": "Banner"
+    },
+	{
+        "type": "checkbox",
+        "id": "enable_banner",
+        "label": "Enable banner",
+        "default": true
+    },
+	{
+        "type": "checkbox",
+        "id": "enable_line_top",
+        "label": "Enable line top",
+        "default": false
+    },
+	{
+        "type": "checkbox",
+        "id": "enable_line_bot",
+        "label": "Enable line bot",
+        "default": false
+    },
+	{
+        	"type": "color",
+        	"id": "bgc_banner",
+        	"label": "Background color",
+        	"default": "#ffe9c7"
+    },
+      {
+        "type": "checkbox",
+        "id": "cart_notes_enable",
+        "label": "Enable cart notes",
+        "default": false
+      },
+	{
+        "type": "checkbox",
+        "id": "paypal_enable",
+        "label": "Enable Paypal payment",
+        "default": false
+      }
+    ]
+  }
+{% endschema %}

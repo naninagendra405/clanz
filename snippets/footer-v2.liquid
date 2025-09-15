@@ -1,0 +1,69 @@
+{% if settings.newsletter_form_action != blank %}
+{% assign form_action = settings.newsletter_form_action %}
+{% else %}
+{% assign form_action = '#' %}
+{% endif %}
+<footer class="BG-footer2 footer_v2">
+  <div class="container v2">
+    <div class="row">
+      <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 content_top_fv2">
+
+        <div class="text-center logo-footer margin_bottom_30">
+          <a href="/" class="inline-block">
+            {% if settings.img-logo-footer2 == blank %}
+            <img src="{{'logo.png' | asset_url}}" class="img-responsive" alt="logo">
+            {% else %}
+            <img src="{{settings.img-logo-footer2 | img_url:'master'}}" class="img-responsive" alt="logo">
+            {% endif %}
+          </a>
+        </div>
+        {% if settings.enable_menu_fv2 %}
+        <div class="text-center menu_fv2 flex center hidden-xs hidden-sm">
+          {% include 'horizon-menu-nixx-3' %}
+        </div>
+		{% endif %}
+        <div class="text-center newletter_fv2">
+          <form action="{{ form_action }}" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="form-group relative" target="_blank">
+            <input type="email" name="EMAIL" class="form-control menu-child-font" placeholder="Your email goes here..." value="{% if customer %}{{ customer.email }}{% endif %}">
+            <button type="submit" class="absolute menu-child-font">
+              {{settings.btn_submit_fv2}}
+              {% if settings.icon-submit-footer2 == blank %}
+              <i class="ti-arrow-right"></i>
+              {% else %}
+              <i class="{{settings.icon-submit-footer2}}"></i>
+              {% endif %}
+            </button>
+          </form>
+        </div>
+        <div class="text-center social_fv2">
+          <a href="{{settings.url_icon_in_fv2}}"><i class="{{settings.icon_in_fv2}}"></i></a>
+          <a href="{{settings.url_icon_fb_fv2}}"><i class="{{settings.icon_fb_fv2}}"></i></a>
+          <a href="{{settings.url_icon_tw_fv2}}"><i class="{{settings.icon_tw_fv2}}"></i></a>
+          <a href="{{settings.url_icon_vi_fv2}}"><i class="{{settings.icon_vi_fv2}}"></i></a>
+          <a href="{{settings.url_icon_pi_fv2}}"><i class="{{settings.icon_pi_fv2}}"></i></a>
+        </div>
+      </div>
+      <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 content_bot_fv2 border-top">
+        <div class="row">
+          <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 text-left">
+            <a href="{{settings.url-img-footer2}}" class="inline-block">
+              {% if settings.img-footer-2 == blank %}
+              <img src="{{ 'img-footer-1.png' | asset_url }}" class="img-responsive" alt="">
+              {% else %}
+              {{ settings.img-footer2 | img_url:'master' }}
+              {% endif %}
+            </a>
+          </div>
+          <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 text-right">
+            <p class="des-font copy-text">{{settings.copy_text_fv2}}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>
+<style>
+  .BG-footer2{
+    background:{{settings.bg-footer2}};
+  }
+</style>

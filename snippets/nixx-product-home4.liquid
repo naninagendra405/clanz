@@ -1,0 +1,18 @@
+<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 product relative margin_bottom_20">
+
+  <div class="img-product relative">
+    <a href="{{ product.url | within: collection }}">
+      <img src="{{ product.featured_image.src | img_url: 'master' }}" class="img-responsive" alt="{{ product.featured_image.alt | escape }}">
+    </a>
+    {% include 'nixx-label-product' %}
+    {% include 'nixx-icon-product' %}
+    {% if sold_out == 'true' %}
+    {% include 'nixx-sold-out' %}
+    {% endif %}
+  </div>
+  <div class="info-product text-center absolute full-width delay03 hidden-sm hidden-xs">
+    <h4 class="des-font capital title-product space_top_20"><a href="{{ product.url | within: collection }}">{{ product.title}}</a></h4>
+    {% include 'nixx-price' %}
+  </div>	
+
+</div>

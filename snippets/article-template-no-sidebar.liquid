@@ -1,0 +1,49 @@
+<div class="main-container no-sidebar single-post">
+    <div class="container">
+        <div class="row">
+            {% if article.image %}
+            <div class="post-image col-xs-12 col-sm-12 col-md-12">
+                <img src="{{ article.image.src | img_url: 'master' }}" class="img-responsive" alt="" />
+            </div>
+            {% endif %}
+            <div class="main-content col-xs-12 col-md-12 col-lg-8 col-lg-offset-2">
+                <div class="blog-post-container blog-page">
+                    <div class="blog-post-single blog-post-item">
+                        <div class="blog-post-info">
+                          	{% if section.settings.show_date%}
+                            <div class="post-date">{{article.published_at | time_tag: format: 'month_day_year'}}</div>
+                          	{% endif %}
+                            <h3 class="post-name ver2"><a href="{{ article.url }}">{{ article.title }}</a></h3>
+                        </div>
+                        <div class="post-metas ver2">
+                            <div class="categories">
+                                {% for tag in article.tags %}
+                                <a href="#" rel="category tag">{{ tag }}</a>, {% endfor %}
+                            </div>
+                        </div>
+                        <div class="post-content">
+                            {{ article.content}}
+                          	{% if section.settings.show_social_share%}
+                            <div class="post-share">
+                                {% include 'social-share-article'%}
+                            </div>
+                          	{% endif %}
+                            <div class="post-link">
+                                <div class="nav-links">
+                                    <div class="nav-previous"><a href="{{blog.previous_article}}">{{ 'blogs.article.prev' | t }}</a></div>
+                                    <div class="nav-next"><a href="{{blog.next_article}}">{{ 'blogs.article.next' | t }}</a></div>
+                                </div>
+                            </div>
+                            <div class="post-related">
+                                {% include 'related-article'%}
+                            </div>
+                            <!--commentlist-->
+                            {% include 'comment-article'%}
+                            <!--endcommentlist-->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

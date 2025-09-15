@@ -1,0 +1,108 @@
+<!-- /templates/search.liquid -->
+{% comment %}
+
+To return only products or pages in results:
+- http://docs.shopify.com/manual/configuration/store-customization/return-only-product-in-storefront-search-results
+- Or manually add type=product or type=page to the search URL as a parameter
+
+{% endcomment %}
+
+{% comment %}
+Set grid_results to true and set search results as a grid instead of a list.
+This works well when your search is only for products.
+{% endcomment %}
+{% assign grid_results = true %}
+
+{% comment %}
+Check to enforce respond.js
+{% endcomment %}
+{% assign respond_js_secret_key = shop.domain | md5 %}
+{% unless search.terms == respond_js_secret_key %}
+
+{% comment %}
+Avoid accessing search.results before the opening paginate tag.
+If you do, the pagination of results will be broken.
+{% endcomment %}
+{% paginate search.results by 12 %}
+<section>
+  <div class="banner margin_bottom_150" >
+	<div class="container">
+		<h1 class="title-font title-banner text-center">Search</h1>
+		{% include 'breadcrumb' %}
+	</div>
+</div>
+</section>
+<h1 class="sr-only title-font margin_bottom_50">{{page.title}}</h1>
+<section>
+  <div class="container">
+    <div class="mb-50">
+      <div class="maxus-titlebox">
+        <div class="text-center">
+          <h2 class="maxus-titlebox__title h1 font-300 fz-60 title-font">{{page.title}}</h2>
+          
+          {% if search.performed %}
+          {% if search.results_count == 0 %}
+          <h1 class="heading title-font margin_bottom_50">{{ 'general.search.no_results_html' | t: terms: search.terms }}</h1>
+          {% else %}
+          <h1 class="heading title-font margin_bottom_50">{{ 'general.search.results_for_html' | t: terms: search.terms }}</h1>
+          {% endif %}
+          {% else %}
+          <h1 class="heading title-font margin_bottom_50">{{ 'general.search.title' | t }}</h1>
+          {% endif %}
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+{% if search.performed %}
+<div id="container" class="container container_150 margin_bottom_50">
+  <div id="layout" class="main-layout">
+    <div id="primary">
+      <main id="main" class="site-main" role="main">
+        <!-- PRODUCTS -->
+        <section>
+          
+          <div class="mb-50">
+            <ul class="products row product-grid grid-uniform">
+              {% for product in search.results %}
+                {% if grid_results == false %}
+                  {% include 'product-collection-standard' %}
+                {% else %}
+                  {% include 'product-collection-standard' %}
+                {% endif %}
+              {% endfor %}
+            </ul>
+          </div>
+          
+          {% if paginate.pages > 1 %}
+          <div class="text-center border-top pb-185">
+            <nav class="pagination font-700">   
+              {{ paginate | default_pagination | replace: '&laquo; Previous', '<i class="fa fa-chevron-left"></i>' | replace: 'Next &raquo;', '<i class="fa fa-chevron-right"></i>' }}
+            </nav>
+          </div>
+          {% endif %}
+        </section>
+      </main>
+      <!-- #main -->
+    </div>
+    <!-- #primary -->
+  </div>
+  <!-- /#layout -->
+</div>
+{% endif %}
+
+{% endpaginate %}
+
+{% else %}
+{% include 'respond' %}
+{% layout none %}
+{% endunless %}
+<style>
+  @media (max-width:1400px){
+  #container {
+  	padding-left:15px;
+    padding-right:15px;
+  }
+  }
+</style>

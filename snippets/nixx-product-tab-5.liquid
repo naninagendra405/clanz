@@ -1,0 +1,18 @@
+<div class="product shoes column margin_bottom_40 engoj_grid_parent">
+  <div class="img-product relative">
+    <a href="{{ product.url | within: collection }}" class="engoj_find_img">
+      <img src="{{ product.featured_image.src | img_url: 'master' }}" class="img-responsive" alt="{{ product.featured_image.alt | escape }}">
+    </a>
+    {% include 'nixx-label-product' %}
+    {% include 'nixx-icon-product' %}
+    {% if sold_out %}
+    {% include 'nixx-sold-out' %}
+    {% endif %}
+    {% include 'nixx-timer-sale-product' %}
+  </div>
+  <div class="info-product text-center">
+    <h4 class="des-font capital title-product space_top_20"><a href="{{ product.url | within: collection }}">{{ product.title}}</a></h4>
+    {% include 'nixx-price' %}
+    {% include 'nixx-variant-product' %}
+  </div>
+</div>

@@ -1,0 +1,395 @@
+{% if section.settings.enable_banner %}
+<div class="banner margin_bottom_150 {% if section.settings.enable_line_top %}border-top{% endif %} {% if section.settings.enable_line_bot %}border-bot{% endif %}" style="background:{{section.settings.bgc_banner}};">
+	<div class="container">
+		<h1 class="title-font title-banner text-center">About Us</h1>
+		{% include 'breadcrumb' %}
+	</div>
+</div>
+{% endif %}
+<!--  -->
+<div class="container shipping-home4 margin_bottom_150">
+  <div class="row">
+    {% if section.blocks.size > 0 %}
+    {% for block in section.blocks %}
+    {% if block.type == 'text' %}
+    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12 content">
+      <div class="flex">
+        {% if block.settings.icon == blank %}
+        <img src="{{'icon_ship.png' | asset_url}}" class="img-responsive" alt="">
+        {% else %}
+        <img src="{{ block.settings.icon | img_url:'master' }}" class="img-responsive" alt="">
+        {% endif %}
+        <span class="title-font title-ship space_left_30">{{block.settings.title}}</span>
+      </div>
+      <p class="des-font des-ship">{{block.settings.des}}</p>
+    </div>
+    {% endif %}
+    {% endfor %}
+    {% endif %}
+  </div>
+</div>
+<!--  -->
+<div class="container-fluid section2-home1 margin_bottom_130 margin_top_150">
+  <div class="row">
+    <div class="col-lg-6 col-md-6 col-sm-6 hidden-xs img-section over-hidden space_bot_30">
+      {% if section.settings.img-banner == blank %}
+      <img src="{{'img-section2-home1.png' | asset_url}}" class="img-responsive right delay03" alt="">
+      {% else %}
+      <img src="{{section.settings.img-banner | img_url:'master'}}" class="img-responsive right delay03" alt="">
+      {% endif %}
+    </div>
+    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 text-left space_top_bot_180 content-section">
+      <h1 class="title-font"><a href="{{section.settings.url-title}}" class="title-hover delay03">{{section.settings.title | truncatewords: 15}}</a></h1>
+      <p class="des-font space_top_bot_70">{{section.settings.des | truncatewords: 100}}</p>
+      <a href="{{section.settings.url-more}}" class="menu-font uppercase learn_more title-hover delay03">{{section.settings.more}}</a>
+    </div>
+  </div>
+</div>
+<style>
+  {% if section.settings.BG == 'image' %}
+  .section2-home1{
+    background-image:url('{{section.settings.bg-image | img_url:'master'}}');
+  }
+  {% else %}
+  .section2-home1{
+    background:{{section.settings.bg-color}};
+  }
+  {% endif %}
+</style>
+<!--  -->
+<div class="content-about-page container margin_bottom_150">
+  {% if section.blocks.size > 0 %}
+  {% for block in section.blocks %}
+  {% if block.type == 'content' %}
+	<div class="row">
+      {% if block.settings.enable_img_1 %}
+		<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 clear-space-right over-hidden">
+			<a href="{{block.settings.url}}">
+              {% if block.settings.img_1 == blank %}
+              <img src="{{'img-about-1.jpg' | asset_url}}" class="img-responsive hover-zoom-out" alt="">
+              {% else %}
+              <img src="{{ block.settings.img_1 | img_url:'master' }}" class="img-responsive hover-zoom-out" alt="">
+              {% endif %}
+          	</a>
+		</div>
+      {% endif %}
+		<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 text-about ver1">
+			<h1 class="title-font title-about margin_bottom_50">{{block.settings.title}}</h1>
+			<p class="des-font des-about">{{ block.settings.des | truncatewords: 100 }}</p>
+		</div>
+      {% if block.settings.enable_img_2 %}
+      	<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 over-hidden clear-space-left">
+			{% if block.settings.img_2 == blank %}
+              <img src="{{'img-about-2.jpg' | asset_url}}" class="img-responsive hover-zoom-out" alt="">
+              {% else %}
+              <img src="{{ block.settings.img_2 | img_url:'master' }}" class="img-responsive hover-zoom-out" alt="">
+              {% endif %}
+		</div>
+      {% endif %}
+	</div>
+  {% endif %}
+  {% endfor %}
+  {% endif %}
+	<!--  -->
+</div>
+<!--  -->
+<div class="testimonial margin_bottom_120">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+        <h1 class="title-font capital title-testi color-text {% if section.settings.select_text == 'center' %}text-center{% else %}text-left{% endif %}">{{section.settings.title_testimonials}}</h1>
+        <p class="des-font des-testi color-text {% if section.settings.select_text == 'center' %}text-center{% else %}text-left{% endif %}">{{ section.settings.des_testimonials | truncatewords: 30 }}</p>
+      </div>
+      <div class="col-md-12">
+        <div class="slider-comment">
+          
+          {% if section.blocks.size > 0 %}
+          {% for block in section.blocks %}
+          {% if block.type == 'comment' %}
+          <div class="content-comment relative">
+            <div class="number-font absolute stt-comment color-number">{{block.settings.number}}</div>
+            <p class="menu-font des-comment space_bot_30 color-text">{{block.settings.content}}</p>
+            <span class="number-font uppercase author-comment color-text">{{block.settings.author}}</span><span class="des-font capital model">/ model</span>
+          </div>
+          {% endif %}
+          {% endfor %}
+          {% endif %}
+          
+
+        </div>
+      </div>
+    </div>	
+  </div>
+</div>
+<style>
+  .testimonial{
+    background:{{section.settings.BG_testimonials}};
+  }
+  .color-text{
+  	color:{{section.settings.color-text}};
+  }
+  .color-number{
+  	color:{{section.settings.color-number}};
+  }
+</style>
+{% schema %}
+{
+  "name": "Page About Us 1",
+  "settings": [
+	{
+      "type": "header",
+      "content": "Banner"
+    },
+	{
+        "type": "checkbox",
+        "id": "enable_banner",
+        "label": "Enable banner",
+        "default": true
+    },
+	{
+        "type": "checkbox",
+        "id": "enable_line_top",
+        "label": "Enable line top",
+        "default": false
+    },
+	{
+        "type": "checkbox",
+        "id": "enable_line_bot",
+        "label": "Enable line bot",
+        "default": false
+    },
+	{
+        	"type": "color",
+        	"id": "bgc_banner",
+        	"label": "Background color",
+        	"default": "#ffe9c7"
+    },
+    {
+      "type": "header",
+      "content": "Content 2"
+    },
+    {
+        "type": "radio",
+        "id": "BG",
+        "label": "Select type Background",
+        "default": "image",
+        "options": [
+          {
+            "value": "color",
+            "label": "Background Color"
+          },
+          {
+            "value": "image",
+            "label": "Background Image"
+          }
+        ]
+      	},
+		{
+        	"type": "image_picker",
+        	"id": "bg-image",
+        	"label": "Image",
+        	"info": " Image size 1920x900"
+    	},
+		{
+        	"type": "color",
+        	"id": "bg-color",
+        	"label": "Background color",
+        	"default": "#fff"
+    	},
+		{
+        "type": "url",
+        "id": "url-title",
+        "label": "URL",
+        "default": "/collections/all"
+    	},
+		{
+        	"type": "image_picker",
+        	"id": "img-banner",
+        	"label": "Image",
+        	"info": " Image size 500x850"
+    	},
+		{
+        "type": "text",
+        "id": "title",
+        "label": "Title",
+        "default": "Style is a way to say who you are without having to speak"
+    	},
+		{
+        "type": "textarea",
+        "id": "des",
+        "label": "description",
+        "default": "This summer vitrine brings you joy and excellence in customer  support. It not only looks great but uses the latest trends in web development to insure fast transactions. This summer vitrine brings you joy and excellence in customer  support. It not only looks great but it uses the latest trends in web development to insure fast transactions. This summer vitrine brings you joy and excellence in customer  support. It not only looks great but it uses the latest trends in web development to insure fast transactions. This summer vitrine brings you joy and excellence in customer  support."
+        },
+		{
+        "type": "url",
+        "id": "url-more",
+        "label": "URL",
+        "default": "/collections/all"
+    	},
+		{
+        "type": "text",
+        "id": "more",
+        "label": "text",
+        "default": "learn more"
+    	},
+		{
+      	"type": "header",
+      	"content": "testimonials"
+    	},
+		{
+		   "type":      "select",
+		   "id":        "select_text",
+		   "label":     "Select location text",
+		   "options": [
+     {
+	       
+	       "value": "center",
+	       "label": "Center"
+     },
+     {
+       
+       		"value": "left",
+       		"label": "Left"
+     }
+   		],
+   			"default":   "left"
+   
+	},
+		{
+        	"type": "text",
+        	"id": "title_testimonials",
+        	"label": "Title",
+        	"default": "testimonials"
+      	},
+		{
+        	"type": "textarea",
+        	"id": "des_testimonials",
+        	"label": "Description",
+        	"default": "I did not even know that there were any better conditions to escape to, but I was more than willing to<br> take my chances among people fashioned after."
+      	},
+		{
+        	"type": "color",
+        	"id": "BG_testimonials",
+        	"label": "Background color",
+        	"default": "#f2f2f2"
+      	},
+		{
+        	"type": "color",
+        	"id": "color-text",
+        	"label": "Color text",
+        	"default": "#333"
+      	},
+		{
+        	"type": "color",
+        	"id": "color-number",
+        	"label": "Color number",
+        	"default": "#dfdfdf"
+      	}
+  ],
+	"blocks":[
+	{
+		"type": "text",
+      	"name": "Information",
+		"limit":3,
+      	"settings": [
+			{
+          		"type": "image_picker",
+          		"id": "icon",
+          		"label": "Icon",
+          		"info": "Image size 45 x 45"
+        	},
+			{
+          		"type": "text",
+          		"id": "title",
+          		"label": "Title",
+          		"default": "Free shipping"
+        	},
+			{
+          		"type": "text",
+          		"id": "des",
+          		"label": "Description",
+          		"default": "I did not even know that there were any better conditions to escape to, but I was more than willing to take my chances among people fashioned after."
+        	}
+	]
+	},
+	{
+		"type": "content",
+      	"name": "about_us",
+		"limit":3,
+      	"settings": [
+			{
+          		"type": "checkbox",
+          		"id": "enable_img_1",
+          		"label": "Enable Image 1",
+          		"default": true
+        	},
+			{
+          		"type": "image_picker",
+          		"id": "img_1",
+          		"label": "Image 1",
+          		"info": "Image size 860 x 600"
+        	},
+			{
+          		"type": "text",
+          		"id": "title",
+          		"label": "Title",
+          		"default": "Why we do?"
+        	},
+			{
+          		"type": "text",
+          		"id": "des",
+          		"label": "Description",
+          		"default": "This summer vitrine brings you joy and excellence in customer  support. It not only looks great but uses the latest trends in web development to insure fast transactions. This summer vitrine brings you joy and excellence in customer  support. It not only looks great but it uses the latest trends in web development to insure fast transactions. This summer vitrine brings you joy and excellence in customer  support. It not only looks great but it uses the latest trends in web development to insure fast transactions. This summer vitrine brings you joy and excellence in customer  support."
+        	},
+			{
+          		"type": "checkbox",
+          		"id": "enable_img_2",
+          		"label": "Enable Image 2",
+          		"default": false
+        	},
+			{
+          		"type": "image_picker",
+          		"id": "img_2",
+          		"label": "Image 2",
+          		"info": "Image size 860 x 600"
+        	}
+	]
+	},
+	{
+      "type": "comment",
+      "name": "testimonials",
+      "settings": [
+        {
+          "type": "text",
+          "id": "number",
+          "label": "Number",
+          "default": "#01"
+        },
+        {
+          "type": "textarea",
+          "id": "content",
+          "label": "Content",
+		  "default":"“Quisque condimentum ipsum at velit hendrerit venenatis. Donec luctus metus enim, nunced. Sed sit amet nisl id purus aliquet cursus et neque vel sodales ligula”"
+        },
+		{
+          "type": "text",
+          "id": "author",
+          "label": "Author",
+          "default": "iryna petrunco"
+        }
+      ]
+    }
+	],
+  "presets": [
+    {
+      "name": "Page About Us 1"
+    }
+  ]
+}
+{% endschema %}
+
+{% stylesheet %}
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}

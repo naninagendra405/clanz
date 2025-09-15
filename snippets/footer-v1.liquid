@@ -1,0 +1,118 @@
+{% if settings.newsletter_form_action != blank %}
+{% assign form_action = settings.newsletter_form_action %}
+{% else %}
+{% assign form_action = '#' %}
+{% endif %}
+<footer>
+	<div  class="footer_v1">
+		<div class="container v2">
+			<div class="row">
+			<div class="col-lg-4 col-md-4 col-sm-12 col-xs-12 content">
+              	<div>
+                  <a href="/">
+                    {% if settings.logo_fv1 == blank %}
+                    <img src="{{'logo_white.png' | asset_url}}" class="img-logo">
+                    {% else %}
+                    <img src="{{settings.logo_fv1 | img_url:'master'}}" class="img-logo">
+                    {% endif %}
+                  </a>
+              	</div>
+				<p class="menu-child-font des_fv1">{{settings.des_footer1}}</p>
+				<p class="copy_right des-font">{{settings.copyright_footer1}}</p>
+				<div class="space_bot_50">
+					<a href="{{settings.url-img-footer1}}">
+                      {% if settings.img-footer-1 == blank %}
+                      <img src="{{ 'img-footer-1.png' | asset_url }}" class="img-responsive" alt="">
+                      {% else %}
+                      {{ settings.img-footer1 | img_url:'master' }}
+                      {% endif %}
+                  	</a>
+				</div>
+			</div>
+			<div class="col-lg-4 col-md-4 col-sm-12 col-xs-12 form_newletter_fv1 content">
+				<h3 class="des-font margin_bottom_30 title_newltter_fv1 text-left">{{settings.title_2_footer1}}</h3>
+              	<p class="des-font des_newletter_fv1 uppercase margin_bottom_20">{{settings.des_newletter_fv1}}</p>
+      			<form action="{{ form_action }}" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="form-group flex relative" target="_blank">
+					<input type="email" name="EMAIL" class="form-control menu-child-font" placeholder="Your email goes here..." value="{% if customer %}{{ customer.email }}{% endif %}">
+					<button type="submit" class="absolute">
+                      {% if settings.icon-submit-footer1 == blank %}
+                      <i class="ti-email"></i>
+                      {% else %}
+                      <i class="{{settings.icon-submit-footer1}}"></i>
+                      {% endif %}
+                  	</button>
+				</form>
+                <div class="social_fv1">
+                  <a href="{{settings.url_icon_fb_fv1}}"><i class="{{settings.icon_fb_fv1}}"></i></a>
+                  <a href="{{settings.url_icon_tw_fv1}}"><i class="{{settings.icon_tw_fv1}}"></i></a>
+                  <a href="{{settings.url_icon_vi_fv1}}"><i class="{{settings.icon_vi_fv1}}"></i></a>
+                  <a href="{{settings.url_icon_pi_fv1}}"><i class="{{settings.icon_pi_fv1}}"></i></a>
+                </div>
+			</div>
+			<div class="col-lg-4 col-md-4 col-sm-12 col-xs-12 instagram content">
+				<h3 class="des-font margin_bottom_30 title_insta_fv1">{{settings.title_insta_footer1}}</h3>
+              	<div class="flex">
+						<a href="{{settings.url-insta-1}}" class="inline-block over-hidden">
+                          {% if settings.img-1-footer1 == blank %}
+                          <img src="{{'img_insta_1.jpg' | asset_url}}" class="img-responsive" alt="">
+                          {% else %}
+                          <img src="{{ settings.img-1-footer1 | img_url:'master' }}" class="img-responsive" alt="">
+                          {% endif %}
+              			</a>
+						<a href="{{settings.url-insta-2}}" class="inline-block over-hidden">
+                          {% if settings.img-2-footer1 == blank %}
+                          <img src="{{'img_insta_2.jpg' | asset_url}}" class="img-responsive" alt="">
+                          {% else %}
+                          <img src="{{ settings.img-2-footer1 | img_url:'master' }}" class="img-responsive" alt="">
+                          {% endif %}
+              			</a>
+						<a href="{{settings.url-insta-3}}" class="inline-block over-hidden">
+                          {% if settings.img-3-footer1 == blank %}
+                          <img src="{{'img_insta_3.jpg' | asset_url}}" class="img-responsive" alt="">
+                          {% else %}
+                          <img src="{{ settings.img-3-footer1 | img_url:'master' }}" class="img-responsive" alt="">
+                          {% endif %}
+              			</a>
+						<a href="{{settings.url-insta-4}}" class="inline-block over-hidden">
+                          {% if settings.img-4-footer1 == blank %}
+                          <img src="{{'img_insta_4.jpg' | asset_url}}" class="img-responsive" alt="">
+                          {% else %}
+                          <img src="{{ settings.img-4-footer1 | img_url:'master' }}" class="img-responsive" alt="">
+                          {% endif %}
+              			</a>
+              	</div>
+              	<div class="flex">
+						<a href="{{settings.url-insta-5}}" class="inline-block over-hidden">
+                          {% if settings.img-5-footer1 == blank %}
+                          <img src="{{'img_insta_5.jpg' | asset_url}}" class="img-responsive" alt="">
+                          {% else %}
+                          <img src="{{ settings.img-5-footer1 | img_url:'master' }}" class="img-responsive" alt="">
+                          {% endif %}
+              			</a>
+						<a href="{{settings.url-insta-6}}" class="inline-block over-hidden">
+                          {% if settings.img-6-footer1 == blank %}
+                          <img src="{{'img_insta_6.jpg' | asset_url}}" class="img-responsive" alt="">
+                          {% else %}
+                          <img src="{{ settings.img-6-footer1 | img_url:'master' }}" class="img-responsive" alt="">
+                          {% endif %}
+              			</a>
+              			<a href="{{settings.url-insta-7}}" class="inline-block over-hidden">
+                          {% if settings.img-7-footer1 == blank %}
+                          <img src="{{'img_insta_6.jpg' | asset_url}}" class="img-responsive" alt="">
+                          {% else %}
+                          <img src="{{ settings.img-7-footer1 | img_url:'master' }}" class="img-responsive" alt="">
+                          {% endif %}
+              			</a>
+						<a href="{{settings.url-insta-8}}" class="inline-block over-hidden">
+                          {% if settings.img-8-footer1 == blank %}
+                          <img src="{{'img_insta_6.jpg' | asset_url}}" class="img-responsive" alt="">
+                          {% else %}
+                          <img src="{{ settings.img-8-footer1 | img_url:'master' }}" class="img-responsive" alt="">
+                          {% endif %}
+              			</a>
+                  </div>
+			</div>
+		</div>
+		</div>
+	</div>
+</footer>

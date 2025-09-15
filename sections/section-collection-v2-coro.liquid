@@ -1,0 +1,372 @@
+<div data-section-id="{{ section.id }}" style="{% if section.settings.margin_top != blank %}margin-top: {{section.settings.margin_top}}px;{%endif%} {% if section.settings.margin_bottom != blank %}margin-bottom: {{section.settings.margin_bottom}}px;{% endif %}">
+  <div class="collection_v1 margin_bottom_30">
+    <div class="container v2">
+      <div class="row">
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 content content_1 relative margin_bottom_30">
+          <div class="relative content_image">
+            <a href="{{section.settings.url_1}}" class="inline-block over-hidden">
+              {% if section.settings.img_1 == blank %}
+              <img src="{{'870x570.jpg' | asset_url}}" class="img-responsive hover-zoom-out" alt="">
+              {% else %}
+              <img src="{{section.settings.img_1 | img_url:'master'}}" class="img-responsive hover-zoom-out" alt="">
+              {% endif %}
+            </a>
+            <h5 class="absolute title-font title_collection"><a href="{{section.settings.url_1}}">{{section.settings.title_1}}</a></h5>
+          </div>
+          <div class="absolute text_content_1">
+            <h1 class="title-font">{{section.settings.title_content_1}}</h1>
+            <p class="des-font">{{section.settings.des_content_1}}</p>
+            <a class="btn_animate_line inline-block relative over-hidden title-font" href="{{section.settings.url_content}}">{{section.settings.btn_name}}</a>
+          </div>
+        </div>
+      </div>
+      <!--          -->
+        <div class="row">
+          <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 content content_2 relative margin_bottom_30">
+            <div class="relative content_image">
+              <a href="{{section.settings.url_2}}" class="inline-block over-hidden">
+                {% if section.settings.img_2 == blank %}
+                <img src="{{'340x340.jpg' | asset_url}}" class="img-responsive hover-zoom-out" alt="">
+                {% else %}
+                <img src="{{section.settings.img_2 | img_url:'master'}}" class="img-responsive hover-zoom-out" alt="">
+                {% endif %}
+              </a>
+              <h5 class="absolute title-font title_collection"><a href="{{section.settings.url_2}}">{{section.settings.title_2}}</a></h5>
+            </div>
+          </div>
+          <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 content content_3 relative margin_bottom_30">
+            <div class="relative content_image image_right">
+              <a href="{{section.settings.url_3}}" class="inline-block over-hidden">
+                {% if section.settings.img_3 == blank %}
+                <img src="{{'560x505.jpg' | asset_url}}" class="img-responsive hover-zoom-out" alt="">
+                {% else %}
+                <img src="{{section.settings.img_3 | img_url:'master'}}" class="img-responsive hover-zoom-out" alt="">
+                {% endif %}
+              </a>
+              <h5 class="absolute title-font title_collection"><a href="{{section.settings.url_3}}">{{section.settings.title_3}}</a></h5>
+            </div>
+          </div>
+        </div>
+<!--          -->
+        <div class="row">
+          <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 content content_4 relative margin_bottom_30">
+            <div class="relative content_image">
+              <a href="{{section.settings.url_4}}" class="inline-block over-hidden">
+                {% if section.settings.img_4 == blank %}
+                <img src="{{'502x1064.jpg' | asset_url}}" class="img-responsive hover-zoom-out" alt="">
+                {% else %}
+                <img src="{{section.settings.img_4 | img_url:'master'}}" class="img-responsive hover-zoom-out" alt="">
+                {% endif %}
+              </a>
+              <h5 class="absolute title-font title_collection"><a href="{{section.settings.url_4}}">{{section.settings.title_4}}</a></h5>
+            </div>
+          </div>
+          <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 content content_5 relative margin_bottom_30">
+            <div class="relative content_image image_right">
+              <a href="{{section.settings.url_5}}" class="inline-block over-hidden">
+                {% if section.settings.img_5 == blank %}
+                <img src="{{'340x340.jpg' | asset_url}}" class="img-responsive hover-zoom-out" alt="">
+                {% else %}
+                <img src="{{section.settings.img_5 | img_url:'master'}}" class="img-responsive hover-zoom-out" alt="">
+                {% endif %}
+              </a>
+              <h5 class="absolute title-font title_collection"><a href="{{section.settings.url_5}}">{{section.settings.title_5}}</a></h5>
+            </div>
+          </div>
+        </div>
+    </div>
+  </div>
+</div>  
+<style>
+  .collection_v1 .content_1 .content_image .title_collection{
+    left:{{section.settings.pos_title_1_mb}}px;
+  }
+  .collection_v1 .content_2 .content_image .title_collection{
+    left:{{section.settings.pos_title_2_mb}}px;
+  }
+  .collection_v1 .content_3 .content_image .title_collection{
+    left:{{section.settings.pos_title_3_mb}}px;
+  }
+  .collection_v1 .content_4 .content_image .title_collection{
+    left:{{section.settings.pos_title_4_mb}}px;
+  }
+  .collection_v1 .content_5 .content_image .title_collection{
+    left:{{section.settings.pos_title_5_mb}}px;
+  }
+  @media (min-width:1200px){
+  	.collection_v1 .content_1 .content_image .title_collection{
+    left:{{section.settings.pos_title_1}}px;
+  }
+    .collection_v1 .content_2 .content_image .title_collection{
+    left:{{section.settings.pos_title_2}}px;
+  }
+  .collection_v1 .content_3 .content_image .title_collection{
+    left:{{section.settings.pos_title_3}}px;
+  }
+  .collection_v1 .content_4 .content_image .title_collection{
+    left:{{section.settings.pos_title_4}}px;
+  }
+  .collection_v1 .content_5 .content_image .title_collection{
+    left:{{section.settings.pos_title_5}}px;
+  }
+  }
+</style>
+{% schema %}
+{
+  "name": "Collection v1",
+  "class": "index-section",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Section Space"
+    },
+    {
+      "type": "text",
+      "id": "margin_top",
+      "label": "Margin Top",
+      "info": "Defined in pixels. Do not add the 'px' unit."
+    },
+    {
+      "type": "text",
+      "id": "margin_bottom",
+      "label": "Margin Bottom",
+      "info": "Defined in pixels. Do not add the 'px' unit."
+    },
+	{
+      "type": "header",
+      "content": "Content 1"
+    },
+    {
+      "type": "url",
+      "id": "url_1",
+      "label": "URL",
+      "default": "/collections/all"
+    },
+    {
+      "type": "image_picker",
+      "id": "img_1",
+      "label": "Image",
+      "info": "870x570.jpg"
+    },
+    {
+      "type": "text",
+      "id": "title_1",
+      "label": "Title collection",
+      "default": "Hot"
+    },
+	{
+      "type": "header",
+      "content": "Position title"
+    },
+	{
+      "type": "text",
+      "id": "pos_title_1",
+      "label": "Position title collection",
+      "default": "-20",
+      "info": "pixel"
+    },
+	{
+      "type": "text",
+      "id": "pos_title_1_mb",
+      "label": "Position title collection on mobile",
+      "default": "20",
+      "info": "pixel"
+    },
+	{
+      "type": "header",
+      "content": "Content child"
+    },
+	{
+      "type": "text",
+      "id": "title_content_1",
+      "label": "Title collection",
+      "default": "Utumn - Winter Sale"
+    },
+	{
+      "type": "textarea",
+      "id": "des_content_1",
+      "label": "content collection",
+      "default": "Caused the dawn of the jean all the way back in 1873. Created for the manual labourer, adverts for the denim cried, “It’s no use, they can’t be ripped!” Today the American brand works with the same high quality, ensuring that these 512."
+    },
+    {
+      "type": "url",
+      "id": "url_content",
+      "label": "URL learn more",
+      "default": "/collections/all"
+    },
+	{
+      "type": "text",
+      "id": "btn_name",
+      "label": "Button learn more",
+      "default": "Learn more"
+    },
+	{
+      "type": "header",
+      "content": "Content 2"
+    },
+    {
+      "type": "url",
+      "id": "url_2",
+      "label": "URL",
+      "default": "/collections/all"
+    },
+    {
+      "type": "image_picker",
+      "id": "img_2",
+      "label": "Image",
+      "info": "870x570.jpg"
+    },
+    {
+      "type": "text",
+      "id": "title_2",
+      "label": "Title collection",
+      "default": "Hot"
+    },
+	{
+      "type": "header",
+      "content": "Position title"
+    },
+	{
+      "type": "text",
+      "id": "pos_title_2",
+      "label": "Position title collection",
+      "default": "-20",
+      "info": "pixel"
+    },
+	{
+      "type": "text",
+      "id": "pos_title_2_mb",
+      "label": "Position title collection on mobile",
+      "default": "20",
+      "info": "pixel"
+    },
+	{
+      "type": "header",
+      "content": "Content 3"
+    },
+    {
+      "type": "url",
+      "id": "url_3",
+      "label": "URL",
+      "default": "/collections/all"
+    },
+    {
+      "type": "image_picker",
+      "id": "img_3",
+      "label": "Image",
+      "info": "870x570.jpg"
+    },
+    {
+      "type": "text",
+      "id": "title_3",
+      "label": "Title collection",
+      "default": "Hot"
+    },
+	{
+      "type": "header",
+      "content": "Position title"
+    },
+	{
+      "type": "text",
+      "id": "pos_title_3",
+      "label": "Position title collection",
+      "default": "-20",
+      "info": "pixel"
+    },
+	{
+      "type": "text",
+      "id": "pos_title_3_mb",
+      "label": "Position title collection on mobile",
+      "default": "20",
+      "info": "pixel"
+    },
+	{
+      "type": "header",
+      "content": "Content 4"
+    },
+    {
+      "type": "url",
+      "id": "url_4",
+      "label": "URL",
+      "default": "/collections/all"
+    },
+    {
+      "type": "image_picker",
+      "id": "img_4",
+      "label": "Image",
+      "info": "870x570.jpg"
+    },
+    {
+      "type": "text",
+      "id": "title_4",
+      "label": "Title collection",
+      "default": "Hot"
+    },
+	{
+      "type": "header",
+      "content": "Position title"
+    },
+	{
+      "type": "text",
+      "id": "pos_title_4",
+      "label": "Position title collection",
+      "default": "-20",
+      "info": "pixel"
+    },
+	{
+      "type": "text",
+      "id": "pos_title_4_mb",
+      "label": "Position title collection on mobile",
+      "default": "20",
+      "info": "pixel"
+    },
+	{
+      "type": "header",
+      "content": "Content 5"
+    },
+    {
+      "type": "url",
+      "id": "url_5",
+      "label": "URL",
+      "default": "/collections/all"
+    },
+    {
+      "type": "image_picker",
+      "id": "img_5",
+      "label": "Image",
+      "info": "870x570.jpg"
+    },
+    {
+      "type": "text",
+      "id": "title_5",
+      "label": "Title collection",
+      "default": "Hot"
+    },
+	{
+      "type": "header",
+      "content": "Position title"
+    },
+	{
+      "type": "text",
+      "id": "pos_title_5",
+      "label": "Position title collection",
+      "default": "-20",
+      "info": "pixel"
+    },
+	{
+      "type": "text",
+      "id": "pos_title_5_mb",
+      "label": "Position title collection on mobile",
+      "default": "20",
+      "info": "pixel"
+    }
+  ],
+  
+  "presets": [
+    {
+      "name": "Collection v1",
+      "category": "section Coro"
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,62 @@
+<div class="container blog-page margin_bottom_150 blog-detail-page">
+  <div class="row flex">
+    <div class="col-lg-8 col-md-8 col-sm-12 col-xs-12 content-blog-detail">
+      {% if article.image %}
+      <div class="over-hidden">
+        <a href="#">
+          <img src="{{ article.image.src | img_url: 'master' }}" class="full-width hover-zoom-out" alt="">
+        </a>
+      </div>
+      {% endif %}
+      <h1 class="title-font title-post">{{ article.title }}</h1>
+      <p class="day-post des-font">{{article.published_at | time_tag: format: 'month_day_year'}}</p>
+      <p class="des-post des-font">{{ article.content}}</p>
+      {% if section.settings.enable_text_special %}
+      <p class="relative des-font des-post des-post-special">
+        {% if section.settings.img_special == blank %}
+        <img src="{{'special-detail.png' | asset_url}}" class="img-responsive absolute" alt="">
+        {% else %}
+        <img src="{{ section.settings.img_special | img_url:'master' }}" class="img-responsive absolute" alt="">
+        {% endif %}
+        {{section.settings.content_special}}
+      </p>
+      {% endif %}
+      {% if section.settings.enable_img_banner %}
+      <div class="row">
+        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 space_right_10 margin_bottom_50">
+          <a href="{{section.settings.url_banner_1}}" class="inline-block over-hidden">
+            {% if section.settings.img_banner_1 == blank %}
+            <img src="{{'blog_detail_1.jpg' | asset_url}}" class="img-responsive hover-zoom-out" alt="">
+            {% else %}
+            <img src="{{section.settings.img_banner_1 | img_url:'master'}}" class="img-responsive hover-zoom-out" alt="">
+            {% endif %}
+          </a>
+        </div>
+        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 space_left_10 margin_bottom_50">
+          <a href="{{section.settings.url_banner_2}}" class="inline-block over-hidden">
+            {% if section.settings.img_banner_2 == blank %}
+            <img src="{{'blog_detail_2.jpg' | asset_url}}" class="img-responsive hover-zoom-out" alt="">
+            {% else %}
+            <img src="{{section.settings.img_banner_2 | img_url:'master'}}" class="img-responsive hover-zoom-out" alt="">
+            {% endif %}
+          </a>
+        </div>
+      </div>
+      {% endif %}
+      {% if article.excerpt != blank %}
+      <p class="des-post des-font space_bot_70 border-bot">{{article.excerpt}}</p>
+      {% endif %}
+      {% if section.settings.enable_category_article %}
+      <div class="collection-post space_top_bot_20 border-bot">
+        <i class="ti-folder space_right_10"></i>
+        <span class="menu-font">Categories:</span>
+        <a href="{{blog.url}}" class="des-font"> {{blog.title}}</a>
+      </div>
+      {% endif %}
+
+
+      {% include 'nixx-comment-article' %}
+
+    </div>
+  </div>
+</div>

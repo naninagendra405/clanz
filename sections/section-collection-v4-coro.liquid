@@ -1,0 +1,193 @@
+<div data-section-id="{{ section.id }}" style="{% if section.settings.margin_top != blank %}margin-top: {{section.settings.margin_top}}px;{%endif%} {% if section.settings.margin_bottom != blank %}margin-bottom: {{section.settings.margin_bottom}}px;{% endif %}">
+
+  <div class="container collection_v3 relative">
+    {% if section.blocks.size > 0 %}
+    {% for block in section.blocks %}
+    <div class="flex content_1">
+      <div class="col-lg-8 col-md-8 col-sm-12 col-xs-12 clear-space relative content_left">
+        <a href="{{block.settings.url_1}}" class="inline-block over-hidden">
+          {% if block.settings.img_1 == blank %}
+      		<img src="{{'1152x737.jpg' | asset_url}}" class="img-responsive img-fit hover-zoom-out">
+          {% else %}
+          	<img src="{{block.settings.img_1 | img_url:'master'}}" class="img-responsive img-fit hover-zoom-out">
+          {% endif %}
+        </a>
+        <div class="title absolute inline-block">
+          <h3 class="title-font"><a href="{{block.settings.url_1}}">{{block.settings.title_collection_1}}</a></h3>
+        </div>
+        <div class="absolute inline-block btn_shop">
+          <a class="inline-block menu-font" href="{{block.settings.url_1}}">{{block.settings.btn_name_1}}</a>
+        </div>
+      </div>
+      <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12 clear-space relative content_right">
+        {% capture col_1 %}product_1{% endcapture %}
+        {% assign product = all_products[block.settings[col_1]] %}
+        <a href="{{ product.url | within: collection }}" class="inline-block">
+          <img src="{{ product.featured_image.src | img_url: 'master' }}" class="img-responsive img-fit" alt="{{ product.featured_image.alt | escape }}">
+        </a>
+        <div class="absolute info_pd">
+          <h4 class="des-font text-center"><a href="{{ product.url | within: collection }}">{{product.title}}</a></h4>
+          <p class="number-font text-center"><span class="price">{{ product.price | money }}</span>
+                  {% if on_sale %}<s class="price-old">{{ product.compare_at_price | money }}</s>{% endif %}</p>
+        </div>
+      </div>
+    </div>
+    <div class="flex content_2">
+      <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12 clear-space relative content_right">
+        {% capture col_2 %}product_2{% endcapture %}
+        {% assign product = all_products[block.settings[col_2]] %}
+        <a href="{{ product.url | within: collection }}" class="inline-block">
+          <img src="{{ product.featured_image.src | img_url: 'master' }}" class="img-responsive img-fit" alt="{{ product.featured_image.alt | escape }}">
+        </a>
+        <div class="absolute info_pd">
+          <h4 class="des-font text-center"><a href="{{ product.url | within: collection }}">{{product.title}}</a></h4>
+          <p class="number-font text-center"><span class="price">{{ product.price | money }}</span>
+                  {% if on_sale %}<s class="price-old">{{ product.compare_at_price | money }}</s>{% endif %}</p>
+        </div>
+      </div>
+      <div class="col-lg-8 col-md-8 col-sm-12 col-xs-12 clear-space relative content_left">
+        <a href="{{block.settings.url_2}}" class="inline-block over-hidden">
+          {% if block.settings.img_2 == blank %}
+      		<img src="{{'1152x737.jpg' | asset_url}}" class="img-responsive img-fit hover-zoom-out">
+          {% else %}
+          	<img src="{{block.settings.img_2 | img_url:'master'}}" class="img-responsive img-fit hover-zoom-out">
+          {% endif %}
+        </a>
+        <div class="title absolute inline-block">
+          <h3 class="title-font"><a href="{{block.settings.url_2}}">{{block.settings.title_collection_2}}</a></h3>
+        </div>
+        <div class="absolute inline-block btn_shop">
+          <a class="inline-block menu-font" href="{{block.settings.url_2}}">{{block.settings.btn_name_2}}</a>
+        </div>
+      </div>
+    </div>
+    {% endfor %}
+    {% endif %}
+  </div>
+</div>
+{% schema %}
+  {
+    "name": "Collection v3",
+    "settings": [
+	{
+      "type": "header",
+      "content": "Section Space"
+    },
+    {
+      "type": "text",
+      "id": "margin_top",
+      "label": "Margin Top",
+      "info": "Defined in pixels. Do not add the 'px' unit."
+    },
+    {
+      "type": "text",
+      "id": "margin_bottom",
+      "label": "Margin Bottom",
+      "info": "Defined in pixels. Do not add the 'px' unit."
+    }
+	],
+	"blocks":[
+	{
+		"type": "image",
+      	"name": "comment",
+		"limit":3,
+      	"settings": [
+	{
+      "type": "header",
+      "content": "Row 1"
+    },
+	{
+      "type": "header",
+      "content": "Content left"
+    },
+    {
+      "type": "url",
+      "id": "url_1",
+      "label": "URL collection",
+      "default": "/collections/all"
+    },
+    {
+      "type": "image_picker",
+      "id": "img_1",
+      "label": "Image",
+      "info": "1152x737.jpg"
+    },
+    {
+      "type": "text",
+      "id": "title_collection_1",
+      "label": "Title",
+      "default": "New Arrival"
+    },
+	{
+      "type": "text",
+      "id": "btn_name_1",
+      "label": "Button",
+      "default": "SHOP"
+    },
+	{
+      "type": "header",
+      "content": "Content right"
+    },
+    {
+      "type": "product",
+      "id": "product_1",
+      "label": "Chose product show"
+    },
+	{
+      "type": "header",
+      "content": "Row 2"
+    },
+	{
+      "type": "header",
+      "content": "Content left"
+    },
+	{
+      "type": "product",
+      "id": "product_2",
+      "label": "Chose product show"
+    },
+	{
+      "type": "header",
+      "content": "Content right"
+    },
+    {
+      "type": "url",
+      "id": "url_2",
+      "label": "URL collection",
+      "default": "/collections/all"
+    },
+    {
+      "type": "image_picker",
+      "id": "img_2",
+      "label": "Image",
+      "info": "1152x737.jpg"
+    },
+    {
+      "type": "text",
+      "id": "title_collection_2",
+      "label": "Title",
+      "default": "Best Seller"
+    },
+	{
+      "type": "text",
+      "id": "btn_name_2",
+      "label": "Button",
+      "default": "SHOP"
+    }
+	]
+	}
+],
+	"presets": [
+      {
+        "name": "Collection v3",
+        "category": "section Coro"
+      }
+    ]
+  }
+{% endschema %}
+
+{% stylesheet %}
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}

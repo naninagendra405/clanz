@@ -1,0 +1,15 @@
+{% if settings.enable_newsletter %}
+{% if settings.newsletter_form_action != blank %}
+{% assign form_action = settings.newsletter_form_action %}
+{% else %}
+{% assign form_action = '#' %}
+{% endif %}
+<div class="newsletter-home3 space_bot_150 space_top_130 BG margin_bottom_120">
+  <h1 class="title-font capital title-newsletter text-center">{{settings.title_newsletter_form}}</h1>
+  <p class="des-font des-newsletter space_bot_60 text-center">{{settings.des_newsletter_form}}</p>
+  <form action="{{ form_action }}" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="form-group des-font flex" method="post" target="_blank">
+    <input type="email" name="EMAIL" class="form-control" placeholder="Your email address...">
+    <button type="submit" class="menu-font uppercase">{{settings.btn_submit_name}}</button>
+  </form>
+</div>
+{% endif %}

@@ -1,0 +1,59 @@
+{% paginate article.comments by 5 %}
+
+{% comment %}
+#comments is required, it is used as an anchor link by Shopify.
+{% endcomment %}
+
+<div class="blog-comment">
+    
+    <div class="blog-comment-content">
+        {% if article.comments_count > 0 %}
+        <div class="cmt-title text-center abs"><h3 class="oval-bd">{{ 'blogs.comments.comments_with_count' | t: count: article.comments_count }} ({{article.comments_count}})</h3></div>
+        {% endif %}
+        {% if comment and comment.created_at %}
+          <div class="alert alert-success alert-dismissible" role="alert">
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <p>
+              {% if blog.moderated? %}
+              {{ 'blogs.comments.success_moderated' | t }}
+              {% else %}
+              {{ 'blogs.comments.success' | t }}
+              {% endif %}
+            </p>
+          </div>
+          {% endif %}
+          {% if article.comments_count > 0 %}
+        <ul>
+        {% comment %}
+        If a comment was just submitted with no blank field, show it.
+        {% endcomment %}
+        {% if comment and comment.created_at %}
+        {% include 'comment' %}
+        {% endif %}
+
+        {% comment %}
+        Showing the rest of the comments.
+        {% endcomment %}
+        {% for comment in article.comments %}
+        {% include 'comment' %}
+        {% endfor %}
+      </ul>
+      {% endif %}
+    </div>
+  <div class="comment-post">
+    <h1 class="title-font title-comment-post">{{section.settings.title_comment}}</h1>
+    <p class="des-font des-comment-post margin_bottom_50">{{section.settings.des_comment}}</p>
+    {% form 'new_comment', article %}
+    <form class="form-group des-font" method="post">
+      <textarea type="text" name="comment" class="form-control" placeholder="Comment"></textarea>
+      <input type="text" name="name" class="form-control inline-block" placeholder="Name*">
+      <input type="email" name="email" class="form-control right inline-block" placeholder="Email*">
+      <input type="text" name="website" class="form-control" placeholder="Website*">
+      <button type="submit" class="menu-font uppercase">{{section.settings.btn_comment}}</button>
+    </form>
+    {% endform %}
+  </div>
+</div>
+<!-- /.comments__respond -->
+
+{% endpaginate %}

@@ -1,0 +1,9 @@
+<div class="product">
+  <div class="img-product relative">
+    <a href="{{ product.url | within: collection }}" class="inline-block">
+      <img src="{{ product.featured_image.src | img_url: 'master' }}" class="img-responsive" alt="{{ product.featured_image.alt | escape }}">
+    </a>
+    {% include 'nixx-label-product' %}
+    {% include 'nixx-icon-product' %}
+  </div>
+</div>

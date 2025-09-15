@@ -1,0 +1,151 @@
+{% if section.settings.enable_banner %}
+<div class="banner margin_bottom_150 {% if section.settings.enable_line_top %}border-top{% endif %} {% if section.settings.enable_line_bot %}border-bot{% endif %}" style="background:{{section.settings.bgc_banner}};">
+	<div class="container">
+		<h1 class="title-font title-banner banner-product-detail text-center">{{product.title}}</h1>
+		{% include 'breadcrumb' %}
+	</div>
+</div>
+{% endif %}
+<div class="container product-detail margin_bottom_150">
+  <div class="row">
+    <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 margin_bottom_50">
+      <div class="slick-product-detail margin_bottom_20">
+        {% for image in product.images %}
+        <div>
+          <img src="{{ image.src | img_url: 'master' }}" class="img-responsive full-width engoj_img_main" alt="{{ image.alt | escape }}">
+        </div>
+        {% endfor %}
+
+      </div>
+      <div class="slick-nav-product-detail">
+        {% for image in product.images %}
+        <div class="engoj_img_variant">
+          <img src="{{ image.src | img_url: 'master' }}" class="img-responsive" alt="{{ image.alt | escape }}">
+        </div>
+        {% endfor %}
+
+      </div>
+    </div>
+    <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 info-product-detail">
+      <h1 class="title-font title-product margin_bottom_30">{{product.title}}</h1>
+      <p class="number-font price margin_bottom_40 price-product engoj_price_main">{{ product.price | money }}
+      {% if on_sale %}<s class="price-old">{{ product.compare_at_price | money }}</s>{% endif %}
+      </p>
+      {% if section.settings.show_rating%}
+      <p class="product-preview margin_bottom_50 product-rating">
+        <span class="shopify-product-reviews-badge" data-id="{{ product.id }}" style="color:#F6FF00;"></span>
+      </p>
+      {% endif%}
+      <form action="/cart/add" method="post" enctype="multipart/form-data" class="product-form product-form-{{ section.id }}{% unless section.settings.show_variant_labels %} product-form--hide-variant-labels{% endunless %}" data-section="{{ section.id }}">
+      <div class="margin_bottom_30">
+        <select name="id" id="productSelect" class="engoj-except-select2 product-single__variants">
+          {% for variant in product.variants %}
+          {% if variant.available %}
+          {% assign sku = variant.sku %}
+          <option {% if variant == product.selected_or_first_available_variant %} selected="selected" {% endif %} data-sku="{{ variant.sku }}" value="{{ variant.id }}">{{ variant.title }} - {{ variant.price | money_with_currency }}</option>
+          {% else %}
+          <option disabled="disabled">
+            {{ variant.title }} - {{ 'products.product.sold_out' | t }}
+          </option>
+          {% endif %}
+          {% endfor %}
+        </select>
+        {% if product.available and product.variants.size > 1 %}
+        {% for option in product.options %}
+        {% include 'swatch' with option %}
+        {% endfor %}
+        {% endif %}
+      </div>
+      <div class="flex margin_bottom_50 border-bot space_bot_50 btn-function">
+        {% unless current_variant.available %}
+        
+        {% if section.settings.show_quantity %}
+        <div>
+          <div class="relative input-number-custom">
+            
+            <input type="number" min="1" value="1"  name="quantity" id="Quantity" pattern="[0-9]*">
+            
+          </div>
+        </div>
+        {% endif %}
+        {% endunless %}
+        
+        <button type="submit" name="add" id="AddToCart" class="enj-add-to-cart-btn menu-font uppercase{% unless current_variant.available %} btn-outofstock{% endunless %}{% if product.options.size == 1 and product.variants[0].title == 'Default Title' %} product-form__cart-submit--small{% endif %}" style="margin-right:20px;" {% unless current_variant.available %}disabled="disabled"{% endunless %}>
+          <span id="AddToCartText-{{ section.id }}">
+            {% unless current_variant.available %}
+            {{ 'products.product.sold_out' | t }}
+            {% else %}
+            {{ 'products.product.addtocart' | t }}
+            {% endunless %}
+          </span>
+        </button>
+       
+        {% include 'nixx-add-wishlist' %}
+      </div>
+      </form>
+      {% if section.settings.enable_alltab %}
+      <div class="inline-block border-bot">
+        {% if section.settings.enable_description_tab %}
+        <div class="inline-block margin_bottom_50">
+          <button class="accordion menu-font btn-tab">{{section.settings.destab_title}}</button>
+          <div class="panel">
+            <p class="des-font des-tab"><br><br>{{product.description}}<br><br></p>
+          </div>
+        </div>
+        {% endif %}
+		{% if section.settings.enable_custom_tab %}
+        <!--  -->
+        <div class="inline-block margin_bottom_50">
+          <button class="accordion menu-font btn-tab">{{section.settings.title_tab_2}}</button>
+          <div class="panel">
+            <p class="des-font des-tab"><br><br>{{section.settings.content_tab_2}}<br><br></p>
+            
+          </div>
+        </div>
+        {% endif %}
+        <!--  -->
+        {% if section.settings.show_rating%}
+        <div class="margin_bottom_50">
+          <button class="accordion menu-font btn-tab">{{section.settings.title_review_tab}} (0)</button>
+          <div class="panel" id="review-tag">
+            <div id="shopify-product-reviews" data-id="{{product.id}}">{{ product.metafields.spr.reviews }}</div>
+          </div>
+        </div>
+        {% endif %}
+      </div>
+      {% endif %}
+      
+      <div class="info-more">
+        {% if section.settings.show_sku%}
+        <p class="des-font margin_bottom_30 margin_top_50"><span class="menu-font">SKU: </span>
+          {% assign current_variant = product.selected_or_first_available_variant %}
+          {{ current_variant.sku }}
+        </p>
+        {% endif%}
+        
+        <p class="margin_bottom_30">
+          <span class="menu-font margin_right_10">Categories:</span>
+          {% for collection in product.collections %}
+          <a href="{{ collection.url }}" class="delay03 margin_right_10">{{ collection.title }}, </a>
+          {% endfor %}
+        </p>
+        
+        <p class="margin_bottom_30">
+          <span class="menu-font margin_right_30">Share:</span>
+          <a href="#" class="delay03 margin_right_30"><i class="ti-facebook"></i></a>
+          <a href="#" class="delay03 margin_right_30"><i class="ti-twitter-alt"></i></a>
+          <a href="#" class="delay03 margin_right_30"><i class="ti-pinterest"></i></a>
+          <a href="#" class="delay03 margin_right_30"><i class="ti-linkedin"></i></a>
+        </p>
+        
+      </div>
+      
+    </div>
+  </div>
+</div>
+{% if section.settings.enable_pd_relate %}
+	{% include 'nixx-pd-relate' %}
+{% endif %}
+{% if section.settings.enable_newsletter %}
+	{% include 'nixx-newsletter' %}
+{% endif %}

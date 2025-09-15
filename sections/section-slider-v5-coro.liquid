@@ -1,0 +1,180 @@
+<div data-section-id="{{ section.id }}" style="{% if section.settings.margin_top != blank %}margin-top: {{section.settings.margin_top}}px;{%endif%} {% if section.settings.margin_bottom != blank %}margin-bottom: {{section.settings.margin_bottom}}px;{% endif %}">
+  <div class="slider_v5 container-fluid clear-space relative over-hidden margin_bottom_30">
+    {% if section.settings.img == blank %}
+    <img src="{{'slide_home7.jpg' | asset_url }}" class="img-responsive img-fit" alt="">
+    {% else %}
+    <img src="{{ section.settings.img | img_url:'master' }}" class="img-responsive img-fit" alt="">
+    {% endif %}
+    <div class="btn_view_all absolute">
+      <a href="{{section.settings.url}}" class="menu-font">{{section.settings.btn_view_all}} <i class="ti-arrow-right"></i></a>
+    </div>
+    <div class="absolute js_slide_pd_v5">
+      {% if section.blocks.size > 0 %}
+      {% for block in section.blocks %}
+      {% if block.settings.img_2 == blank %}
+      <a href="{{block.settings.url_pd}}">
+        <img src="{{'400x600.png' | asset_url}}" class="img-responsive" alt="">
+      </a>
+      {% else %}
+      <a href="{{block.settings.url_pd}}">
+        <img src="{{ block.settings.img_2 | img_url:'master' }}" class="img-responsive" alt="">
+      </a>
+      {% endif %}
+      {% endfor %}
+      {% endif %}
+    </div>
+<!--      -->
+    <div class="js_slider_5 absolute">
+      {% if section.blocks.size > 0 %}
+      {% for block in section.blocks %}
+      <div class="content-slider">
+        <div class="text_slider_1">
+          <h3 class="menu-font title-slider delay2"><a href="{{block.settings.url_pd}}">{{block.settings.title_pd}}</a></h3>
+          <p class="price menu-font">From <span class="color_price">{{block.settings.price}}</span></p>
+        </div>
+      </div>
+      {% endfor %}
+      {% endif %}
+    </div>
+    <!--  -->
+  </div>
+</div>
+<style>
+  @media (min-width:1200px){
+    .slider_v5 .content-slider .text_slider_1 .title-slider{
+      font-size:{{section.settings.font_size_title_1}}px;
+    }
+    .slider_v5 .content-slider .text_slider_1 .price{
+      font-size:{{section.settings.font_size_title_price}}px;
+    }
+    .slider_v5 .content-slider .text_slider_1 .price .color_price{
+      color:{{section.settings.color_price}};
+    }
+  }
+</style>
+{% schema %}
+{
+"name": "Slider home 5",
+"class": "index-section",
+"settings": [
+{
+"type": "header",
+"content": "Section Space"
+},
+{
+"type": "text",
+"id": "margin_top",
+"label": "Margin Top",
+"info": "Defined in pixels. Do not add the 'px' unit."
+},
+{
+"type": "text",
+"id": "margin_bottom",
+"label": "Margin Bottom",
+"info": "Defined in pixels. Do not add the 'px' unit."
+},
+{
+"type": "header",
+"content": "Image Background"
+},
+{
+"type": "image_picker",
+"id": "img",
+"label": "Image",
+"info": "Image size 1920 x 1080"
+},
+{
+"type": "header",
+"content": "Title product"
+},
+{
+"type": "range",
+"id": "font_size_title_1",
+"label": "Font size title left",
+"default": 100,
+"min": 14,
+"max": 100,
+"unit": "px"
+},
+{
+"type": "header",
+"content": "Text price"
+},
+{
+"type": "range",
+"id": "font_size_title_price",
+"label": "Font size Price",
+"default": 40,
+"min": 14,
+"max": 100,
+"unit": "px"
+},
+{
+"type": "color",
+"id": "color_price",
+"label": "Color price",
+"default": "#f4b54f"
+},
+{
+"type": "header",
+"content": "Button view all"
+},
+{
+"type": "url",
+"id": "url",
+"label": "URL button view all",
+"default": "/collections/all"
+},
+{
+"type": "text",
+"id": "btn_view_all",
+"label": "Button view all",
+"default": "VIEW ALL PRODUCTS"
+}
+],
+"blocks": [
+{
+"type": "image",
+"name": "Image",
+"limit":6,
+"settings": [
+
+{
+"type": "text",
+"id": "title_pd",
+"label": "Title product",
+"default": "OPEN-KNIT <br>SWEATER"
+},
+{
+"type": "text",
+"id": "price",
+"label": "Price",
+"default": "$59.00"
+},
+{
+"type": "url",
+"id": "url_pd",
+"label": "URL Product",
+"default": "/collections/all"
+},
+{
+"type": "header",
+"content": "Slider product"
+},
+{
+"type": "image_picker",
+"id": "img_2",
+"label": "Image product",
+"info": "Image size 1800 x 2300"
+}
+]
+}
+],
+"presets": [
+{
+"name": "Slider home 5",
+"category": "Slider coro"
+}
+]
+}
+{% endschema %}

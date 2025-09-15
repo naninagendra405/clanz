@@ -1,0 +1,12 @@
+<ul class="price margin_bottom_70 clear-space-left space_right_10 filter-tag">
+  <li><h1 class="title-font title">{{section.settings.shop_by_price_title}}</h1></li>
+  {% assign tags = section.settings.shop_by_price_list_tags | split: ',' %}
+  {% for t in tags %}
+  {% assign tag = t | strip %}
+  {% assign tag_value = tag | handleize %}
+  <li class="cat-item{% if current_tags contains tag %} current-cat{% endif %} color-item">
+    <input class="absolute op_0" type="checkbox" value="{{ tag_value | split: '|' | first }}" {% if current_tags contains tag %}checked{% endif %}/>
+    <a href="javascript:void(0)" title="{{tag}}" class="des-font link-collection capital">{{tag}}</a>
+  </li>
+  {% endfor %}
+</ul>

@@ -1,0 +1,412 @@
+<div data-section-id="{{ section.id }}" style="{% if section.settings.margin_top != blank %}margin-top: {{section.settings.margin_top}}px;{%endif%} {% if section.settings.margin_bottom != blank %}margin-bottom: {{section.settings.margin_bottom}}px;{% endif %}">
+  <div class="slider-home7 container-fluid clear-space relative margin_bottom_20">
+    {% if section.blocks.size > 0 %}
+    {% for block in section.blocks %}
+    {% if block.type == 'image' %}
+    <div class="content-slider relative">
+      <div class="img-slider">
+        <a href="{{block.settings.url}}" class="inline-block">
+          {% if block.settings.img == blank %}
+          	<img src="{{'slide_home7.jpg' | asset_url }}" class="img-responsive img-fit" alt="">
+          {% else %}
+          	<img src="{{ block.settings.img | img_url:'master' }}" class="img-responsive img-fit" alt="">
+          {% endif %}
+        </a>
+      </div>
+      <div class="absolute text-slider_1">
+        <h3 class="title-font title-slider delay2 capital">{{block.settings.title_1}}</h3>
+      </div>
+      <div class="absolute text-slider_2">
+        <h3 class="title-font des-slider delay1_5 text-center">{{ block.settings.title_2 }}</h3>
+        {% if block.settings.img_2 == blank %}
+        <img src="{{'350x450.png' | asset_url}}" class="img-responsive" alt="">
+        {% else %}
+          	<img src="{{ block.settings.img_2 | img_url:'master' }}" class="img-responsive" alt="">
+        {% endif %}
+      </div>
+    </div>
+    {% endif %}
+    {% if block.type == 'video' %}
+        <div class="br-background engoj_bgvideoslider" style="padding: 0px;max-height:880px;">
+          <script>
+            $('.engoj_bgvideoslider').umbg({
+              'mediaPlayerType'				: '{{ block.settings.choose_videobg }}', // YouTube, Vimeo, Dailymotion, Wistia, HTML5, Image, or Color.
+              'mediaId'						: '{{ block.settings.embed_video }}', // Use the video id . For HTML5 use the location and video filename.
+              'mediaPoster'					: '{{ block.settings.img_video | img_url : 'master' }}', // Location of video poster to display for mobile.
+              'videoQuality' 				: '{% if block.settings.choose_videobg == "Vimeo" %}1{% endif %}{% if block.settings.choose_videobg == "Youtube" %}highres{% endif %}', // Vimeo Quality: default or 1 (1 is for HD). YouTube Quality = default, small, medium, large, hd720, hd1080, or highres.
+              'startAt' 					: 0, // Where to start the video in seconds.
+              'endAt'						: 0, // Where to end the video in seconds.
+              'audio' 						: 0, //  0 = no audio, 1 = video plays with audio and volume button is display.
+              'startAudioMuted' 			: 1, // 0 = no, 1 = yes. When enable(yes) the media will start with the audio muted.
+              'volumeLevel' 				: 0, // Choose 0-100, 0 = no volume (mute), 100 = video plays with audio at 100% volume.
+              'loop'						: 1, // 0=no, 1=yes. Loop the media play.
+              'pud'							: 1, // Use Page-Up-Down (PUD) 0=no, 1=yes.
+              'pudDown' 					: 0, // Start playback with PUD on down position.
+              'pudUp' 						: 0, // PUD will automatically go up when media playback ends or first loop ends.
+              'pudShow' 					: 0, // Amount of page to show in pixels when pud is down position.
+              'displayControls'          	: 0, // 0=no, 1=yes.
+              'placeControls'             	: 'umbg-br', // umbg-br = bottom right, umbg-bl = bottom left, umbg-tr = top right, umbg-tl = top left.
+              'controlColor'              	: 'rgba(255, 255, 255, 0.8)', // Color for the control icons.
+              'controlBgColor'            	: 'rgba(39, 173, 211, 0.7)', // Color for the control background.
+              'disableOnMobileAll'        	: 0, // 0=no, 1=yes. Disable playback of all backgrounds on mobile devices.
+              'disableOnMobileVideoOnly'  	: 0, // 0=no, 1=yes. Disable playback of video backgrounds on all mobile devices.
+              'disableOnMobilePhonesOnly' 	: 0 // 0=no, 1=yes. Disable playback on mobile phones only. Will play on tablets.
+            });
+          </script>
+          <div class="br-background bg-slide-5 slider_video">
+            <div class="slide-banner-full-content slide-banner-slide-5" style="text-align:{{ block.settings.text_content }};">
+              <div class="container">
+                <div class="row">
+                  <div class="col-md-{% if block.settings.position_content == "left" %}6{% endif %}{% if block.settings.position_content == "center" %}12{% endif %}{% if block.settings.position_content == "right" %}6 col-md-offset-6{% endif %}">
+                    {% if block.settings.icon != blank %}
+                    <img class="mb-20" src="{{ block.settings.icon | img_url: "master" }}" alt="" {% if block.setting.space_cicon != blank %} style="margin-bottom: {{ block.settings.space_cicon }}px;" {% endif %} >
+                    {% endif %}
+                    {% if block.settings.content_1 != blank %}
+                    <span class=" uppercase white des-font" style="text-align: {{ block.settings.text_content }}; color: {{ block.settings.color_c1 }}; font-size: {{ block.settings.size_c1 }}px; margin-bottom: {{ block.settings.space_c1 }}px;">{{ block.settings.content_1 }}</span>
+                    {% endif %}
+                    {% if block.settings.content_2 != blank %}
+                    <h2 class="font-secondary white title-font" style="text-align: {{ block.settings.text_content }}; color: {{ block.settings.color_c2 }}; font-size: {{ block.settings.size_c2 }}px; margin-bottom: {{ block.settings.space_c2 }}px;">{{block.settings.content_2}}</h2>
+                    {% endif %}
+                    {% if block.settings.content_3 != blank %}
+                    <span class=" uppercase white des-font" style="text-align: {{ block.settings.text_content }}; color: {{ block.settings.color_c3 }}; font-size: {{ block.settings.size_c3 }}px; margin-bottom: {{ block.settings.space_c3 }}px;">{{block.settings.content_3}}</span>
+                    {% endif %}
+                    {% if block.settings.content_4 != blank %}
+                    <span class=" font-four white des-font" style="text-align: {{ block.settings.text_content }}; color: {{ block.settings.color_c4 }}; font-size: {{ block.settings.size_c4 }}px; margin-bottom: {{ block.settings.space_c4 }}px;">{{block.settings.content_4}}</span>
+                    {% endif %}
+                    {% if block.settings.btn_url_1 != blank %}
+                    <a href="{{block.settings.btn_url_1}}" class="btn btn-default des-font delay03 box-shadow">{{block.settings.btn_name_1}}</a>
+                    {% endif %}
+                    {% if block.settings.btn_url_2 != blank %}
+                    <a href="{{block.settings.btn_url_2}}" class="btn btn-shop number-font delay03">{{block.settings.btn_name_2}}</a>
+                    {% endif %}
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- .slide-banner-content -->
+          </div>
+        </div>   
+    	{% endif %}
+    {% endfor %}
+    {% endif %}
+    <!--  -->
+   
+  </div>
+</div>  
+<style>
+  @media (min-width:1400px){
+    .slider-home7 .content-slider .text-slider_2 .des-slider{
+      margin-bottom:120px;
+      font-size:{{section.settings.font_size_title_2}}px;
+    }
+  }
+  @media (min-width:1400px){
+    .slider-home7 .content-slider .text-slider_1 .title-slider{
+      font-size:{{section.settings.font_size_title_1}}px;
+    }
+  }
+</style>
+{% schema %}
+{
+  "name": "Slider home 1",
+  "class": "index-section",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Section Space"
+    },
+    {
+      "type": "text",
+      "id": "margin_top",
+      "label": "Margin Top",
+      "info": "Defined in pixels. Do not add the 'px' unit."
+    },
+    {
+      "type": "text",
+      "id": "margin_bottom",
+      "label": "Margin Bottom",
+      "info": "Defined in pixels. Do not add the 'px' unit."
+    },
+	{
+      "type": "header",
+      "content": "Text left"
+    },
+	{
+          "type": "range",
+          "id": "font_size_title_1",
+          "label": "Font size title left",
+          "default": 100,
+          "min": 14,
+          "max": 100,
+          "unit": "px"
+    },
+	{
+      "type": "header",
+      "content": "Text right"
+    },
+	{
+          "type": "range",
+          "id": "font_size_title_2",
+          "label": "Font size title right",
+          "default": 70,
+          "min": 14,
+          "max": 100,
+          "unit": "px"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "image",
+      "name": "Image",
+	  "limit":6,
+      "settings": [
+        {
+          "type": "url",
+          "id": "url",
+          "label": "URL",
+          "default": "/collections/all"
+        },
+        {
+          "type": "image_picker",
+          "id": "img",
+          "label": "Image",
+          "info": "Image size 1920 x 1080"
+        },
+		{
+          "type": "text",
+          "id": "title_1",
+          "label": "Title left",
+          "default": "Padded Jacket"
+        },
+		{
+          "type": "image_picker",
+          "id": "img_2",
+          "label": "Image child",
+          "info": "Image size 350 x 450"
+        },
+		{
+          "type": "textarea",
+          "id": "title_2",
+          "label": "Tittle right",
+		  "default": "<span>Best of</span> Winter"
+        },
+		{
+          "type": "checkbox",
+          "id": "enable_social",
+          "label": "Enable social",
+          "default": true
+        }
+      ]
+    },
+	{
+      "type": "video",
+      "name": "Video slide",
+	  "limit":2,
+      "settings": [
+      {
+        "type": "select",
+        "id": "choose_videobg",
+        "label": "Choose Video?",
+        "options": [
+          {
+            "value": "Vimeo",
+            "label": "Vimeo"
+          },
+          {
+            "value": "Youtube",
+            "label": "Youtube"
+          }
+        ],
+        "default": "Youtube"
+      },
+      {
+        "type": "image_picker",
+        "id": "img_video",
+        "label": "Image on Mobile",
+        "info": "* for Video Background Slider"
+      },
+      {
+        "type": "text",
+        "id": "embed_video",
+        "label": "ID Video"
+      },
+      {
+        "type": "select",
+        "id": "position_content",
+        "label": "Position all content?",
+        "options": [
+          {
+            "value": "left",
+            "label": "Left"
+          },
+          {
+            "value": "center",
+            "label": "Center"
+          },
+          {
+            "value": "right",
+            "label": "Right"
+          }
+        ],
+        "default": "center"
+      },
+      {
+        "type": "select",
+        "id": "text_content",
+        "label": "Text align all content?",
+        "options": [
+          {
+            "value": "left",
+            "label": "Left"
+          },
+          {
+            "value": "center",
+            "label": "Center"
+          },
+          {
+            "value": "right",
+            "label": "Right"
+          }
+        ],
+        "default": "center"
+      },
+      {
+        "type": "image_picker",
+        "id": "icon",
+        "label": "CONTENT Icon"
+      },
+      {
+        "type": "text",
+        "id": "space_cicon",
+        "default": "20",
+        "label": "Space bottom of CONTENT Icon"
+      },
+      {
+        "type": "text",
+        "id": "content_1",
+        "label": "CONTENT 1"
+      },
+      {
+        "type": "color",
+        "id": "color_c1",
+        "default": "#ffffff",
+        "label": "Color of CONTENT 1"
+      },
+      {
+        "type": "text",
+        "id": "size_c1",
+        "default": "20",
+        "label": "Font size of CONTENT 1"
+      },
+      {
+        "type": "text",
+        "id": "space_c1",
+        "default": "10",
+        "label": "Space bottom of CONTENT 1"
+      },
+      {
+        "type": "text",
+        "id": "content_2",
+        "label": "CONTENT 2"
+      },
+      {
+        "type": "color",
+        "id": "color_c2",
+        "default": "#ffffff",
+        "label": "Color of CONTENT 2"
+      },
+      {
+        "type": "text",
+        "id": "size_c2",
+        "default": "80",
+        "label": "Font size of CONTENT 2"
+      },
+      {
+        "type": "text",
+        "id": "space_c2",
+        "default": "30",
+        "label": "Space bottom of CONTENT 2"
+      },
+      {
+        "type": "text",
+        "id": "content_3",
+        "label": "CONTENT 3"
+      },
+      {
+        "type": "color",
+        "id": "color_c3",
+        "default": "#ffffff",
+        "label": "Color of CONTENT 3"
+      },
+      {
+        "type": "text",
+        "id": "size_c3",
+        "default": "20",
+        "label": "Font size of CONTENT 3"
+      },
+      {
+        "type": "text",
+        "id": "space_c3",
+        "default": "30",
+        "label": "Space bottom of CONTENT 3"
+      },
+      {
+        "type": "text",
+        "id": "content_4",
+        "label": "CONTENT 4"
+      },
+      {
+        "type": "color",
+        "id": "color_c4",
+        "default": "#ffffff",
+        "label": "Color of CONTENT 4"
+      },
+      {
+        "type": "text",
+        "id": "size_c4",
+        "default": "20",
+        "label": "Font size of CONTENT 4"
+      },
+      {
+        "type": "text",
+        "id": "space_c4",
+        "default": "50",
+        "label": "Space bottom of CONTENT 4"
+      },
+      {
+        "type": "text",
+        "id": "btn_name_1",
+        "label": "Button 1 Name",
+        "default": "view more"
+      },
+      {
+        "type": "text",
+        "id": "btn_url_1",
+        "label": "Button 1 URL",
+        "info": "if Button URL empty, Button don't show!",
+        "default": "\/collections\/all"
+      },
+      {
+        "type": "text",
+        "id": "btn_name_2",
+        "label": "Button 2 Name",
+        "default": "shop now"
+      },
+      {
+        "type": "text",
+        "id": "btn_url_2",
+        "label": "Button 2 URL",
+        "info": "if Button URL empty, Button don't show!",
+        "default": "\/collections\/all"
+      }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Slider home 1",
+      "category": "Slider coro"
+    }
+  ]
+}
+{% endschema %}

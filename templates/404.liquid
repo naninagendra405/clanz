@@ -1,0 +1,26 @@
+{% if settings.newsletter_form_action != blank %}
+{% assign form_action = settings.newsletter_form_action %}
+{% else %}
+{% assign form_action = '#' %}
+{% endif %}
+<div class="page404">
+  <h1 class="menu-font title-404 text-center">404</h1>
+  <p class="menu-font text-error text-center margin_bottom_30">{{settings.title_error}}</p>
+  <p class="des-font des-404 text-center margin_bottom_70">{{settings.des_error}}</p>
+  <form method="get" action="/search" role="search">
+    <input type="text" class="form-control control-search des-font" value="" autocomplete="off" placeholder="Search ..." aria-label="SEARCH" name="q">
+  </form>
+  <div class="text-center"><a href="{{settings.error_url}}" class="uppercase menu-font link-to-home margin_top_30">{{settings.error_btn_name}}</a></div>
+</div>
+{% if settings.enable_new %}
+<!--  -->
+<div class="container-fluid newsletter-home3 space_top_bot_150">
+  <h1 class="title-font capital title-newsletter text-center">{{settings.title_new}}</h1>
+  <p class="des-font des-newsletter space_bot_60 text-center">{{settings.des_new}}</p>
+  <form action="{{ form_action }}" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="form-group des-font flex" method="post" target="_blank">
+    <input type="email" name="EMAIL" class="form-control" placeholder="Your email address...">
+    <button type="submit" class="menu-font uppercase">{{settings.btn_sub}}</button>
+  </form>
+</div>
+<!--  -->
+{% endif %}

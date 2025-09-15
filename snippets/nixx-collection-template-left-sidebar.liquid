@@ -1,0 +1,54 @@
+{% if section.settings.enable_banner %}
+<div class="banner margin_bottom_150 {% if section.settings.enable_line_top %}border-top{% endif %} {% if section.settings.enable_line_bot %}border-bot{% endif %}" style="background:{{section.settings.bgc_banner}};">
+	<div class="container">
+		<h1 class="title-font title-banner text-center">Shop</h1>
+		{% include 'breadcrumb' %}
+	</div>
+</div>
+{% endif %}
+<div class="container shop-page margin_bottom_150">
+  <div class="row">
+    <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12 sidebar-left engoj-collection-sidebar">
+    {% include 'nixx-sidebar-collection' %}
+    </div>
+    <div class="col-lg-8 col-md-8 col-sm-12 col-xs-12 content-shop">
+      <div class="row btn-function-shop">
+        <div class="col-lg-7 col-md-7 col-sm-6 col-xs-6 margin_bottom_50">
+          <span class="des-font showing hidden-xs">Showing 1–{{ per_page }} of {{ collection.all_products_count }} results</span>
+          <button class="active" id="btn-grid"><i class="{{section.settings.btn-grid}}"></i></button>
+          <button id="btn-list"><i class="{{section.settings.btn-list}}"></i></button>
+        </div>
+        {% include 'nixx-sorting' %}
+      </div>
+      <div class="row product-collection-grid">
+        {% for product in collection.products %}
+        {% include 'nixx-product-collection' %}
+       	{% endfor %}
+      </div>
+      <!--  -->
+      <div class="row">
+        <div class="col-md-12">
+          {% include 'pagination' %}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% include 'nixx-newsletter' %}
+<div class="open-sidebar-left fixed" data-click-state="0">
+	<i class="ti-angle-right"></i>
+</div>
+<style>
+  {% if section.settings.enable_bg_banner %}
+  {% if section.settings.select_bg == 'img' %}
+  .banner{
+    background-image: url({{ section.settings.bg-banner | img_url:'master' }});
+    background-position: center center;
+    background-repeat: none;
+    height:auto;
+  }
+  {% else %}
+  background:{{section.settings.color}};
+  {% endif %}
+  {% endif %}
+</style>

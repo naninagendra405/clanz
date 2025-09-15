@@ -1,0 +1,34 @@
+<div class="container blog-page margin_bottom_150">
+  <div class="row">
+    <div class="col-lg-8 col-md-8 col-sm-12 col-xs-12 content-blog">
+      <div class="row">
+        {% for article in blog.articles %}
+        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 space_right_10 margin_bottom_70">
+          {% if article.image %}
+          <div class="inline-block over-hidden">
+          <a href="{{ article.url }}" class="inline-block over-hidden hover-zoom-out">
+            {{ article | img_url: 'master' | img_tag: article.title }}
+          </a>
+          </div>
+          {% endif %}
+          <h2 class="title-font capital title-post"><a href="{{ article.url }}">{{ article.title }}</a></h2>
+          <p class="des-font day-post">{{article.published_at | time_tag: format: 'month_day_year'}}</p>
+          <p class="des-font des-post">{{article.content | strip_html | strip_newlines | truncatewords: 30}}</p>
+          <a href="{{ article.url }}" class="menu-font link-more uppercase">read more</a>
+        </div>
+        {%endfor%}
+      </div>
+<!--        -->
+      <div class="row">
+        <div class="col-md-12">
+          {% include 'pagination' %}
+        </div>
+      </div>
+    </div>
+    {% include 'nixx-sidebar-blog-right' %}
+
+  </div>
+</div>
+<div class="open-sidebar fixed" data-click-state="0">
+	<i class="ti-angle-left"></i>
+</div>

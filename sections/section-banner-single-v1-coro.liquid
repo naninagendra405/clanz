@@ -1,0 +1,78 @@
+<div data-section-id="{{ section.id }}" style="{% if section.settings.margin_top != blank %}margin-top: {{section.settings.margin_top}}px;{%endif%} {% if section.settings.margin_bottom != blank %}margin-bottom: {{section.settings.margin_bottom}}px;{% endif %}">
+  <div class="banner_v1 margin_bottom_30 over-hidden relative">
+    <div class="container">
+      {% if section.settings.img == blank %}
+      <img src="{{'slide_home7.jpg' | asset_url}}" class="img-responsive  img-fit">
+      {% else %}
+      <img src="{{section.settings.img | img_url:'master'}}" class="img-responsive  img-fit">
+      {% endif %}
+        
+        <div class="content text-center absolute">
+          <h3 class="menu-font title_banner margin_bottom_20 text-center">
+            {{section.settings.title_banner}}
+          </h3>
+          <a href="{{section.settings.url}}" class="inline-block over-hidden relative btn_animate_line menu-font">
+            {{section.settings.btn_shop}}
+          </a>
+        </div>
+        
+      
+    </div>
+  </div>
+</div>  
+
+{% schema %}
+{
+  "name": "Banner Single v1",
+  "class": "index-section",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Section Space"
+    },
+    {
+      "type": "text",
+      "id": "margin_top",
+      "label": "Margin Top",
+      "info": "Defined in pixels. Do not add the 'px' unit."
+    },
+    {
+      "type": "text",
+      "id": "margin_bottom",
+      "label": "Margin Bottom",
+      "info": "Defined in pixels. Do not add the 'px' unit."
+    },
+	{
+      "type": "image_picker",
+      "id": "img",
+      "label": "Image",
+      "info": "1920x700.jpg"
+    },
+    {
+      "type": "text",
+      "id": "title_banner",
+      "label": "Title",
+      "default": "Up To 40% Off<br>Final Sale Items"
+    },
+    {
+      "type": "url",
+      "id": "url",
+      "label": "URL button",
+      "default": "/collections/all"
+    },
+    {
+      "type": "text",
+      "id": "btn_shop",
+      "label": "Button",
+      "default": "SHOP NOW"
+    }
+  ],
+  
+  "presets": [
+    {
+      "name": "Banner Single v1",
+      "category": "section Coro"
+    }
+  ]
+}
+{% endschema %}

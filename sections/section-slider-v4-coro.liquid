@@ -1,0 +1,148 @@
+<div data-section-id="{{ section.id }}" style="{% if section.settings.margin_top != blank %}margin-top: {{section.settings.margin_top}}px;{%endif%} {% if section.settings.margin_bottom != blank %}margin-bottom: {{section.settings.margin_bottom}}px;{% endif %}">
+  <div class="slider_v4 js_slider_4 container-fluid clear-space relative margin_bottom_30">
+    {% if section.blocks.size > 0 %}
+    {% for block in section.blocks %}
+    
+    <div class="content-slider relative">
+      <div class="img-slider">
+        <a href="{{block.settings.url}}" class="inline-block">
+          {% if block.settings.img == blank %}
+          	<img src="{{'slide_home7.jpg' | asset_url }}" class="img-responsive img-fit" alt="">
+          {% else %}
+          	<img src="{{ block.settings.img | img_url:'master' }}" class="img-responsive img-fit" alt="">
+          {% endif %}
+        </a>
+      </div>
+      <div class="absolute text-slider_1">
+        <h3 class="menu-font title-slider delay2 text-center">{{block.settings.title_1}}</h3>
+      </div>
+      <div class="absolute text-slider_2">
+        <h5 class="title-font des-slider delay1_5">{{ block.settings.title_2 }}</h5>
+        <div class="flex">
+          <span class="menu-font">{{block.settings.title_3}}</span>
+          {% if block.settings.img_2 == blank %}
+          <img src="{{'201x16.png' | asset_url}}" class="img-responsive space_left_20" alt="">
+          {% else %}
+              <img src="{{ block.settings.img_2 | img_url:'master' }}" class="img-responsive space_left_20" alt="">
+          {% endif %}
+        </div>
+      </div>
+    </div>
+    
+    {% endfor %}
+    {% endif %}
+    <!--  -->
+   
+  </div>
+</div>
+<style>
+  @media (min-width:1200px){
+    .slider_v4 .content-slider .text-slider_1 .title-slider{
+      font-size:{{section.settings.font_size_title_1}}px;
+    }
+    .slider_v4 .content-slider .text-slider_2 .des-slider{
+      font-size:{{section.settings.font_size_title_2}}px;
+    }
+  }
+</style>
+{% schema %}
+{
+  "name": "Slider home 4",
+  "class": "index-section",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Section Space"
+    },
+    {
+      "type": "text",
+      "id": "margin_top",
+      "label": "Margin Top",
+      "info": "Defined in pixels. Do not add the 'px' unit."
+    },
+    {
+      "type": "text",
+      "id": "margin_bottom",
+      "label": "Margin Bottom",
+      "info": "Defined in pixels. Do not add the 'px' unit."
+    },
+	{
+      "type": "header",
+      "content": "Text left"
+    },
+	{
+          "type": "range",
+          "id": "font_size_title_1",
+          "label": "Font size title left",
+          "default": 100,
+          "min": 14,
+          "max": 100,
+          "unit": "px"
+    },
+	{
+      "type": "header",
+      "content": "Text right"
+    },
+	{
+          "type": "range",
+          "id": "font_size_title_2",
+          "label": "Font size title right",
+          "default": 30,
+          "min": 14,
+          "max": 100,
+          "unit": "px"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "image",
+      "name": "Image",
+	  "limit":6,
+      "settings": [
+        {
+          "type": "url",
+          "id": "url",
+          "label": "URL",
+          "default": "/collections/all"
+        },
+        {
+          "type": "image_picker",
+          "id": "img",
+          "label": "Image",
+          "info": "Image size 1920 x 1080"
+        },
+		{
+          "type": "text",
+          "id": "title_1",
+          "label": "Title left",
+          "default": "HOODIE<br>GOLF"
+        },
+		{
+          "type": "image_picker",
+          "id": "img_2",
+          "label": "Image child",
+          "info": "Image size 201 x 16"
+        },
+		{
+          "type": "textarea",
+          "id": "title_2",
+          "label": "Tittle right",
+		  "default": "Wardrobe 56 items"
+        },
+		{
+          "type": "text",
+          "id": "title_3",
+          "label": "Tittle 3",
+		  "default": "EXPLORE"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Slider home 4",
+      "category": "Slider coro"
+    }
+  ]
+}
+{% endschema %}

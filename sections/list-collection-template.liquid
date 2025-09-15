@@ -1,0 +1,73 @@
+{% if section.settings.enable_banner %}
+<div class="banner margin_bottom_150 {% if section.settings.enable_line_top %}border-top{% endif %} {% if section.settings.enable_line_bot %}border-bot{% endif %}" style="background:{{section.settings.bgc_banner}};">
+	<div class="container">
+		<h1 class="title-font title-banner text-center">Collections</h1>
+		{% include 'breadcrumb' %}
+	</div>
+</div>
+{% endif %}
+<div class="container container_150 container_unset">
+    <div class="e-cat">
+        <div class="section-cate space-padding-tb-50">
+            <h3 class="title-font text-center margin_bottom_50">{{section.settings.title_section}}</h3>
+            <div class="row">
+                {% for collection in collections %}
+                  {% include 'collection-grid-item'%}
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</div>
+<style>
+  @media (max-width: 1400px){
+  .container_unset{
+  	padding-left:15px;
+    padding-right:15px;
+  }
+  }
+</style>
+{% schema %}
+  {
+    "name": "List collections",
+    "settings": [
+	  {
+      "type": "header",
+      "content": "Banner"
+    },
+	{
+        "type": "checkbox",
+        "id": "enable_banner",
+        "label": "Enable banner",
+        "default": true
+    },
+	{
+        "type": "checkbox",
+        "id": "enable_line_top",
+        "label": "Enable line top",
+        "default": false
+    },
+	{
+        "type": "checkbox",
+        "id": "enable_line_bot",
+        "label": "Enable line bot",
+        "default": false
+    },
+	{
+        	"type": "color",
+        	"id": "bgc_banner",
+        	"label": "Background color",
+        	"default": "#ffe9c7"
+    },
+      {
+        "type": "header",
+        "content": "Header"
+      },
+      {
+        "type": "text",
+        "id": "title_section",
+        "label": "Section Title",
+        "default": "All Collection Categories"
+      }
+  ]
+  }
+{% endschema %}

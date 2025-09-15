@@ -1,0 +1,85 @@
+<div data-section-id="{{ section.id }}" style="{% if section.settings.margin_top != blank %}margin-top: {{section.settings.margin_top}}px;{%endif%} {% if section.settings.margin_bottom != blank %}margin-bottom: {{section.settings.margin_bottom}}px;{% endif %}">
+
+  <div class="container about_collection_v1 margin_botom_20">
+    <div class="content relative">
+      <a href="{{section.settings.url}}" class="inline-block over-hidden">
+        {% if section.settings.img == blank %}
+        <img src="{{'1720x500.jpg' | asset_url}}" class="img-responsive hover-zoom-out img-fit" alt="">
+        {% else %}
+        <img src="{{ section.settings.img | img_url:'master' }}" class="img-responsive hover-zoom-out img-fit" alt="">
+        {% endif %}
+      </a>
+      <div class="absolute content_text">
+        <h3 class="title-font">{{section.settings.title}}</h3>
+        <p class="des-font">{{section.settings.des}}</p>
+        <a href="{{section.settings.url}}" class="inline-block over-hidden relative menu-font btn_animate_line">{{section.settings.btn_name}}</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% schema %}
+  {
+    "name": "About collection v1",
+    "settings": [
+		{
+      "type": "header",
+      "content": "Section Space"
+    },
+    {
+      "type": "text",
+      "id": "margin_top",
+      "label": "Margin Top",
+      "info": "Defined in pixels. Do not add the 'px' unit."
+    },
+    {
+      "type": "text",
+      "id": "margin_bottom",
+      "label": "Margin Bottom",
+      "info": "Defined in pixels. Do not add the 'px' unit."
+    },
+    {
+      "type": "url",
+      "id": "url",
+      "label": "URL",
+      "default": "/collections/all"
+    },
+    {
+      "type": "image_picker",
+      "id": "img",
+      "label": "Image"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title",
+      "default": "Women’s<br>Collection’s"
+    },
+    {
+      "type": "textarea",
+      "id": "des",
+      "label": "Content",
+      "default": "Quisque condimentum ipsum at velit hendvenenatis. Donec luctus metus enim, nunced. Sed sinisl id purus aliquet cursus et neque  sodales ligula. “Quisque condimentum ipsum at velit hendrerit "
+    },
+    {
+      "type": "text",
+      "id": "btn_name",
+      "label": "Button",
+      "default": "READ MORE"
+    }
+	],
+	
+	"presets": [
+      {
+        "name": "About collection v1",
+        "category": "section Coro"
+      }
+    ]
+  }
+{% endschema %}
+
+{% stylesheet %}
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}

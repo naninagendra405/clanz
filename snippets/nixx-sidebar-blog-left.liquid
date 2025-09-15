@@ -1,0 +1,88 @@
+<div class="col-lg-4 col-md-4 col-sm-12 col-xs-12 sidebar-left">
+  {% if section.settings.enable_widget_search %}
+  <form method="get" action="/search" role="search" class="margin_bottom_70 relative">
+    <input type="text" class="form-control control-search des-font" value="" autocomplete="off" placeholder="Search ..." aria-label="SEARCH" name="q">
+    <button class="button_search" type="submit">
+      {% if section.settings.icon_search == blank %}
+      <i class="ti-search"></i>
+      {% else %}
+      <i class="{{section.settings.icon_search}}"></i>
+      {% endif %}
+    </button>
+  </form>
+  {% endif %}
+  {% if section.settings.enable_widget_categories %}
+  <ul class="category margin_bottom_70">
+    <li><h1 class="title-font title">{{section.settings.title_category}}</h1></li>
+    {% assign sidebar_menu = section.settings.widget_categories_menu %}
+    {% for link in linklists[sidebar_menu].links %}
+
+    <li><a href="{{ link.url }}" class="des-font link-default link-collection">{{ link.title }}</a></li>
+
+    {% endfor %}
+  </ul>
+  {% endif %}
+  {% if section.settings.enable_widget_rposts %}
+  <ul class="post margin_bottom_70">
+    <li><h1 class="title-font title">{{section.settings.title_post}}</h1></li>
+    {% assign block_limit = section.settings.blog_limit %}
+    {% assign col = section.settings.blog_collection %}
+    {% for article in blogs[col].articles limit: block_limit %}
+    <li class="clearfix margin_bottom_20">
+      <div class="column-40 left over-hidden">
+        <a href="{{ article.url }}" class="inline-block over-hidden hover-zoom-out">
+          {{ article | img_url: '190x130' | img_tag: article.title }}
+        </a>
+      </div>
+      <div class="column-60 left space_left_20">
+        <h4 class="menu-font post-name"><a href="{{ article.url }}" class="link-default">{{ article.title }}</a></h4>
+        <p class="des-font post-day">{{article.published_at | time_tag: format: 'month_day_year'}}</p>
+      </div>
+    </li>
+    {% endfor %}
+
+  </ul>
+  {% endif %}
+  {% if section.settings.enable_widget_cmt %}
+  <ul class="comment margin_bottom_70">
+    <li><h1 class="title-font title">{{section.settings.title_cmt}}</h1></li>
+    <li>
+      <div class="column-20 left">
+        <a href="{{section.settings.url_cmt}}">
+          {% if section.settings.img_cmt == blank %}
+          <img src="{{ 'avatar.png' | asset_url }}" class="img-responsive" alt="">
+          {% else %}
+          <img src="{{ section.settings.img_cmt | img_url:'master' }}" class="img-responsive" alt="">
+          {% endif %}
+        </a>
+      </div>
+      <div class="column-80 left">
+        <h4 class="menu-font">{{section.settings.name_cmt}}</h4>
+        <p class="des-font">{{ section.settings.content_cmt | truncatewords: 6 }}</p>
+        <p class="des-font">on <a href="{{section.settings.url_cmt}}">{{section.settings.des_cmt}}</a></p>
+      </div>
+    </li>
+  </ul>
+  {% endif %}
+  {% if section.settings.enable_widget_archive %}
+  <ul class="archive margin_bottom_70 clearfix space_top_100">
+    <li><h1 class="title-font title">{{section.settings.title_archive}}</h1></li>
+    {% assign archive = section.settings.widget_archive %}
+    {% for link in linklists[archive].links %}
+    <li><a href="{{ link.url }}" class="link-default des-font link-collection">{{ link.title }}</a></li>
+    {% endfor %}
+
+  </ul>
+  {% endif %}
+  {% if section.settings.enable_widget_meta %}
+  <ul class="meta margin_bottom_70">
+    <li><h1 class="title-font title">{{section.settings.title_meta}}</h1></li>
+
+    {% assign meta = section.settings.widget_meta %}
+    {% for link in linklists[meta].links %}
+    <li><a href="{{ link.url }}" class="link-default des-font link-collection">{{ link.title }}</a></li>
+    {% endfor %}
+
+  </ul>
+</div>
+{% endif %}

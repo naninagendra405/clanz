@@ -1,0 +1,29 @@
+<div class="blog-grid">
+    <h3 class="blog-heading text-center">{{ page_title }}</h3>
+    <div class="row">
+        {% for article in blog.articles %}
+        <div class="col-md-4 col-sm-6 col-xs-12 blog-post-item">
+            {% if article.image %}
+            <div class="blog-img">
+                <a href="{{ article.url }}" class="hover-images">{{ article | img_url: 'master' | img_tag: article.title }}</a>
+                {% if section.settings.blog_show_date %}
+                <div class="blog-post-date e-gradient abs">
+                    <span class="b-date">{{article.published_at | date: "%d" }}</span>
+                    <span class="b-month">{{article.published_at | date: "%b"}}</span>
+                </div>
+                {%endif%}
+            </div>
+            {% endif %}
+            <div class="blog-info">
+                <h3 class="blog-post-title"><a href="{{ article.url }}">{{ article.title }}</a></h3>
+                <p class="blog-post-desc">{{article.excerpt}}</p>
+                <div class="blog-post-author">
+                    <div class="author">{{ 'blogs.article.poster_by' | t }} <span class="c-black">{{article.author}}</span></div>
+                     <div class="blog-post-comment"><span class="c-black"></span>{{article.comments_count}}</div>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% include 'pagination'%}

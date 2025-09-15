@@ -1,0 +1,34 @@
+<div class="product col-lg-2 col-md-4 col-sm-6 col-xs-6 margin_bottom_50 engoj_grid_parent">
+  <div class="img-product relative">
+    <a href="{{ product.url | within: collection }}" class="engoj_find_img">
+      <img src="{{ product.featured_image.src | img_url: '330x400' }}" class="img-responsive" alt="{{ product.featured_image.alt | escape }}">
+    </a>
+    {% include 'nixx-label-product' %}
+    {% include 'nixx-icon-product' %}
+    {% if sold_out %}
+    {% include 'nixx-sold-out' %}
+    {% endif %}
+    {% include 'nixx-timer-sale-product' %}
+    {% include 'nixx-variant-product' %}
+  </div>
+  <div class="product-info">
+    <div class="info-product text-center">
+      <h4 class="des-font capital title-product space_top_20">
+        <a href="{{ product.url | within: collection }}">{{product.title}}</a>
+      </h4>
+      {% include 'nixx-price' %}
+      
+      <p class="des-font des-product">{{product.description | truncatewords: 20}}</p>
+    </div>
+    <div class="btn-product-list">
+      <form method="post" action="/cart/add" enctype="multipart/form-data" class="inline-block icon-addcart">
+        <input type="hidden" name="id" value="" />
+        <button type="submit" name="add" class="enj-add-to-cart-btn btn-default des-font uppercase">add to cart</button>
+      </form>
+      {% include 'nixx-add-wishlist' %}
+      <a href="#" class="engoj_btn_quickview icon-quickview inline-block" title="quickview" data-id="{{ product.handle }}">
+        <i class="ti-more-alt"></i>
+      </a>
+    </div>
+  </div>
+</div>

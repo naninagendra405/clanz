@@ -1,0 +1,67 @@
+<header class="BG-header-1 delay03 header_v5 {% if settings.enable_overlay_hdv5 %}{% if template.name contains 'index' %}fixed full-width{% endif %}{% endif %}">
+  <div class="container space_top_bot_30 delay03" id="menu-header">
+    <div class="row flex">
+      <div class="hidden-md hidden-lg col-sm-4 col-xs-4">
+      	<a href="#" class="link-menu delay03 inline-block space_left_10 btn-push-menu">
+          {% if settings.icon-pushmenu == blank %}
+          <svg width="26" height="16" version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" viewBox="0 0 66 41" xmlns:xlink="http://www.w3.org/1999/xlink" xml:space="preserve">
+            <g>
+              <line class="st0" x1="1.5" y1="1.5" x2="64.5" y2="1.5"></line>
+              <line class="st0" x1="1.5" y1="20.5" x2="64.5" y2="20.5"></line>
+              <line class="st0" x1="1.5" y1="39.5" x2="64.5" y2="39.5"></line>
+            </g>
+          </svg>
+          {% else %}
+          <i class="{{ settings.icon-pushmenu }}"></i>
+          {% endif %}
+        </a>
+      </div>
+      <div class="col-lg-3 col-md-3 col-sm-4 col-xs-4 logo-top-home1">
+        <a href="/"><img src="{% if settings.logo-image-hdv5 == blank %}{{'logo.png' | asset_url}}{% else %}{{ settings.logo-image-hdv5 | img_url:'master' }}{% endif %}" alt="logo" class="img-logo"></a>
+      </div>
+      
+      <div class="hidden_992 col-lg-6 col-md-6 hidden-sm hidden-xs menu-center-home1 flex center menu_sticky_v4">
+        {% include 'horizon-menu-nixx' %}
+      </div>
+      
+      <div class="col-lg-3 col-md-3 col-sm-4 col-xs-4 text-right icon-main">
+        <a href="#" class="link-menu delay03 container_20 inline-block hidden-xs hidden-sm" id="btn-search">
+          {% if settings.icon-search == blank %}
+          <i class="ti-search"></i>
+          {% else %}
+          <i class="{{ settings.icon-search }}"></i>
+          {% endif %}
+        </a>
+        {% if customer.email != blank %}
+         <a class="link-menu delay03 container_20 inline-block hidden-xs hidden-sm" href="/account/logout" title="logout">
+           {% if settings.icon-logout == blank %}
+           <i class="zoa-icon-log-out"></i>
+           {% else %}
+          <i class="{{ settings.icon-logout }}"></i>
+          {% endif %}
+        </a>
+            {% else %}
+        <a href="/account/login" class="link-menu delay03 container_20 inline-block hidden-xs hidden-sm" id="btn-login">
+          {% if settings.icon-login == blank %}
+          <i class="zoa-icon-user"></i>
+          {% else %}
+          <i class="{{ settings.icon-login }}"></i>
+          {% endif %}
+        </a>
+        {% endif %}
+        <a href="#" class="link-menu delay03 container_20 relative inline-block text-center" id="btn-cart">
+          {% if settings.icon-cart == blank %}
+          <i class="ti-bag"></i>
+          {% else %}
+          <i class="{{ settings.icon-cart }}"></i>
+          {% endif %}
+          <figure class="absolute label-cart number-font enj-cartcount">{{ cart.item_count }}</figure>
+        </a>
+        
+      </div>
+    </div>
+  </div>
+</header>
+<div class="absolute hidden-sm hidden-xs menu_home_v5">
+  {% include 'horizon-menu-nixx-2' %}
+</div>

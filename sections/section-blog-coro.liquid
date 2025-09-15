@@ -1,0 +1,109 @@
+<div data-section-id="{{ section.id }}" style="{% if section.settings.margin_top != blank %}margin-top: {{section.settings.margin_top}}px;{%endif%} {% if section.settings.margin_bottom != blank %}margin-bottom: {{section.settings.margin_bottom}}px;{% endif %}">
+  <div class="container blog_v1 margin_bottom_30 {% if section.settings.enable_BG %}BG{% endif %}">
+
+    <h1 class="title_section title-font {% if section.settings.select_text == 'center' %}text-center{% else %}text-left{% endif %}">{{section.settings.title}}</h1>
+   
+    <div class="row">
+      {% assign products_limit = section.settings.limit %}
+      {% assign col = section.settings.blog %}
+      {% for article in blogs[col].articles limit: products_limit %}
+      <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12 content-blog space_right_10">
+        <div class="inline-block over-hidden">
+        <a href="{{ article.url }}" class="inline-block hover-zoom-out">
+          {{ article | img_url: 'master' | img_tag: article.title }}
+        </a>
+        </div>
+        {% for tag in article.tags %}
+        <p class="des-font tag_blog">{{ tag }}{% unless forloop.last %},{% endunless %}</p>
+        {% endfor %}
+        <h3 class="title-font title-post"><a href="{{ article.url }}">{{ article.title }}</a></h3>
+        <a href="{{ article.url }}" class="menu-font btn_animate_line uppercase">read more</a>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+</div>
+<style>
+  .blog-home4.BG{
+    background: {{section.settings.bg}};
+  }
+</style>
+{% schema %}
+{
+  "name": "Blog v1",
+  "class": "index-section",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Section Space"
+    },
+    {
+      "type": "text",
+      "id": "margin_top",
+      "label": "Margin Top",
+      "info": "Defined in pixels. Do not add the 'px' unit."
+    },
+    {
+      "type": "text",
+      "id": "margin_bottom",
+      "label": "Margin Bottom",
+      "info": "Defined in pixels. Do not add the 'px' unit."
+    },
+	{
+        	"type": "checkbox",
+        	"id": "enable_BG",
+        	"label": "Enable background color",
+        	"default": false
+    },
+	{
+        	"type": "color",
+        	"id": "bg",
+        	"label": "Background color",
+        	"default": "#f2f2f2"
+    },
+	{
+		   "type":      "select",
+		   "id":        "select_text",
+		   "label":     "Select location text",
+		   "options": [
+     {
+	       
+	       "value": "center",
+	       "label": "Center"
+     },
+     {
+       
+       		"value": "left",
+       		"label": "Left"
+     }
+   		],
+   			"default":   "center"
+   
+	},
+	{
+        	"type": "text",
+        	"id": "title",
+        	"label": "Title",
+        	"default": "Blogs"
+    },
+	{
+        	"type": "blog",
+        	"id": "blog",
+        	"label": "Chose Blog"
+    },
+	{
+        	"type": "text",
+        	"id": "limit",
+        	"label": "Limit Blog",
+        	"default": "3"
+    }
+  ],
+  
+  "presets": [
+    {
+      "name": "Blog v1",
+      "category": "section Coro"
+    }
+  ]
+}
+{% endschema %}

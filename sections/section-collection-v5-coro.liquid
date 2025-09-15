@@ -1,0 +1,230 @@
+<div data-section-id="{{ section.id }}" style="{% if section.settings.margin_top != blank %}margin-top: {{section.settings.margin_top}}px;{%endif%} {% if section.settings.margin_bottom != blank %}margin-bottom: {{section.settings.margin_bottom}}px;{% endif %}">
+
+  <div class="container collection_v4 relative margin_bottom_20">
+    <div class="row">
+      <div class="col-lg-7 col-md-7 col-sm-12 col-xs-12 relative content_left">
+        <a href="{{section.settings.url}}" class="inline-block over-hidden">
+          {% if section.settings.img == blank %}
+      		<img src="{{'970x500.jpg' | asset_url}}" class="img-responsive img-fit hover-zoom-out">
+          {% else %}
+          	<img src="{{section.settings.img | img_url:'master'}}" class="img-responsive img-fit hover-zoom-out">
+          {% endif %}
+        </a>
+        <div class="content absolute inline-block">
+          <h3 class="title-font title"><a href="{{section.settings.url}}">{{section.settings.title}}</a></h3>
+          <p class="number-font price">{{section.settings.price}}</p>
+        </div>
+        
+      </div>
+      <div class="col-lg-5 col-md-5 col-sm-12 col-xs-12 relative content_right">
+        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 content flex">
+          <div class="image_left text-center">
+            <a href="{{section.settings.url_1}}">
+              {% if section.settings.img_1 == blank %}
+              <img src="{{'80x80.jpg' | asset_url}}" class="img-responsive inline-block hover-zoom-out">
+              {% else %}
+              <img src="{{section.settings.img_1 | img_url:'master'}}" class="img-responsive inline-block hover-zoom-out">
+              {% endif %}
+            </a>
+          </div>
+          <div class="text_right text-center">
+            <h4 class="des-font title"><a href="{{section.settings.url_1}}">{{section.settings.title_col_1}}</a></h4>
+          </div>
+        </div>
+        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 content flex">
+          <div class="image_left text-center">
+            <a href="{{section.settings.url_2}}">
+              {% if section.settings.img_2 == blank %}
+              <img src="{{'80x80.jpg' | asset_url}}" class="img-responsive inline-block hover-zoom-out">
+              {% else %}
+              <img src="{{section.settings.img_2 | img_url:'master'}}" class="img-responsive inline-block hover-zoom-out">
+              {% endif %}
+            </a>
+          </div>
+          <div class="text_right text-center">
+            <h4 class="des-font title"><a href="{{section.settings.url_2}}">{{section.settings.title_col_2}}</a></h4>
+          </div>
+        </div>
+        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 content flex">
+          <div class="image_left text-center">
+            <a href="{{section.settings.url_3}}">
+              {% if section.settings.img_3 == blank %}
+              <img src="{{'80x80.jpg' | asset_url}}" class="img-responsive inline-block hover-zoom-out">
+              {% else %}
+              <img src="{{section.settings.img_3 | img_url:'master'}}" class="img-responsive inline-block hover-zoom-out">
+              {% endif %}
+            </a>
+          </div>
+          <div class="text_right text-center">
+            <h4 class="des-font title"><a href="{{section.settings.url_3}}">{{section.settings.title_col_3}}</a></h4>
+          </div>
+        </div>
+        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 content flex">
+          <div class="image_left text-center">
+            <a href="{{section.settings.url_4}}">
+              {% if section.settings.img_4 == blank %}
+              <img src="{{'80x80.jpg' | asset_url}}" class="img-responsive inline-block hover-zoom-out">
+              {% else %}
+              <img src="{{section.settings.img_4 | img_url:'master'}}" class="img-responsive inline-block hover-zoom-out">
+              {% endif %}
+            </a>
+          </div>
+          <div class="text_right text-center">
+            <h4 class="des-font title"><a href="{{section.settings.url_4}}">{{section.settings.title_col_4}}</a></h4>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% schema %}
+  {
+    "name": "Collection v4",
+    "settings": [
+	{
+      "type": "header",
+      "content": "Section Space"
+    },
+    {
+      "type": "text",
+      "id": "margin_top",
+      "label": "Margin Top",
+      "info": "Defined in pixels. Do not add the 'px' unit."
+    },
+    {
+      "type": "text",
+      "id": "margin_bottom",
+      "label": "Margin Bottom",
+      "info": "Defined in pixels. Do not add the 'px' unit."
+    },
+	{
+      "type": "header",
+      "content": "Content Left"
+    },
+    {
+      "type": "url",
+      "id": "url",
+      "label": "URL",
+      "default": "/collections/all"
+    },
+    {
+      "type": "image_picker",
+      "id": "img",
+      "label": "Image"
+    },
+	{
+      "type": "text",
+      "id": "title",
+      "label": "Title",
+      "default": "New<br>Arrival"
+    },
+	{
+      "type": "text",
+      "id": "price",
+      "label": "Price",
+      "default": "$99.00"
+    },
+	{
+      "type": "header",
+      "content": "Content Right"
+    },
+	{
+      "type": "header",
+      "content": "Content 1"
+    },
+    {
+      "type": "image_picker",
+      "id": "img_1",
+      "label": "Image"
+    },
+    {
+      "type": "url",
+      "id": "url_1",
+      "label": "URL",
+      "default": "/collections/all"
+    },
+    {
+      "type": "text",
+      "id": "title_col_1",
+      "label": "Title",
+      "default": "Dresses"
+    },
+	{
+      "type": "header",
+      "content": "Content 2"
+    },
+    {
+      "type": "image_picker",
+      "id": "img_2",
+      "label": "Image"
+    },
+    {
+      "type": "url",
+      "id": "url_2",
+      "label": "URL",
+      "default": "/collections/all"
+    },
+    {
+      "type": "text",
+      "id": "title_col_2",
+      "label": "Title",
+      "default": "Hand - bag"
+    },
+	{
+      "type": "header",
+      "content": "Content 3"
+    },
+    {
+      "type": "image_picker",
+      "id": "img_3",
+      "label": "Image"
+    },
+    {
+      "type": "url",
+      "id": "url_3",
+      "label": "URL",
+      "default": "/collections/all"
+    },
+    {
+      "type": "text",
+      "id": "title_col_3",
+      "label": "Title",
+      "default": "Sneaker"
+    },
+	{
+      "type": "header",
+      "content": "Content 4"
+    },
+    {
+      "type": "image_picker",
+      "id": "img_4",
+      "label": "Image"
+    },
+    {
+      "type": "url",
+      "id": "url_4",
+      "label": "URL",
+      "default": "/collections/all"
+    },
+    {
+      "type": "text",
+      "id": "title_col_4",
+      "label": "Title",
+      "default": "Hoodie"
+    }
+	],
+	
+	"presets": [
+      {
+        "name": "Collection v4",
+        "category": "section Coro"
+      }
+    ]
+  }
+{% endschema %}
+
+{% stylesheet %}
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}

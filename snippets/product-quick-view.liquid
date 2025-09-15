@@ -1,0 +1,95 @@
+<div id="quick-view" class="hidden-label br-product-popup hidden">
+  <div class="quickview-wrapper">
+    <div class="quick-modal show">
+      <div class="content relative" id="quickview-content">
+        <a href="javascript:void(0)" class="ti-close close-window close-btn quickview-close delay03"></a>
+        <div class="single-product-detail">
+          <div class="row flex" style="align-items: center;">
+            <div class="col-md-6 col-sm-6">
+              <div class="product-img js-quickview-slide"></div>
+      		</div>
+            <div class="col-md-6 col-sm-6">
+                <div class="single-flex text-left">
+                	<div class="single-product-info product-info product-grid-v2 s-50 js-price-wrapper">
+                <h3 class="product-title title-font"><a class="link-default">&nbsp;</a></h3>
+                      <div class="product-rating rating margin_bottom_30">
+                        <span class="shopify-product-reviews-badge" data-id=""></span>
+                      </div>
+                <div class="details clearfix">
+                  <form action="/cart/add" method="post" class="variants CartContainer">
+                    <div class="product-price number-font margin_bottom_30">
+                      <span class="price f-24 space_right_20"></span>
+                      <s class="compare-price"></s>
+                    </div>
+
+
+					
+                    <p class="product-desc margin_bottom_30 des-font" style="font-size:18px;"></p>
+					
+
+                    <select name='id'  class="engoj-except-select2">
+					
+                    </select>
+					
+                    <div class="single-product-button-group btn-function">
+                      <div class="input-number-group margin_bottom_30 product-quantity">
+                        
+                        
+                        <div class="relative input-number-custom quantity-all js-qty">
+                          <div class="input-group-button absolute down-btn">
+                            <span class="qtyminus" data-field='quantity'><i class="input-number-decrement ti-angle-down"></i></span>
+                          </div>
+                          <input type="text" class="input-number menu-font qty quantity"  name='quantity' value="1" style="border-radius: 0;">
+                          <div class="input-group-button absolute up-btn">
+                            <span class="qtyplus" data-field='quantity'><i class="input-number-increment ti-angle-up"></i></span>
+                          </div>
+                        </div>
+                        
+                        
+                        <div class="total-price product-price right number-font">
+                          <label class="engoc_subtt_qw" style="font-size:18px;padding-right:20px;">{{ 'products.general.subtotal_price' | t }}:</label>
+                          <span class="br-product__price"></span>
+                        </div>
+                      </div>
+                      <div class="flex product">
+                        
+                            <button type="submit" class="btn-addToCart btn-add-cart btn-nixx number-font uppercase">{{ 'products.product.addtocart' | t }}</button>
+                            {% include 'nixx-add-wishlist' %}
+                          
+                      </div>
+<!--                         <div class="e-btn cart-qtt btn-gradient">
+                          <div class="e-quantity">
+                            <input type="text" name="quantity" value="1" class="qty input-text product_quantity_number js-number">
+                            <button  class='qtyminus quantity-left-minus btn btn-number js-minus ' data-field='quantity'><i class="fa fa-caret-down"></i></button>
+
+                            <button class='qtyplus quantity-right-plus btn btn-number js-plus' data-field='quantity'><i class="fa fa-caret-up"></i></button>
+                          </div>
+						<button type="button" class="btn-addToCart  btn-add-cart">{{ 'products.product.addtocart' | t }}<p class="icon-bg icon-cart v2"></p></button>
+
+                        </div> -->
+                        
+
+
+
+                    </div>
+                  </form>
+                </div>
+
+
+              
+            </div>
+                </div>
+            </div>
+          </div>
+      </div>
+          
+    </div>
+    </div>
+  </div>
+</div>
+
+
+
+<script type="text/javascript">
+  Shopify.doNotTriggerClickOnThumb = false;
+</script>

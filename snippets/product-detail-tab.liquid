@@ -1,0 +1,45 @@
+<div class="single-product-tab ver3 bd-7">
+    <div class="cmt-title text-center abs">
+        <ul class="nav nav-tabs v3 text-center">
+            {%if section.settings.enable_description_tab%}
+            <li class="active"><a data-toggle="tab" href="#desc">{{section.settings.destab_title}}</a></li>
+            {%endif%}
+            {% if section.settings.enable_custom_tab%}
+            <li><a data-toggle="tab" href="#info">{{section.settings.customtab_title}}</a></li>
+            {%endif%}
+            {%if section.settings.enable_review_tab%}
+            <li><a data-toggle="tab" href="#review">{{section.settings.reviewtab_title}}</a></li>
+            {%endif%}
+        </ul>
+    </div>
+    <div class="tab-content">
+        {%if section.settings.enable_description_tab%}
+        <div id="desc" class="tab-pane fade in active">
+            {{product.description}}
+        </div>
+        {%endif%}
+        {% if section.settings.enable_custom_tab%}
+        <div id="info" class="tab-pane fade ">
+            {% if section.settings.custom_tab_option == "ct_ops_image" %}
+            <div class="img">
+              <img {%if section.settings.ct_option_1 == blank%}src="{{'destabimg.jpg'| asset_url }}" 
+                   {%else%}
+                   src="{{section.settings.ct_option_1 | img_url:'master'}}" class="img-reponsive"{%endif%} alt="" /> 
+            </div>
+            {% elsif section.settings.custom_tab_option == "ct_ops_html" %}
+
+            {{section.settings.ct_option_2}}
+            {% elsif section.settings.custom_tab_option == "ct_ops_page" %}
+            {{section.settings.ct_option_3}}    
+            {% endif %}
+        </div>
+        {%endif%}
+        {%if section.settings.enable_review_tab%}
+        <div id="review" class="tab-pane fade  ">
+              <div class="entry-inside v3">
+                  <div id="shopify-product-reviews" data-id="{{product.id}}">{{ product.metafields.spr.reviews }}</div>
+              </div>
+        </div>
+        {%endif%}
+    </div>
+</div>

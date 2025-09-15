@@ -1,0 +1,155 @@
+<div data-section-id="{{ section.id }}" style="{% if section.settings.margin_top != blank %}margin-top: {{section.settings.margin_top}}px;{%endif%} {% if section.settings.margin_bottom != blank %}margin-bottom: {{section.settings.margin_bottom}}px;{% endif %}">
+
+<div class="testimonial">
+  <div class="container v2">
+  	 <h1 class="margin_bottom_20 title_section title-font capital title-testi color-text {% if section.settings.select_text == 'center' %}text-center{% else %}text-left{% endif %}">{{section.settings.title}}</h1>
+  </div>
+  <div class="container {% if section.settings.enable_style2 %}v2{% endif %}">
+    <div class="row">
+      <div class="col-md-12">
+       
+       
+      </div>
+      <div class="col-md-12">
+        <div class="slider-comment">
+          
+          {% if section.blocks.size > 0 %}
+          {% for block in section.blocks %}
+          <div class="content-comment relative">
+            <div class="number-font absolute stt-comment color-number">{{block.settings.number}}</div>
+            <p class="menu-font des-comment space_bot_30 color-text">{{block.settings.content}}</p>
+            <span class="number-font uppercase author-comment color-text">{{block.settings.author}}</span><span class="des-font capital model">/ model</span>
+          </div>
+          {% endfor %}
+          {% endif %}
+          
+
+        </div>
+      </div>
+    </div>	
+  </div>
+</div>
+</div>
+<style>
+  .testimonial{
+    background:{{section.settings.BG}};
+  }
+  .color-text{
+  	color:{{section.settings.color-text}};
+  }
+  .color-number{
+  	color:{{section.settings.color-number}};
+  }
+</style>
+{% schema %}
+  {
+    "name": "Testimonials v1",
+	"class": "index-section",
+	"max_blocks": 10,
+    "settings": [
+		{
+      "type": "header",
+      "content": "Section Space"
+    },
+    {
+      "type": "text",
+      "id": "margin_top",
+      "label": "Margin Top",
+      "info": "Defined in pixels. Do not add the 'px' unit."
+    },
+    {
+      "type": "text",
+      "id": "margin_bottom",
+      "label": "Margin Bottom",
+      "info": "Defined in pixels. Do not add the 'px' unit."
+    },
+		{
+		   "type":      "select",
+		   "id":        "select_text",
+		   "label":     "Select location text",
+		   "options": [
+     {
+	       
+	       "value": "center",
+	       "label": "Center"
+     },
+     {
+       
+       		"value": "left",
+       		"label": "Left"
+     }
+   		],
+   			"default":   "left"
+   
+	},
+		{
+        	"type": "text",
+        	"id": "title",
+        	"label": "Title",
+        	"default": "testimonials"
+      	},
+		{
+        	"type": "color",
+        	"id": "BG",
+        	"label": "Background color",
+        	"default": "#fff"
+      	},
+		{
+        	"type": "color",
+        	"id": "color-text",
+        	"label": "Color text",
+        	"default": "#333"
+      	},
+		{
+        	"type": "color",
+        	"id": "color-number",
+        	"label": "Color number",
+        	"default": "#eaeaea"
+      	},
+		{
+        	"type": "checkbox",
+        	"id": "enable_style2",
+        	"label": "Style 2?",
+        	"default": false
+      	}
+	],
+	"blocks": [
+    {
+      "type": "text",
+      "name": "comment",
+      "settings": [
+        {
+          "type": "text",
+          "id": "number",
+          "label": "Number",
+          "default": "#01"
+        },
+        {
+          "type": "textarea",
+          "id": "content",
+          "label": "Content",
+		  "default":"“Quisque condimentum ipsum at velit hendrerit venenatis. Donec luctus metus enim, nunced. Sed sit amet nisl id purus aliquet cursus et neque vel sodales ligula”"
+        },
+		{
+          "type": "text",
+          "id": "author",
+          "label": "Author",
+          "default": "iryna petrunco"
+        }
+      ]
+    }
+  ],
+	"presets": [
+      {
+        "name": "Testimonials v1",
+        "category": "section Coro"
+      }
+    ]
+  }
+{% endschema %}
+
+{% stylesheet %}
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}

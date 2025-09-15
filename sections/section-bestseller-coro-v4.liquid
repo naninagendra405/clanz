@@ -1,0 +1,196 @@
+{% assign product_label_new = false %}
+{% capture _time %}{{settings.product_new_time | times:86400}}{% endcapture %} 
+{% assign time = _time|plus:0 %}
+{% assign now = 'now' | date: '%s'|plus:0 %}
+
+{% capture _value %}{{product.published_at | date: "%s" | plus : time }}{% endcapture %} 
+{% assign value = _value|plus:0 %}
+
+{% if now < value %}
+{% assign product_label_new = true %}
+{% endif %}
+
+
+{% assign label_popular = false %}
+{% if product.tags contains "popular" %}
+{% assign label_popular = true %}
+{% endif %} 
+
+{% assign label_hot = false %}
+{% if product.tags contains "hot" %}
+{% assign label_hot = true %}
+{% endif %}
+
+{% assign on_sale = false %}
+{% if product.compare_at_price > product.price %}
+{% assign on_sale = true %}
+{% endif %}
+
+{% assign sold_out = true %}
+{% if product.available %}
+{% assign sold_out = false %}
+{% endif %}	
+<div data-section-id="{{ section.id }}" style="{% if section.settings.margin_top != blank %}margin-top: {{section.settings.margin_top}}px;{%endif%} {% if section.settings.margin_bottom != blank %}margin-bottom: {{section.settings.margin_bottom}}px;{% endif %}">
+  <div class="product_tab v2 v3">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-5 col-md-6 col-sm-12 col-xs-12 content_right relative">
+          <div class="js_pd_best">
+          {% if section.blocks.size > 0 %}
+            {% for block in section.blocks %}
+            {% if block.type == "content_left" %}
+            <div class="relative">
+              <a href="{{block.settings.url_pd}}" class="inline-block">
+                {% if block.settings.img_pd == blank %}
+                <img src="{{ '650x830.jpg' | asset_url }}" class="img-responsive" alt="">
+                {% else %}
+                <img src="{{ block.settings.img_pd | img_url: 'master' }}" class="img-responsive" alt="">
+                {% endif %}
+              </a>
+              <h3 class="absolute title-font title text-center"><a href="{{block.settings.url_pd}}">{{block.settings.pd_name}}</a></h3>
+              <p class="des-font absolute pd_sku">{{block.settings.sku}}</p>
+            </div>
+            {% endif %}
+            {% endfor %}
+            {% endif %}
+          </div>
+        </div>
+        <div class="col-lg-7 col-md-6 col-sm-12 col-xs-12 content_left">
+          <h1 class="title-font margin_bottom_20 title_section">{{section.settings.title}}</h1>
+          <ul class="nav nav-tabs flex title-tab margin_bottom_20">
+            {% if section.blocks.size > 0 %}
+            {%- assign i = 1 -%}
+            {% for block in section.blocks %}
+            {% if block.type == "content_right" %}
+            <li class="{% if forloop.first %}active{% endif %}">
+              <a href="#{{i}}_{{ section.id }}" data-toggle="tab" class="delay03 title-font">{{block.settings.tab_title}}</a>
+            </li>
+            {%- assign i = i | plus : 1 -%}
+            {% endif %}
+            {% endfor %}
+            {% endif %}
+          </ul>
+          <div class="tab-content">
+
+            {% if section.blocks.size > 0 %}
+            {%- assign i = 1 -%}
+            {% for block in section.blocks %}
+            {% if block.type == "content_right" %}
+            {% assign products_limit = block.settings.tab_limit %}
+            {% assign col = block.settings.tab_collection %}
+            <div id="{{i}}_{{ section.id }}" class="tab-pane fade {% if forloop.first %}active in{% endif %}">
+              <div class="slick-bestseller-v1 slider_product">
+                {% for product in collections[col].products limit: products_limit %}
+                {% include 'nixx-product' %}
+                {% endfor %}
+              </div>
+            </div>
+            {%- assign i = i | plus : 1 -%}
+            {% endif %}
+            {% endfor %}
+            {% endif %}
+
+          </div>
+        </div>
+        
+      </div>
+    </div>
+  </div>
+</div>
+{% schema %}
+  {
+    "name": "bestseller v4",
+    "settings": [
+	{
+      "type": "header",
+      "content": "Section Space"
+    },
+    {
+      "type": "text",
+      "id": "margin_top",
+      "label": "Margin Top",
+      "info": "Defined in pixels. Do not add the 'px' unit."
+    },
+    {
+      "type": "text",
+      "id": "margin_bottom",
+      "label": "Margin Bottom",
+      "info": "Defined in pixels. Do not add the 'px' unit."
+    },
+		{
+        	"type": "text",
+        	"id": "title",
+        	"label": "Title",
+        	"default": "Best Seller"
+      	}
+
+	],
+"blocks": [
+    {
+      "type": "content_right",
+      "name": "product",
+      "settings": [
+	{
+      "type": "text",
+      "id": "tab_title",
+      "label": "Title Tab",
+      "default": "All"
+    },
+	{
+      "type": "collection",
+      "id": "tab_collection",
+      "label": "Chose collection"
+    },
+	{
+      "type": "text",
+      "id": "tab_limit",
+      "label": "Limit",
+      "default": "20"
+    }
+]
+},
+{
+      "type": "content_left",
+      "name": "banner",
+      "settings": [
+	{
+      "type": "url",
+      "id": "url_pd",
+      "label": "URL",
+      "default": "/collections/all"
+    },
+	{
+      "type": "image_picker",
+      "id": "img_pd",
+      "label": "Image",
+      "info": "650x830.jpg"
+    },
+	{
+      "type": "text",
+      "id": "pd_name",
+      "label": "Title",
+      "default": "Title"
+    },
+	{
+      "type": "text",
+      "id": "sku",
+      "label": "Description",
+      "default": "Product code : 123456"
+    }
+]
+}
+],
+	"presets": [
+      {
+        "name": "bestseller v4",
+        "category": "section Coro"
+      }
+    ]
+  }
+{% endschema %}
+
+{% stylesheet %}
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}
